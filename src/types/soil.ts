@@ -55,6 +55,49 @@ export interface SoilBalancingPlan {
     k_delta_lbs: number;
     is_p_overloaded: boolean;
   };
+  manure_credit: ManureNutrientCredit | null;
+  net_need: {
+    n_lbs: number;
+    p_lbs: number;
+    k_lbs: number;
+  };
+}
+
+/** Year-1 plant-available manure from a saved paddock stay. Snake_case farm record. */
+export interface ManureNutrientCredit {
+  source_id: string;
+  source_name: string;
+  available_n_lbs: number;
+  available_p2o5_lbs: number;
+  available_k2o_lbs: number;
+  area_sqft: number;
+  livestock_class?: string;
+}
+
+export interface SoilAmendmentBalance {
+  crop_demand: {
+    n_lbs: number;
+    p2o5_lbs: number;
+    k2o_lbs: number;
+  };
+  manure_credit_applied: ManureNutrientCredit | null;
+  net_deficit: {
+    n_lbs: number;
+    p2o5_lbs: number;
+    k2o_lbs: number;
+  };
+  amendment_recipe: {
+    feather_meal_12_0_0_lbs: number;
+    bone_meal_1_13_0_lbs: number;
+    potash_0_0_50_lbs: number;
+  };
+  amendment_recipe_cups: {
+    feather_meal_cups: number;
+    bone_meal_cups: number;
+    potash_cups: number;
+  };
+  commercial_savings_usd: number;
+  p_overload_warning: boolean;
 }
 
 export interface SoilSettings {
@@ -63,6 +106,7 @@ export interface SoilSettings {
   texture: SoilTexture;
   horizon_weeks: number;
   selected_amendment_ids: string[];
+  manure_credit_id?: string | null;
 }
 
 export interface MineralizationPoint {

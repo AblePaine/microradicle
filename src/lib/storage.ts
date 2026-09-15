@@ -9,13 +9,14 @@ import { cropBySlug, getCrop } from "@/lib/crops";
 import { getMicrogreen } from "@/lib/nursery";
 import { computeBatch } from "@/lib/nurseryMath";
 import { getSpecies } from "@/lib/pasture";
-import { computeRotation, isPastureStand } from "@/lib/pastureMath";
+import { computeRotation, inferLivestockClass, isPastureStand } from "@/lib/pastureMath";
 import { defaultNetwork, PIPE_DIAMETERS } from "@/lib/hydraulics";
 import { DEFAULT_AMENDMENT_IDS, DEFAULT_SOIL } from "@/lib/soilMath";
 import { DEFAULT_ECONOMICS } from "@/lib/economicsMath";
 import { computeSuccession, iso, recomputeFarm } from "@/lib/math";
 
 export const FARM_STORAGE_KEY = "microradicle:farm:v3";
+export const PASTURE_LEDGER_KEY = "microradicle_pasture_batches_v1";
 export const LEGACY_FARM_KEYS = [
   "microradicle:farm:v2",
   "microradicle:farm:v1",
@@ -353,6 +354,7 @@ function parseSoil(raw: unknown): SoilSettings | undefined {
     texture,
     horizon_weeks: pickNum(o, "horizon_weeks") ?? DEFAULT_SOIL.horizon_weeks,
     selected_amendment_ids: selected.length ? selected : [...DEFAULT_AMENDMENT_IDS],
+    manure_credit_id: pickStr(o, "manure_credit_id") ?? null,
   };
 }
 
@@ -437,6 +439,8 @@ function parsePastureRotation(raw: unknown): PastureRotationQueueItem | null {
     manure_p2o5_lbs: pickNum(b, "manure_p2o5_lbs", "manureP2o5Lbs") ?? 0,
     manure_k2o_lbs: pickNum(b, "manure_k2o_lbs", "manureK2oLbs") ?? 0,
     overgrazing_warning: Boolean(b.overgrazing_warning ?? b.overgrazingWarning),
+    livestock_class: inferLivestockClass(species_id, pickStr(b, "livestock_class", "livestockClass")),
+    saved_at: pickStr(b, "saved_at", "savedAt"),
   };
 }
 
@@ -482,14 +486,41 @@ export function parseFarm(raw: unknown): FarmState {
   );
 }
 
+export function loadPastureLedger(): PastureRotationQueueItem[] {
+  if (typeof localStorage === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(PASTURE_LEDGER_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map(parsePastureRotation).filter((b): b is PastureRotationQueueItem => b !== null);
+  } catch {
+    return [];
+  }
+}
+
+export function savePastureLedger(items: PastureRotationQueueItem[]): void {
+  if (typeof localStorage === "undefined") return;
+  localStorage.setItem(PASTURE_LEDGER_KEY, JSON.stringify(items));
+}
+
+function mergePastureLedger(farm: FarmState): FarmState {
+  const ledger = loadPastureLedger();
+  if (!ledger.length) return farm;
+  const have = new Set((farm.pasture_rotations ?? []).map((r) => r.id));
+  const extra = ledger.filter((r) => !have.has(r.id));
+  if (!extra.length) return farm;
+  return { ...farm, pasture_rotations: [...(farm.pasture_rotations ?? []), ...extra] };
+}
+
 export function loadFarm(): FarmState {
   if (typeof localStorage === "undefined") return createDefaultFarm();
   try {
     const raw =
       localStorage.getItem(FARM_STORAGE_KEY) ??
       LEGACY_FARM_KEYS.map((k) => localStorage.getItem(k)).find((v) => v);
-    if (!raw) return createDefaultFarm();
-    return parseFarm(JSON.parse(raw));
+    if (!raw) return mergePastureLedger(createDefaultFarm());
+    return mergePastureLedger(parseFarm(JSON.parse(raw)));
   } catch {
     return createDefaultFarm();
   }
@@ -498,6 +529,7 @@ export function loadFarm(): FarmState {
 export function saveFarm(farm: FarmState): void {
   if (typeof localStorage === "undefined") return;
   localStorage.setItem(FARM_STORAGE_KEY, JSON.stringify(farm));
+  savePastureLedger(farm.pasture_rotations ?? []);
 }
 
 export function exportFarmJson(farm: FarmState): string {

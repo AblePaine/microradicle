@@ -47,6 +47,7 @@ export interface PastureRotationQueueItem {
   id: string;
   species_id: string;
   species_name: string;
+  livestock_class: LivestockClass;
   head_count: number;
   stand: PastureForageStand;
   start_date: string;
@@ -62,8 +63,10 @@ export interface PastureRotationQueueItem {
   manure_p2o5_lbs: number;
   manure_k2o_lbs: number;
   overgrazing_warning: boolean;
+  saved_at?: string;
 }
 
+/** Ledger row for a paddock stay — same shape as a queued rotation, stored for the soil credit. */
 export type PasturePaddockAudit = PastureRotationQueueItem;
 
 export const LIVESTOCK_CLASSES: LivestockClass[] = [
@@ -126,3 +129,7 @@ export const STAND_REST_DAYS: Record<PastureForageStand, { spring: number; summe
 export const MAX_HEAD_PER_ROTATION = 2000;
 export const MAX_MOVE_DAYS = 14;
 export const MAX_PADDOCK_SQFT = SQFT_PER_ACRE * 20;
+
+/** Year-1 plant-available N. Poultry loses more to volatilization; ruminants more to organic N. */
+export const POULTRY_N_YEAR1 = 0.5;
+export const RUMINANT_N_YEAR1 = 0.4;

@@ -5,7 +5,7 @@ import { MineralizationCurveChart } from "@/components/MineralizationCurveChart"
 import { nAppliedById, SoilNutrientBalancer } from "@/components/SoilNutrientBalancer";
 import { cropBySlug } from "@/lib/crops";
 import { useFarmStore } from "@/lib/farm-store";
-import { balancePlan, blockDeficit, resolveSoil, selectedAmendments } from "@/lib/soilMath";
+import { balancePlan, blockDeficit, creditById, resolveSoil, selectedAmendments } from "@/lib/soilMath";
 
 export const Route = createFileRoute("/soil/$slug")({
   component: SoilBlock,
@@ -27,7 +27,11 @@ function SoilBlock() {
   const block = farm.blocks.find((b) => b.id === slug);
   const settings = resolveSoil(farm);
   const deficit = useMemo(() => blockDeficit(farm, slug, cropBySlug), [farm, slug]);
-  const plan = useMemo(() => (deficit ? balancePlan(deficit, settings) : null), [deficit, settings]);
+  const credit = creditById(farm, settings.manure_credit_id);
+  const plan = useMemo(
+    () => (deficit ? balancePlan(deficit, settings, credit) : null),
+    [deficit, settings, credit],
+  );
 
   if (!block || !deficit || !plan) {
     return (

@@ -322,6 +322,7 @@ export const useFarmStore = create<FarmStore>((set, get) => ({
     const spec = getSpecies(speciesId);
     if (!spec) return "";
     const rotation = computeRotation(spec, headCount, stand, startDate, moveDays, allocatedSqft, uid("pr"));
+    rotation.saved_at = new Date().toISOString();
     set({
       farm: persist({ ...farm, pasture_rotations: [...(farm.pasture_rotations ?? []), rotation] }),
     });

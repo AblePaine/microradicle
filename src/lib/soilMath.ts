@@ -3,16 +3,29 @@ import type { Crop } from "../types/crop";
 import type { FarmState } from "../types/farm";
 import type {
   BedNutrientDeficit,
+  ManureNutrientCredit,
   OrganicAmendment,
+  SoilAmendmentBalance,
   SoilBalancingPlan,
   SoilSettings,
   SoilTexture,
 } from "../types/soil";
 import { extractionLbs } from "./math";
 import {
+  cropDemandOxides,
+  equivalentMealLbs,
+  mealSavingsUsd,
+  manureCreditFromRotation,
+  manurePOverload,
+  netNeedAfterCredit,
+} from "./nutrientBridge";
+import {
+  elementalKToK2O,
+  elementalPToP2O5,
   estimateSoilTempF,
   netBalance,
   P_OVERLOAD_RATIO,
+  round2,
   solveAmendmentRecipe,
 } from "./soil-chemistry";
 
@@ -25,12 +38,25 @@ export const DEFAULT_AMENDMENT_IDS = [
   "sulfate-of-potash-0-0-50",
 ] as const;
 
+export const FEATHER_MEAL_ID = "feather-meal-12-0-0";
+export const BONE_MEAL_ID = "bone-meal-3-15-0";
+export const POTASH_ID = "sulfate-of-potash-0-0-50";
+
+export {
+  equivalentMealLbs,
+  manureCreditFromRotation,
+  manurePOverload,
+  mealSavingsUsd,
+  netNeedAfterCredit,
+};
+
 export const DEFAULT_SOIL: SoilSettings = {
   soil_temp_f: 65,
   organic_matter_pct: 4,
   texture: "silt-loam",
   horizon_weeks: 8,
   selected_amendment_ids: [...DEFAULT_AMENDMENT_IDS],
+  manure_credit_id: null,
 };
 
 export function resolveSoil(farm: FarmState): SoilSettings {
@@ -48,6 +74,7 @@ export function resolveSoil(farm: FarmState): SoilSettings {
     texture,
     horizon_weeks: Math.min(26, Math.max(2, Math.round(raw.horizon_weeks || 8))),
     selected_amendment_ids: ids.length ? ids : [...DEFAULT_AMENDMENT_IDS],
+    manure_credit_id: raw.manure_credit_id ?? null,
   };
 }
 
@@ -150,12 +177,67 @@ export function farmDeficit(farm: FarmState, crops: Map<string, Crop>): BedNutri
   };
 }
 
+export function manureCreditsFromFarm(farm: FarmState): ManureNutrientCredit[] {
+  return (farm.pasture_rotations ?? []).map(manureCreditFromRotation);
+}
+
+export function creditById(farm: FarmState, id: string | null | undefined): ManureNutrientCredit | null {
+  if (!id) return null;
+  return manureCreditsFromFarm(farm).find((c) => c.source_id === id) ?? null;
+}
+
+function cupsFromLbs(amendmentId: string, lbs: number): number {
+  const a = AMENDMENT_BY_ID.get(amendmentId);
+  const dens = a?.bulk_density_lbs_per_qt ?? 1;
+  if (!(dens > 0) || lbs <= 0) return 0;
+  return round2((lbs / dens) * 4);
+}
+
+export function recipeLbsById(recipe: SoilBalancingPlan["recipe"], id: string): number {
+  return recipe.find((r) => r.amendment.id === id)?.lbs_required ?? 0;
+}
+
+export function soilAmendmentBalance(
+  deficit: BedNutrientDeficit,
+  settings: SoilSettings,
+  credit: ManureNutrientCredit | null,
+): SoilAmendmentBalance {
+  const plan = balancePlan(deficit, settings, credit);
+  const demand = cropDemandOxides(deficit);
+  const net = netNeedAfterCredit(deficit, credit);
+  const remaining = {
+    feather_meal_12_0_0_lbs: round2(recipeLbsById(plan.recipe, FEATHER_MEAL_ID)),
+    bone_meal_1_13_0_lbs: round2(recipeLbsById(plan.recipe, BONE_MEAL_ID)),
+    potash_0_0_50_lbs: round2(recipeLbsById(plan.recipe, POTASH_ID)),
+  };
+  const equiv = equivalentMealLbs(credit);
+  return {
+    crop_demand: demand,
+    manure_credit_applied: credit,
+    net_deficit: {
+      n_lbs: round2(net.n),
+      p2o5_lbs: round2(elementalPToP2O5(net.p)),
+      k2o_lbs: round2(elementalKToK2O(net.k)),
+    },
+    amendment_recipe: remaining,
+    amendment_recipe_cups: {
+      feather_meal_cups: cupsFromLbs(FEATHER_MEAL_ID, remaining.feather_meal_12_0_0_lbs),
+      bone_meal_cups: cupsFromLbs(BONE_MEAL_ID, remaining.bone_meal_1_13_0_lbs),
+      potash_cups: cupsFromLbs(POTASH_ID, remaining.potash_0_0_50_lbs),
+    },
+    commercial_savings_usd: mealSavingsUsd(equiv),
+    p_overload_warning: manurePOverload(deficit, credit) || plan.net_balance.is_p_overloaded,
+  };
+}
+
 export function balancePlan(
   deficit: BedNutrientDeficit,
   settings: SoilSettings,
+  credit: ManureNutrientCredit | null = null,
 ): SoilBalancingPlan {
+  const need = netNeedAfterCredit(deficit, credit);
   const recipe = solveAmendmentRecipe(
-    { n: deficit.total_n_lbs, p: deficit.total_p_lbs, k: deficit.total_k_lbs },
+    { n: need.n, p: need.p, k: need.k },
     selectedAmendments(settings),
     settings.soil_temp_f,
     settings.horizon_weeks,
@@ -164,10 +246,9 @@ export function balancePlan(
   return {
     deficit,
     recipe,
-    net_balance: netBalance(
-      { n: deficit.total_n_lbs, p: deficit.total_p_lbs, k: deficit.total_k_lbs },
-      recipe,
-    ),
+    net_balance: netBalance({ n: need.n, p: need.p, k: need.k }, recipe),
+    manure_credit: credit,
+    net_need: { n_lbs: need.n, p_lbs: need.p, k_lbs: need.k },
   };
 }
 

@@ -61,6 +61,7 @@ export function PasturePlanner({ units, rotations, initialSpeciesId, onAdd, onRe
   const [startDate, setStartDate] = useState(today);
   const [allocated, setAllocated] = useState(0);
   const [allocTouched, setAllocTouched] = useState(false);
+  const [savedFlash, setSavedFlash] = useState(false);
 
   useEffect(() => {
     if (initialSpeciesId && getSpecies(initialSpeciesId)) setSpeciesId(initialSpeciesId);
@@ -84,6 +85,8 @@ export function PasturePlanner({ units, rotations, initialSpeciesId, onAdd, onRe
   function queue() {
     if (!spec || !preview) return;
     onAdd(spec.id, clampHead(head), stand, startDate, clampMoveDays(moveDays), allocTouched ? allocated : 0);
+    setSavedFlash(true);
+    window.setTimeout(() => setSavedFlash(false), 2400);
   }
 
   return (
@@ -195,13 +198,13 @@ export function PasturePlanner({ units, rotations, initialSpeciesId, onAdd, onRe
           </label>
           <div className="flex flex-col justify-end">
             <button
-              id="pasture-queue"
+              id="save-ledger"
               type="button"
               disabled={!spec}
               onClick={queue}
               className="flex h-11 items-center justify-center bg-accent px-3 font-mono text-[11px] font-semibold tracking-[0.16em] text-accent-fg uppercase transition-transform duration-150 active:scale-[0.96] disabled:opacity-40"
             >
-              Queue rotation
+              {savedFlash ? "Saved to ledger" : "Save move to farm ledger"}
             </button>
           </div>
         </div>
@@ -247,7 +250,7 @@ export function PasturePlanner({ units, rotations, initialSpeciesId, onAdd, onRe
       <section className="overflow-hidden rounded-lg border border-border bg-surface">
         <header className="flex flex-wrap items-end justify-between gap-2 border-b border-border px-3 py-1.5">
           <p className="font-mono text-[10px] tracking-[0.18em] text-subtle uppercase">
-            Rotations · {rotations.length} queued · {rotations.reduce((s, r) => s + r.head_count, 0)} head
+            Rotations · {rotations.length} on the ledger · {rotations.reduce((s, r) => s + r.head_count, 0)} head
           </p>
           <p className="font-mono text-[10px] tracking-widest text-faint uppercase">
             {round1(rotations.reduce((s, r) => s + r.total_daily_dm_lbs, 0))} lb DM/d
@@ -255,7 +258,7 @@ export function PasturePlanner({ units, rotations, initialSpeciesId, onAdd, onRe
         </header>
         {rotations.length === 0 ? (
           <p className="px-3 py-10 text-center font-mono text-sm text-muted">
-            Queue a flock or herd to occupy a paddock.
+            Queue a flock or herd, then save the move. Soil will use that manure as an N-P-K credit.
           </p>
         ) : (
           <>
@@ -430,7 +433,7 @@ function RestPanel({ rotation, units }: { rotation: PastureRotationQueueItem; un
       </dl>
       <p className="px-3 py-2 font-mono text-[10px] leading-relaxed tracking-wide text-faint">
         Stay off the paddock for the rest window or the next graze hits a stand that has not grown back.
-        Manure numbers are what hits the soil during this stay — not a bagged fertilizer rate.
+        Year-1 plant-available N is half of this number for poultry, 40% for sheep and cattle — that is the credit the soil balancer will take.
       </p>
     </section>
   );

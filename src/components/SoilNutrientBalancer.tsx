@@ -8,12 +8,17 @@ import {
   AMENDMENTS,
   balancePlan,
   blockDeficit,
+  creditById,
   DEFAULT_AMENDMENT_IDS,
+  equivalentMealLbs,
   estimateSoilTempF,
   farmDeficit,
+  manureCreditsFromFarm,
+  manurePOverload,
   P_OVERLOAD_RATIO,
   resolveSoil,
   selectedAmendments,
+  soilAmendmentBalance,
 } from "@/lib/soilMath";
 import { elementalKToK2O, elementalPToP2O5, round2, round3 } from "@/lib/soil-chemistry";
 import { cn } from "@/lib/utils";
@@ -34,22 +39,35 @@ export function SoilNutrientBalancer({ farm, onPatchSoil, blockId }: Props) {
   const settings = resolveSoil(farm);
   const units = farm.units;
   const palette = selectedAmendments(settings);
+  const credits = useMemo(() => manureCreditsFromFarm(farm), [farm]);
+  const credit = useMemo(
+    () => creditById(farm, settings.manure_credit_id),
+    [farm, settings.manure_credit_id],
+  );
 
   const deficit = useMemo(() => {
     if (blockId) return blockDeficit(farm, blockId, cropBySlug);
     return farmDeficit(farm, cropBySlug);
   }, [farm, blockId]);
 
-  const plan = useMemo(() => (deficit ? balancePlan(deficit, settings) : null), [deficit, settings]);
+  const plan = useMemo(
+    () => (deficit ? balancePlan(deficit, settings, credit) : null),
+    [deficit, settings, credit],
+  );
+
+  const bridge = useMemo(
+    () => (deficit ? soilAmendmentBalance(deficit, settings, credit) : null),
+    [deficit, settings, credit],
+  );
 
   const blockRows = useMemo(() => {
     return farm.blocks
       .map((b) => {
         const d = blockDeficit(farm, b.id, cropBySlug);
-        return d ? { block: b, plan: balancePlan(d, settings) } : null;
+        return d ? { block: b, plan: balancePlan(d, settings, credit) } : null;
       })
       .filter((row): row is NonNullable<typeof row> => Boolean(row));
-  }, [farm, settings]);
+  }, [farm, settings, credit]);
 
   if (!deficit || !plan) {
     return (
@@ -59,7 +77,8 @@ export function SoilNutrientBalancer({ farm, onPatchSoil, blockId }: Props) {
     );
   }
 
-  const need = { n: deficit.total_n_lbs, p: deficit.total_p_lbs, k: deficit.total_k_lbs };
+  const cropNeed = { n: deficit.total_n_lbs, p: deficit.total_p_lbs, k: deficit.total_k_lbs };
+  const need = { n: plan.net_need.n_lbs, p: plan.net_need.p_lbs, k: plan.net_need.k_lbs };
   const supplied = {
     n: need.n + plan.net_balance.n_delta_lbs,
     p: need.p + plan.net_balance.p_delta_lbs,
@@ -67,8 +86,10 @@ export function SoilNutrientBalancer({ farm, onPatchSoil, blockId }: Props) {
   };
   const nShort = supplied.n < need.n * 0.95 - 0.01;
   const kShort = supplied.k < need.k * 0.95 - 0.01;
-  const pOver = plan.net_balance.is_p_overloaded;
-  const empty = need.n + need.p + need.k <= 0;
+  const manureP = manurePOverload(deficit, credit);
+  const pOver = plan.net_balance.is_p_overloaded || manureP;
+  const empty = cropNeed.n + cropNeed.p + cropNeed.k <= 0;
+  const equiv = equivalentMealLbs(credit);
 
   function toggleAmendment(id: string) {
     const on = settings.selected_amendment_ids.includes(id);
@@ -142,23 +163,91 @@ export function SoilNutrientBalancer({ farm, onPatchSoil, blockId }: Props) {
         </div>
         <dl className="grid grid-cols-2 gap-px border-t border-border bg-border sm:grid-cols-4">
           <Stat k="Bed-feet" v={fmtFeet(deficit.total_bed_feet, units)} />
-          <Stat k="N need" v={fmtMass(need.n, units)} warn={nShort} />
+          <Stat k="N crop took" v={fmtMass(cropNeed.n, units)} warn={nShort} />
           <Stat
-            k="P need"
-            v={`${fmtMass(need.p, units)} · ${fmtMass(elementalPToP2O5(need.p), units, 2)} P₂O₅`}
+            k="P crop took"
+            v={`${fmtMass(cropNeed.p, units)} · ${fmtMass(elementalPToP2O5(cropNeed.p), units, 2)} P₂O₅`}
             warn={pOver}
           />
           <Stat
-            k="K need"
-            v={`${fmtMass(need.k, units)} · ${fmtMass(elementalKToK2O(need.k), units, 2)} K₂O`}
+            k="K crop took"
+            v={`${fmtMass(cropNeed.k, units)} · ${fmtMass(elementalKToK2O(cropNeed.k), units, 2)} K₂O`}
             warn={kShort}
           />
         </dl>
       </section>
 
+      <section className="rounded-lg border border-border bg-surface">
+        <header className="border-b border-border px-3 py-1.5 font-mono text-[10px] tracking-[0.18em] text-subtle uppercase">
+          Pasture manure · year-1 credit
+        </header>
+        <div className="p-3">
+          <label className="block font-mono text-[10px] tracking-widest text-subtle">
+            CREDIT SOURCE
+            <select
+              id="manure-credit"
+              value={settings.manure_credit_id ?? ""}
+              onChange={(e) => onPatchSoil({ manure_credit_id: e.currentTarget.value || null })}
+              onInput={(e) => onPatchSoil({ manure_credit_id: (e.currentTarget as HTMLSelectElement).value || null })}
+              className="mt-1 h-11 w-full rounded-sm border border-border bg-elevated px-2 text-sm text-fg outline-none focus:border-accent"
+            >
+              <option value="">None — bagged meals only</option>
+              {credits.map((c) => (
+                <option key={c.source_id} value={c.source_id}>
+                  {c.source_name}
+                </option>
+              ))}
+            </select>
+          </label>
+          {credits.length === 0 ? (
+            <p className="mt-2 font-mono text-[11px] leading-relaxed text-muted">
+              No paddock stays on the ledger yet.{" "}
+              <Link to="/pasture" className="text-accent hover:underline">
+                Save a move on pasture
+              </Link>{" "}
+              and it will show up here as N, P, and K you do not have to buy.
+            </p>
+          ) : null}
+        </div>
+        {credit && bridge ? (
+          <div
+            id="manure-credit-banner"
+            className={cn(
+              "border-t px-3 py-3 font-mono text-[11px] leading-relaxed",
+              manureP ? "border-danger/40 bg-danger/10 text-danger" : "border-ok/30 bg-ok/5 text-fg",
+            )}
+          >
+            <p>
+              {credit.source_name} puts{" "}
+              <span className="text-accent">{fmtMass(credit.available_n_lbs, units, 2)} plant-available N</span>,{" "}
+              {fmtMass(credit.available_p2o5_lbs, units, 2)} P₂O₅, and {fmtMass(credit.available_k2o_lbs, units, 2)} K₂O
+              on these beds. That stands in for about {fmtMass(equiv.feather_meal_12_0_0_lbs, units, 1)} feather meal
+              12-0-0, {fmtMass(equiv.bone_meal_1_13_0_lbs, units, 1)} bone meal, and{" "}
+              {fmtMass(equiv.potash_0_0_50_lbs, units, 1)} sulfate of potash — roughly $
+              {bridge.commercial_savings_usd.toFixed(0)} of bags left on the pallet.
+            </p>
+            {manureP ? (
+              <p className="mt-2">
+                Phosphate from this manure already overshoots what the crop took out by more than 25%. Skip bone meal
+                on this block. Spread the flock over more bed-feet or keep the next tractor off it.
+              </p>
+            ) : (
+              <p className="mt-2 text-muted">
+                Recipe below is the remainder after this credit. Year-1 N is 50% of poultry manure, 40% of sheep and
+                cattle manure.
+              </p>
+            )}
+          </div>
+        ) : null}
+      </section>
+
       {empty ? (
         <p className="rounded-md border border-border bg-elevated px-3 py-2 font-mono text-xs text-muted">
           No crop extraction on this {blockId ? "block" : "farm"}. Drop successions in the engine first.
+        </p>
+      ) : manureP ? (
+        <p className="rounded-md border border-danger/40 bg-elevated px-3 py-2 font-mono text-xs text-danger">
+          Phosphorus cap — manure P₂O₅ is over 125% of crop removal. Do not add bone meal.
         </p>
       ) : pOver ? (
         <p className="rounded-md border border-danger/40 bg-elevated px-3 py-2 font-mono text-xs text-danger">
@@ -172,7 +261,7 @@ export function SoilNutrientBalancer({ farm, onPatchSoil, blockId }: Props) {
         </p>
       ) : (
         <p className="rounded-md border border-ok/30 bg-elevated px-3 py-2 font-mono text-xs text-ok">
-          Recipe meets N and K. P held at ≤ {Math.round((P_OVERLOAD_RATIO - 1) * 100)}% over removal. OMRI palette.
+          Recipe meets N and K after manure. P held at ≤ {Math.round((P_OVERLOAD_RATIO - 1) * 100)}% over removal.
         </p>
       )}
 

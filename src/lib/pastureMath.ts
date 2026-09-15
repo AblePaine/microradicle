@@ -3,16 +3,20 @@
  */
 import type {
   FenceType,
+  LivestockClass,
   LivestockSpeciesSpec,
   PastureForageStand,
   PastureRotationQueueItem,
 } from "../types/pasture.ts";
 import {
   FORAGE_UTILIZATION,
+  LIVESTOCK_CLASSES,
   MAX_HEAD_PER_ROTATION,
   MAX_MOVE_DAYS,
   MAX_PADDOCK_SQFT,
   NET_ROLL_FT,
+  POULTRY_N_YEAR1,
+  RUMINANT_N_YEAR1,
   SQFT_PER_ACRE,
   STAND_DM_LBS_PER_ACRE,
   STAND_REST_DAYS,
@@ -24,6 +28,8 @@ export {
   MAX_MOVE_DAYS,
   MAX_PADDOCK_SQFT,
   NET_ROLL_FT,
+  POULTRY_N_YEAR1,
+  RUMINANT_N_YEAR1,
   SQFT_PER_ACRE,
   STAND_DM_LBS_PER_ACRE,
   STAND_REST_DAYS,
@@ -31,6 +37,10 @@ export {
 
 export function isPastureStand(v: unknown): v is PastureForageStand {
   return typeof v === "string" && Object.prototype.hasOwnProperty.call(STAND_DM_LBS_PER_ACRE, v);
+}
+
+export function isLivestockClass(v: unknown): v is LivestockClass {
+  return typeof v === "string" && (LIVESTOCK_CLASSES as string[]).includes(v);
 }
 
 export function clampHead(n: number): number {
@@ -112,6 +122,28 @@ export function manureForGraze(
   };
 }
 
+export function isPoultryClass(cls: LivestockClass): boolean {
+  return cls === "pastured-broilers" || cls === "pastured-layers";
+}
+
+/** Year-1 plant-available N fraction. Poultry 50%, ruminants 40%. */
+export function nYear1Factor(cls: LivestockClass): number {
+  return isPoultryClass(cls) ? POULTRY_N_YEAR1 : RUMINANT_N_YEAR1;
+}
+
+export function year1AvailableN(totalNLbs: number, cls: LivestockClass): number {
+  return round2(Math.max(0, totalNLbs) * nYear1Factor(cls));
+}
+
+export function inferLivestockClass(speciesId: string, fallback?: unknown): LivestockClass {
+  if (isLivestockClass(fallback)) return fallback;
+  const id = speciesId.toLowerCase();
+  if (id.includes("layer")) return "pastured-layers";
+  if (id.includes("sheep") || id.includes("goat")) return "hair-sheep";
+  if (id.includes("cattle") || id.includes("cow") || id.includes("dexter")) return "small-herd-cattle";
+  return "pastured-broilers";
+}
+
 export function isOvergrazed(allocatedSqft: number, recommendedSqft: number): boolean {
   if (!(recommendedSqft > 0)) return false;
   return allocatedSqft < recommendedSqft * 0.9;
@@ -138,6 +170,7 @@ export function computeRotation(
     id,
     species_id: spec.id,
     species_name: spec.breed,
+    livestock_class: spec.livestockClass,
     head_count: head,
     stand,
     start_date: startDate,
