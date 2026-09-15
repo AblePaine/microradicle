@@ -1,0 +1,66 @@
+{
+  "id": "lettuce-romaine-green-forest",
+  "commonName": "Lettuce",
+  "cultivar": "Green Forest Romaine",
+  "botanicalName": "Lactuca sativa var. longifolia",
+  "family": "Asteraceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 5,
+    "minGermTempF": 40,
+    "optimumGermTempF": 68,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 8,
+    "seedSpacingIn": 0.5,
+    "plantsPerLinearFoot": 4.5
+  },
+  "timeline": {
+    "dtmFromField": 58,
+    "fieldHoldingDays": 12,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.2,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "head",
+    "unitsPerBedFoot": 4.5,
+    "avgWeightPerUnitLbs": 0.85,
+    "targetYieldLbsPerBedFoot": 3.8,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.6,
+    "targetDirectPriceUsd": 2.75
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 1.8,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 1.9
+  },
+  "successionIntervalDays": 10,
+  "maxSuccessions": 8,
+  "companions": [
+    "carrot",
+    "onion",
+    "radish"
+  ],
+  "avoid": [
+    "broccoli"
+  ],
+  "notes": "Upright romaine for wholesale hearts. Tipburn risk with uneven irrigation. Keep even moisture; harvest at dawn.",
+  "swatch": "#4ade80"
+}

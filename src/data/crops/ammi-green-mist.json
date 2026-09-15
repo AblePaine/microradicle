@@ -1,0 +1,91 @@
+{
+  "id": "ammi-green-mist",
+  "commonName": "Ammi",
+  "cultivar": "Green Mist",
+  "botanicalName": "Ammi visnaga",
+  "family": "Apiaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "filler",
+    "targetStemLengthIn": 22,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 8,
+      "firstLayerHeightIn": 16,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 4,
+      "stemsPerPlant": 5,
+      "stemsPerLinearBedFoot": 8,
+      "recommendedPulse": "citric-acid-hydration",
+      "vaseLifeDays": 7
+    }
+  },
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 12,
+    "minGermTempF": 55,
+    "optimumGermTempF": 65,
+    "maxGermTempF": 75
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 6
+  },
+  "timeline": {
+    "dtmFromField": 75,
+    "fieldHoldingDays": 14,
+    "isMulticut": true,
+    "regrowthDays": 4,
+    "maxHarvests": 4,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "moderate"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.03,
+    "targetYieldLbsPerBedFoot": 0.24,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.5,
+    "targetDirectPriceUsd": 1
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 1.1,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.6
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Green Mist. Cut when umbels are 70% open. Soft filler. Direct or 128s.",
+  "swatch": "#86efac"
+}

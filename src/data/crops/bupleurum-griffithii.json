@@ -1,0 +1,91 @@
+{
+  "id": "bupleurum-griffithii",
+  "commonName": "Bupleurum",
+  "cultivar": "Griffithii",
+  "botanicalName": "Bupleurum rotundifolium",
+  "family": "Apiaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "filler",
+    "targetStemLengthIn": 20,
+    "supportNetting": {
+      "required": false,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 0,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 5,
+      "stemsPerPlant": 4,
+      "stemsPerLinearBedFoot": 7,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 8
+    }
+  },
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 10,
+    "minGermTempF": 55,
+    "optimumGermTempF": 65,
+    "maxGermTempF": 75
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 6
+  },
+  "timeline": {
+    "dtmFromField": 70,
+    "fieldHoldingDays": 12,
+    "isMulticut": true,
+    "regrowthDays": 5,
+    "maxHarvests": 3,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "moderate"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 7,
+    "avgWeightPerUnitLbs": 0.03,
+    "targetYieldLbsPerBedFoot": 0.21,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 0.55,
+    "targetDirectPriceUsd": 1.1
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.85
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 1,
+    "pRemovalLbsPer100BedFt": 0.25,
+    "kRemovalLbsPer100BedFt": 1.5
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Griffithii. Chartreuse umbel filler. Cut as flowers open. Cool-season.",
+  "swatch": "#a3e635"
+}

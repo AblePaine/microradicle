@@ -1,0 +1,66 @@
+{
+  "id": "chard-fordhook-giant",
+  "commonName": "Chard",
+  "cultivar": "Fordhook Giant",
+  "botanicalName": "Beta vulgaris subsp. vulgaris",
+  "family": "Amaranthaceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 6,
+    "minGermTempF": 50,
+    "optimumGermTempF": 75,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 2,
+    "inRowSpacingIn": 10,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 2.4
+  },
+  "timeline": {
+    "dtmFromField": 55,
+    "fieldHoldingDays": 60,
+    "isMulticut": true,
+    "regrowthDays": 10,
+    "maxHarvests": 8,
+    "fallPhotoperiodMultiplier": 1.1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 2.4,
+    "avgWeightPerUnitLbs": 0.7,
+    "targetYieldLbsPerBedFoot": 1.7,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 2.5,
+    "targetDirectPriceUsd": 4
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.6,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 2.2
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 3,
+  "companions": [
+    "allium",
+    "lettuce",
+    "bean"
+  ],
+  "avoid": [
+    "spinach"
+  ],
+  "notes": "White-rib bulk bunches. 2-row 12 in if plants get large.",
+  "swatch": "#166534"
+}

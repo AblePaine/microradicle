@@ -1,0 +1,68 @@
+{
+  "id": "tomato-cherry-sun-gold",
+  "commonName": "Tomato",
+  "cultivar": "Sun Gold",
+  "botanicalName": "Solanum lycopersicum",
+  "family": "Solanaceae",
+  "category": "solanaceous",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 49,
+    "germinationDays": 6,
+    "minGermTempF": 60,
+    "optimumGermTempF": 78,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 18,
+    "seedSpacingIn": 18,
+    "plantsPerLinearFoot": 0.67
+  },
+  "timeline": {
+    "dtmFromField": 57,
+    "fieldHoldingDays": 70,
+    "isMulticut": true,
+    "regrowthDays": 3,
+    "maxHarvests": 24,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pint",
+    "unitsPerBedFoot": 6.4,
+    "avgWeightPerUnitLbs": 1.25,
+    "targetYieldLbsPerBedFoot": 8,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 3.25,
+    "targetDirectPriceUsd": 5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 12,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.5
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2.8,
+    "pRemovalLbsPer100BedFt": 0.9,
+    "kRemovalLbsPer100BedFt": 4.2
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "carrot",
+    "onion"
+  ],
+  "avoid": [
+    "fennel",
+    "potato",
+    "brassica"
+  ],
+  "notes": "Indeterminate cherry. Single row on 30-inch bed, 7-ft stake or roll-and-pinch trellis. Prune to 2–3 leaders. Split fruit after rain — pick daily at first orange blush.",
+  "swatch": "#facc15"
+}

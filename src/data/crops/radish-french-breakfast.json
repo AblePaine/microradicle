@@ -1,0 +1,66 @@
+{
+  "id": "radish-french-breakfast",
+  "commonName": "Radish",
+  "cultivar": "French Breakfast",
+  "botanicalName": "Raphanus sativus",
+  "family": "Brassicaceae",
+  "category": "root-crops",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 4,
+    "minGermTempF": 40,
+    "optimumGermTempF": 60,
+    "maxGermTempF": 75
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 5,
+    "inRowSpacingIn": 1.5,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 40
+  },
+  "timeline": {
+    "dtmFromField": 25,
+    "fieldHoldingDays": 7,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.2,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 0.4,
+    "targetYieldLbsPerBedFoot": 1.6,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.75,
+    "targetDirectPriceUsd": 3
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.25,
+    "weeklyWaterRequirementIn": 0.7
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.5,
+    "pRemovalLbsPer100BedFt": 0.2,
+    "kRemovalLbsPer100BedFt": 0.8
+  },
+  "successionIntervalDays": 7,
+  "maxSuccessions": 12,
+  "companions": [
+    "carrot",
+    "lettuce",
+    "pea"
+  ],
+  "avoid": [
+    "hyssop"
+  ],
+  "notes": "Catch crop and row marker for carrots. Seven-day successions in spring and fall. Pithy above 80°F. Bunch of 8–10, ice immediately.",
+  "swatch": "#f472b6"
+}

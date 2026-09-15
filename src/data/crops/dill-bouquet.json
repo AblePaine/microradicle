@@ -1,0 +1,65 @@
+{
+  "id": "dill-bouquet",
+  "commonName": "Dill",
+  "cultivar": "Bouquet",
+  "botanicalName": "Anethum graveolens",
+  "family": "Apiaceae",
+  "category": "herbs",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 8,
+    "minGermTempF": 50,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 4,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 9
+  },
+  "timeline": {
+    "dtmFromField": 40,
+    "fieldHoldingDays": 10,
+    "isMulticut": true,
+    "regrowthDays": 10,
+    "maxHarvests": 3,
+    "fallPhotoperiodMultiplier": 1.15,
+    "frostHardiness": "moderate"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 2.5,
+    "avgWeightPerUnitLbs": 0.2,
+    "targetYieldLbsPerBedFoot": 0.5,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.5,
+    "targetDirectPriceUsd": 2.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.6,
+    "pRemovalLbsPer100BedFt": 0.2,
+    "kRemovalLbsPer100BedFt": 0.8
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 6,
+  "companions": [
+    "cabbage",
+    "onion"
+  ],
+  "avoid": [
+    "carrot"
+  ],
+  "notes": "Leaf then umbel. Succession every 14 d.",
+  "swatch": "#65a30d"
+}

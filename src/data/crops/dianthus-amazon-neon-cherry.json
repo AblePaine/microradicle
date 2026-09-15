@@ -1,0 +1,91 @@
+{
+  "id": "dianthus-amazon-neon-cherry",
+  "commonName": "Dianthus",
+  "cultivar": "Amazon Neon Cherry",
+  "botanicalName": "Dianthus barbatus",
+  "family": "Caryophyllaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "focal",
+    "targetStemLengthIn": 20,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 12,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 4,
+      "stemsPerPlant": 4,
+      "stemsPerLinearBedFoot": 8,
+      "recommendedPulse": "bleach-chlorine-shock",
+      "vaseLifeDays": 9
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 42,
+    "germinationDays": 8,
+    "minGermTempF": 60,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 78
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 85,
+    "fieldHoldingDays": 16,
+    "isMulticut": true,
+    "regrowthDays": 4,
+    "maxHarvests": 4,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.05,
+    "targetYieldLbsPerBedFoot": 0.4,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 0.7,
+    "targetDirectPriceUsd": 1.4
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.5,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 2
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Amazon Neon. First-year flowering Sweet William type. Cut ⅓ open. Chlorine shock helps.",
+  "swatch": "#e11d48"
+}

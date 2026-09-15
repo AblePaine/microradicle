@@ -1,0 +1,91 @@
+{
+  "id": "stock-katz-bright-rose",
+  "commonName": "Stock",
+  "cultivar": "Katz Bright Rose",
+  "botanicalName": "Matthiola incana",
+  "family": "Brassicaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "spike",
+    "targetStemLengthIn": 22,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 12,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 0,
+      "stemsPerPlant": 1,
+      "stemsPerLinearBedFoot": 8,
+      "recommendedPulse": "citric-acid-hydration",
+      "vaseLifeDays": 6
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 35,
+    "germinationDays": 7,
+    "minGermTempF": 55,
+    "optimumGermTempF": 65,
+    "maxGermTempF": 75
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 80,
+    "fieldHoldingDays": 10,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.06,
+    "targetYieldLbsPerBedFoot": 0.48,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.8,
+    "targetDirectPriceUsd": 1.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.5,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 2
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Selectable Katz: dark seed = double. Cool crop. Cut when 3–5 florets open. Citric pulse.",
+  "swatch": "#e11d48"
+}

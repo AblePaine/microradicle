@@ -1,0 +1,91 @@
+{
+  "id": "bells-of-ireland",
+  "commonName": "Bells of Ireland",
+  "cultivar": "Bells of Ireland",
+  "botanicalName": "Moluccella laevis",
+  "family": "Lamiaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "spike",
+    "targetStemLengthIn": 24,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 8,
+      "firstLayerHeightIn": 16,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "fully-open",
+      "cutFrequencyDays": 5,
+      "stemsPerPlant": 3,
+      "stemsPerLinearBedFoot": 5,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 8
+    }
+  },
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 35,
+    "germinationDays": 12,
+    "minGermTempF": 55,
+    "optimumGermTempF": 65,
+    "maxGermTempF": 75
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 9,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 4
+  },
+  "timeline": {
+    "dtmFromField": 90,
+    "fieldHoldingDays": 14,
+    "isMulticut": true,
+    "regrowthDays": 5,
+    "maxHarvests": 2,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 5,
+    "avgWeightPerUnitLbs": 0.06,
+    "targetYieldLbsPerBedFoot": 0.3,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.75,
+    "targetDirectPriceUsd": 1.4
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.3,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.8
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Pre-chill seed 5 d. Cut when bells are developed, flowers still small. Spike + filler.",
+  "swatch": "#4ade80"
+}

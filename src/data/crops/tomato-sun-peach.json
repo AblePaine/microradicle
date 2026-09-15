@@ -1,0 +1,68 @@
+{
+  "id": "tomato-sun-peach",
+  "commonName": "Cherry tomato",
+  "cultivar": "Sun Peach",
+  "botanicalName": "Solanum lycopersicum",
+  "family": "Solanaceae",
+  "category": "solanaceous",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 49,
+    "germinationDays": 6,
+    "minGermTempF": 60,
+    "optimumGermTempF": 78,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 18,
+    "seedSpacingIn": 18,
+    "plantsPerLinearFoot": 0.67
+  },
+  "timeline": {
+    "dtmFromField": 60,
+    "fieldHoldingDays": 70,
+    "isMulticut": true,
+    "regrowthDays": 3,
+    "maxHarvests": 20,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pint",
+    "unitsPerBedFoot": 5.5,
+    "avgWeightPerUnitLbs": 1.1,
+    "targetYieldLbsPerBedFoot": 6,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 3.25,
+    "targetDirectPriceUsd": 5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 12,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.5
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2.6,
+    "pRemovalLbsPer100BedFt": 0.85,
+    "kRemovalLbsPer100BedFt": 4
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "carrot",
+    "onion"
+  ],
+  "avoid": [
+    "fennel",
+    "potato",
+    "brassica"
+  ],
+  "notes": "Pink cherry, crack-resistant sister to Sun Gold. Same trellis.",
+  "swatch": "#fb923c"
+}

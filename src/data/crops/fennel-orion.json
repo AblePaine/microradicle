@@ -1,0 +1,67 @@
+{
+  "id": "fennel-orion",
+  "commonName": "Fennel",
+  "cultivar": "Orion",
+  "botanicalName": "Foeniculum vulgare var. azoricum",
+  "family": "Apiaceae",
+  "category": "root-crops",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 10,
+    "minGermTempF": 50,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 8,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 4.5
+  },
+  "timeline": {
+    "dtmFromField": 80,
+    "fieldHoldingDays": 14,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.15,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "head",
+    "unitsPerBedFoot": 4.5,
+    "avgWeightPerUnitLbs": 0.7,
+    "targetYieldLbsPerBedFoot": 3.1,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 2,
+    "targetDirectPriceUsd": 3.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.2,
+    "pRemovalLbsPer100BedFt": 0.35,
+    "kRemovalLbsPer100BedFt": 1.5
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 3,
+  "companions": [
+    "pea",
+    "cucumber"
+  ],
+  "avoid": [
+    "tomato",
+    "bean",
+    "coriander"
+  ],
+  "notes": "Bolt-resistant bulb fennel. Fall planting is more reliable than spring in the Southeast. Do not transplant late — check at 3 weeks. Hill slightly as bulbs swell.",
+  "swatch": "#d9f99d"
+}

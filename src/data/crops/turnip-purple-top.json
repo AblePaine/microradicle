@@ -1,0 +1,63 @@
+{
+  "id": "turnip-purple-top",
+  "commonName": "Turnip",
+  "cultivar": "Purple Top White Globe",
+  "botanicalName": "Brassica rapa subsp. rapa",
+  "family": "Brassicaceae",
+  "category": "root-crops",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 4,
+    "minGermTempF": 50,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 3,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 16
+  },
+  "timeline": {
+    "dtmFromField": 50,
+    "fieldHoldingDays": 7,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.2,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 3.2,
+    "avgWeightPerUnitLbs": 0.55,
+    "targetYieldLbsPerBedFoot": 1.75,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 2.25,
+    "targetDirectPriceUsd": 3.75
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.1,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.6
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 5,
+  "companions": [
+    "pea",
+    "allium"
+  ],
+  "avoid": [],
+  "notes": "Storage turnip. Larger, 3-row 4 in.",
+  "swatch": "#f5f5f4"
+}

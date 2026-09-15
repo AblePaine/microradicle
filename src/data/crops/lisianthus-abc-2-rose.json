@@ -1,0 +1,91 @@
+{
+  "id": "lisianthus-abc-2-rose",
+  "commonName": "Lisianthus",
+  "cultivar": "ABC 2 Rose",
+  "botanicalName": "Eustoma grandiflorum",
+  "family": "Gentianaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "focal",
+    "targetStemLengthIn": 24,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 14,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": true,
+      "pinchAtHeightIn": 6,
+      "leaveNodeCount": 3,
+      "dtmPenaltyDays": 14
+    },
+    "harvestProtocol": {
+      "stage": "marshmallow",
+      "cutFrequencyDays": 4,
+      "stemsPerPlant": 4,
+      "stemsPerLinearBedFoot": 7,
+      "recommendedPulse": "chrysal-holding-soln",
+      "vaseLifeDays": 12
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 80,
+    "germinationDays": 14,
+    "minGermTempF": 68,
+    "optimumGermTempF": 75,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 124,
+    "fieldHoldingDays": 18,
+    "isMulticut": true,
+    "regrowthDays": 4,
+    "maxHarvests": 4,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 7,
+    "avgWeightPerUnitLbs": 0.05,
+    "targetYieldLbsPerBedFoot": 0.35,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 1.25,
+    "targetDirectPriceUsd": 2.25
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.6,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 2.2
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "10–12 week 128s. Do not bury the crown. One Hortonova layer. Cut at marshmallow — buds finish in the vase.",
+  "swatch": "#f9a8d4"
+}

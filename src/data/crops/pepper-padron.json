@@ -1,0 +1,66 @@
+{
+  "id": "pepper-padron",
+  "commonName": "Pepper",
+  "cultivar": "Padron",
+  "botanicalName": "Capsicum annuum",
+  "family": "Solanaceae",
+  "category": "solanaceous",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 56,
+    "germinationDays": 10,
+    "minGermTempF": 65,
+    "optimumGermTempF": 80,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 2,
+    "inRowSpacingIn": 12,
+    "seedSpacingIn": 12,
+    "plantsPerLinearFoot": 2
+  },
+  "timeline": {
+    "dtmFromField": 60,
+    "fieldHoldingDays": 45,
+    "isMulticut": true,
+    "regrowthDays": 7,
+    "maxHarvests": 8,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 2.2,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 2.2,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 2.75,
+    "targetDirectPriceUsd": 4.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.4
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2,
+    "pRemovalLbsPer100BedFt": 0.6,
+    "kRemovalLbsPer100BedFt": 2.8
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "basil",
+    "tomato",
+    "onion"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Spanish fryer. Some hot. 2-row.",
+  "swatch": "#f97316"
+}

@@ -1,0 +1,67 @@
+{
+  "id": "cucumber-dasher-ii",
+  "commonName": "Cucumber",
+  "cultivar": "Dasher II",
+  "botanicalName": "Cucumis sativus",
+  "family": "Cucurbitaceae",
+  "category": "cucurbits",
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 21,
+    "germinationDays": 5,
+    "minGermTempF": 60,
+    "optimumGermTempF": 80,
+    "maxGermTempF": 95
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 12,
+    "seedSpacingIn": 12,
+    "plantsPerLinearFoot": 1
+  },
+  "timeline": {
+    "dtmFromField": 52,
+    "fieldHoldingDays": 35,
+    "isMulticut": true,
+    "regrowthDays": 2,
+    "maxHarvests": 16,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 7.6,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 7.6,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 1.25,
+    "targetDirectPriceUsd": 2.1
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.6
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 1.8,
+    "pRemovalLbsPer100BedFt": 0.55,
+    "kRemovalLbsPer100BedFt": 2.4
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 3,
+  "companions": [
+    "bean",
+    "pea",
+    "radish"
+  ],
+  "avoid": [
+    "potato",
+    "sage"
+  ],
+  "notes": "Trellis one row. Corinto/Dasher for slicers. Pick every other day or they balloon.",
+  "swatch": "#4ade80"
+}

@@ -1,0 +1,67 @@
+{
+  "id": "scallion-parade",
+  "commonName": "Scallion",
+  "cultivar": "Parade",
+  "botanicalName": "Allium fistulosum",
+  "family": "Amaryllidaceae",
+  "category": "alliums",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 200,
+    "nurseryLeadDays": 42,
+    "germinationDays": 7,
+    "minGermTempF": 50,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 4,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 12
+  },
+  "timeline": {
+    "dtmFromField": 50,
+    "fieldHoldingDays": 14,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.2,
+    "frostHardiness": "extreme"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 3,
+    "avgWeightPerUnitLbs": 0.35,
+    "targetYieldLbsPerBedFoot": 1.05,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.75,
+    "targetDirectPriceUsd": 3
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.3
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 4,
+  "companions": [
+    "carrot",
+    "lettuce",
+    "beet"
+  ],
+  "avoid": [
+    "pea",
+    "bean"
+  ],
+  "notes": "The bunching onion. 4 seeds/200-cell, plant the plug.",
+  "swatch": "#86efac"
+}

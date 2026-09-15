@@ -1,0 +1,66 @@
+{
+  "id": "lettuce-romaine-plato",
+  "commonName": "Romaine",
+  "cultivar": "Plato",
+  "botanicalName": "Lactuca sativa var. longifolia",
+  "family": "Asteraceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 26,
+    "germinationDays": 5,
+    "minGermTempF": 40,
+    "optimumGermTempF": 68,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 8,
+    "seedSpacingIn": 0.5,
+    "plantsPerLinearFoot": 4.5
+  },
+  "timeline": {
+    "dtmFromField": 60,
+    "fieldHoldingDays": 12,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.15,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "head",
+    "unitsPerBedFoot": 4.5,
+    "avgWeightPerUnitLbs": 0.7,
+    "targetYieldLbsPerBedFoot": 3.15,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.85,
+    "targetDirectPriceUsd": 3.25
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.5,
+    "pRemovalLbsPer100BedFt": 0.38,
+    "kRemovalLbsPer100BedFt": 1.7
+  },
+  "successionIntervalDays": 10,
+  "maxSuccessions": 10,
+  "companions": [
+    "carrot",
+    "onion",
+    "radish"
+  ],
+  "avoid": [
+    "broccoli"
+  ],
+  "notes": "3-row 8 in romaine on 30-inch. Tipburn watch in heat — Muir/Nevada class for summer.",
+  "swatch": "#4ade80"
+}

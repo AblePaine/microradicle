@@ -1,0 +1,65 @@
+{
+  "id": "mache-vit",
+  "commonName": "Mâche",
+  "cultivar": "Vit",
+  "botanicalName": "Valerianella locusta",
+  "family": "Caprifoliaceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 4,
+    "minGermTempF": 45,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 4,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 12
+  },
+  "timeline": {
+    "dtmFromField": 50,
+    "fieldHoldingDays": 7,
+    "isMulticut": true,
+    "regrowthDays": 10,
+    "maxHarvests": 3,
+    "fallPhotoperiodMultiplier": 1.25,
+    "frostHardiness": "extreme"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 0.8,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 0.8,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 6,
+    "targetDirectPriceUsd": 10
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.2,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.4
+  },
+  "successionIntervalDays": 10,
+  "maxSuccessions": 8,
+  "companions": [
+    "lettuce",
+    "allium"
+  ],
+  "avoid": [
+    "strawberry"
+  ],
+  "notes": "Corn salad. Fall sow. Dense 5-row. Slow.",
+  "swatch": "#22c55e"
+}

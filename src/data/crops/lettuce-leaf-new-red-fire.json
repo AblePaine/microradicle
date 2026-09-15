@@ -1,0 +1,65 @@
+{
+  "id": "lettuce-leaf-new-red-fire",
+  "commonName": "Leaf lettuce",
+  "cultivar": "New Red Fire",
+  "botanicalName": "Lactuca sativa var. crispa",
+  "family": "Asteraceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 22,
+    "germinationDays": 4,
+    "minGermTempF": 40,
+    "optimumGermTempF": 68,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 0.5,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 45,
+    "fieldHoldingDays": 8,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.2,
+    "frostHardiness": "moderate"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "head",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.35,
+    "targetYieldLbsPerBedFoot": 2.8,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.6,
+    "targetDirectPriceUsd": 2.75
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.3,
+    "pRemovalLbsPer100BedFt": 0.32,
+    "kRemovalLbsPer100BedFt": 1.5
+  },
+  "successionIntervalDays": 7,
+  "maxSuccessions": 14,
+  "companions": [
+    "carrot",
+    "onion"
+  ],
+  "avoid": [
+    "broccoli"
+  ],
+  "notes": "Fast leaf for shoulder seasons. New Red Fire and Tropicana hold in heat better than butterheads.",
+  "swatch": "#ef4444"
+}

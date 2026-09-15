@@ -1,0 +1,67 @@
+{
+  "id": "garlic-music",
+  "commonName": "Garlic",
+  "cultivar": "Music",
+  "botanicalName": "Allium sativum",
+  "family": "Amaryllidaceae",
+  "category": "alliums",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 21,
+    "minGermTempF": 32,
+    "optimumGermTempF": 50,
+    "maxGermTempF": 70
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 6,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 240,
+    "fieldHoldingDays": 14,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "extreme"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 1.6,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 1.6,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 6,
+    "targetDirectPriceUsd": 10
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.2,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 1.6
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "beet",
+    "lettuce",
+    "kale"
+  ],
+  "avoid": [
+    "pea",
+    "bean"
+  ],
+  "notes": "Porcelain hardneck. Huge cloves, scapes in May. Fall plant.",
+  "swatch": "#e7e5e4"
+}

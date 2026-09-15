@@ -1,0 +1,63 @@
+{
+  "id": "radish-sparkler",
+  "commonName": "Radish",
+  "cultivar": "Sparkler",
+  "botanicalName": "Raphanus sativus",
+  "family": "Brassicaceae",
+  "category": "root-crops",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 4,
+    "minGermTempF": 45,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 5,
+    "inRowSpacingIn": 1.5,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 40
+  },
+  "timeline": {
+    "dtmFromField": 26,
+    "fieldHoldingDays": 4,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.25,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 0.45,
+    "targetYieldLbsPerBedFoot": 1.8,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.75,
+    "targetDirectPriceUsd": 3
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.7,
+    "pRemovalLbsPer100BedFt": 0.2,
+    "kRemovalLbsPer100BedFt": 0.9
+  },
+  "successionIntervalDays": 7,
+  "maxSuccessions": 12,
+  "companions": [
+    "lettuce",
+    "carrot"
+  ],
+  "avoid": [],
+  "notes": "Fast cash. Flea beetle net. Pull on time or pithy. Daikon is a different crop — 50–70 d, 3-row.",
+  "swatch": "#fca5a5"
+}

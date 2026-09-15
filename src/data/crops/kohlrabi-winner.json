@@ -1,0 +1,65 @@
+{
+  "id": "kohlrabi-winner",
+  "commonName": "Kohlrabi",
+  "cultivar": "Winner",
+  "botanicalName": "Brassica oleracea var. gongylodes",
+  "family": "Brassicaceae",
+  "category": "brassicas",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 24,
+    "germinationDays": 5,
+    "minGermTempF": 45,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 6
+  },
+  "timeline": {
+    "dtmFromField": 45,
+    "fieldHoldingDays": 10,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.15,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 0.6,
+    "targetYieldLbsPerBedFoot": 2.4,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 2,
+    "targetDirectPriceUsd": 3.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.6,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 1.8
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 4,
+  "companions": [
+    "beet",
+    "allium"
+  ],
+  "avoid": [
+    "strawberry"
+  ],
+  "notes": "Pick at tennis-ball or it lignifies. Kolibri (purple) outsells green at market.",
+  "swatch": "#86efac"
+}

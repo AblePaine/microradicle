@@ -1,0 +1,66 @@
+{
+  "id": "carrot-yaya",
+  "commonName": "Carrot",
+  "cultivar": "Yaya Nantes",
+  "botanicalName": "Daucus carota subsp. sativus",
+  "family": "Apiaceae",
+  "category": "root-crops",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 10,
+    "minGermTempF": 45,
+    "optimumGermTempF": 72,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 5,
+    "inRowSpacingIn": 1,
+    "seedSpacingIn": 0.75,
+    "plantsPerLinearFoot": 60
+  },
+  "timeline": {
+    "dtmFromField": 56,
+    "fieldHoldingDays": 14,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 2.5,
+    "avgWeightPerUnitLbs": 0.72,
+    "targetYieldLbsPerBedFoot": 1.8,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 2,
+    "targetDirectPriceUsd": 3.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.8,
+    "pRemovalLbsPer100BedFt": 0.35,
+    "kRemovalLbsPer100BedFt": 1.8
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 5,
+  "companions": [
+    "lettuce",
+    "onion",
+    "radish"
+  ],
+  "avoid": [
+    "dill"
+  ],
+  "notes": "Early Nantes for first bunches. Sweeter, shorter keeper than Bolero. Use for June and October bunches; leave Bolero for storage.",
+  "swatch": "#fdba74"
+}

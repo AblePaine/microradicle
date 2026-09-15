@@ -1,0 +1,91 @@
+{
+  "id": "eucalyptus-baby-blue",
+  "commonName": "Eucalyptus",
+  "cultivar": "Baby Blue",
+  "botanicalName": "Eucalyptus pulverulenta",
+  "family": "Myrtaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "foliage",
+    "targetStemLengthIn": 24,
+    "supportNetting": {
+      "required": false,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 0,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": true,
+      "pinchAtHeightIn": 12,
+      "leaveNodeCount": 2,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "fully-open",
+      "cutFrequencyDays": 10,
+      "stemsPerPlant": 6,
+      "stemsPerLinearBedFoot": 4,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 16
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 56,
+    "germinationDays": 14,
+    "minGermTempF": 60,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 2,
+    "inRowSpacingIn": 18,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 1.33
+  },
+  "timeline": {
+    "dtmFromField": 150,
+    "fieldHoldingDays": 40,
+    "isMulticut": true,
+    "regrowthDays": 10,
+    "maxHarvests": 6,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 0.12,
+    "targetYieldLbsPerBedFoot": 0.48,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 1.1,
+    "targetDirectPriceUsd": 2
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 1.8,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 2.2
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Baby Blue. First-year juvenile foliage. Cut pencil-thick stems. Foliage, not bloom.",
+  "swatch": "#94a3b8"
+}

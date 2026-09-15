@@ -1,0 +1,66 @@
+{
+  "id": "spinach-corvair",
+  "commonName": "Spinach",
+  "cultivar": "Corvair",
+  "botanicalName": "Spinacia oleracea",
+  "family": "Amaranthaceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 8,
+    "minGermTempF": 35,
+    "optimumGermTempF": 50,
+    "maxGermTempF": 68
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 5,
+    "inRowSpacingIn": 2,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 30
+  },
+  "timeline": {
+    "dtmFromField": 40,
+    "fieldHoldingDays": 8,
+    "isMulticut": true,
+    "regrowthDays": 12,
+    "maxHarvests": 3,
+    "fallPhotoperiodMultiplier": 1.25,
+    "frostHardiness": "extreme"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 0.9,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 0.9,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 4.5,
+    "targetDirectPriceUsd": 8
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.85
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 1.6,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.4
+  },
+  "successionIntervalDays": 10,
+  "maxSuccessions": 8,
+  "companions": [
+    "strawberry",
+    "pea",
+    "onion"
+  ],
+  "avoid": [
+    "potato"
+  ],
+  "notes": "Downy-mildew resistant savoy. Germination collapses above 75°F — pre-sprout in fridge for September sowings. Overwinter under row cover in zone 7–8.",
+  "swatch": "#166534"
+}

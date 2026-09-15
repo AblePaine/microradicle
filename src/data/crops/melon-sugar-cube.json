@@ -1,0 +1,64 @@
+{
+  "id": "melon-sugar-cube",
+  "commonName": "Melon",
+  "cultivar": "Sugar Cube",
+  "botanicalName": "Cucumis melo",
+  "family": "Cucurbitaceae",
+  "category": "cucurbits",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 21,
+    "germinationDays": 5,
+    "minGermTempF": 70,
+    "optimumGermTempF": 85,
+    "maxGermTempF": 95
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 24,
+    "seedSpacingIn": 24,
+    "plantsPerLinearFoot": 0.5
+  },
+  "timeline": {
+    "dtmFromField": 80,
+    "fieldHoldingDays": 10,
+    "isMulticut": true,
+    "regrowthDays": 5,
+    "maxHarvests": 4,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 3.5,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 3.5,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 1.75,
+    "targetDirectPriceUsd": 3
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 12,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.5
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.4,
+    "pRemovalLbsPer100BedFt": 0.45,
+    "kRemovalLbsPer100BedFt": 2.2
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "radish"
+  ],
+  "avoid": [
+    "potato"
+  ],
+  "notes": "Personal melon. High count, high direct price.",
+  "swatch": "#fbbf24"
+}

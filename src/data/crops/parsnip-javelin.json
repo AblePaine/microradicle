@@ -1,0 +1,68 @@
+{
+  "id": "parsnip-javelin",
+  "commonName": "Parsnip",
+  "cultivar": "Javelin",
+  "botanicalName": "Pastinaca sativa",
+  "family": "Apiaceae",
+  "category": "root-crops",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 12,
+    "minGermTempF": 45,
+    "optimumGermTempF": 75,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 5,
+    "inRowSpacingIn": 1,
+    "seedSpacingIn": 0.75,
+    "plantsPerLinearFoot": 60
+  },
+  "timeline": {
+    "dtmFromField": 110,
+    "fieldHoldingDays": 21,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.12,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 2.2,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 2.2,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 1.5,
+    "targetDirectPriceUsd": 2.75
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.9,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 2.2
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 4,
+  "companions": [
+    "lettuce",
+    "onion",
+    "radish",
+    "pea"
+  ],
+  "avoid": [
+    "dill",
+    "parsnip"
+  ],
+  "notes": "Parsnip. 3-row 3 in. Same seedbed discipline as carrot. Sweet after frost.",
+  "swatch": "#fb923c"
+}

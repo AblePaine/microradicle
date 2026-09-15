@@ -1,0 +1,65 @@
+{
+  "id": "zucchini-desert",
+  "commonName": "Zucchini",
+  "cultivar": "Desert",
+  "botanicalName": "Cucurbita pepo",
+  "family": "Cucurbitaceae",
+  "category": "cucurbits",
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 18,
+    "germinationDays": 5,
+    "minGermTempF": 60,
+    "optimumGermTempF": 85,
+    "maxGermTempF": 95
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 24,
+    "seedSpacingIn": 24,
+    "plantsPerLinearFoot": 0.5
+  },
+  "timeline": {
+    "dtmFromField": 48,
+    "fieldHoldingDays": 28,
+    "isMulticut": true,
+    "regrowthDays": 2,
+    "maxHarvests": 14,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 6,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 6,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.4,
+    "targetDirectPriceUsd": 2.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 12,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.5
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 1.7,
+    "pRemovalLbsPer100BedFt": 0.55,
+    "kRemovalLbsPer100BedFt": 2.2
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 3,
+  "companions": [
+    "bean",
+    "nasturtium"
+  ],
+  "avoid": [
+    "potato"
+  ],
+  "notes": "Dunja is PM-resistant. Pick 6–8 in daily. Squash bug: row cover until female flowers.",
+  "swatch": "#22c55e"
+}

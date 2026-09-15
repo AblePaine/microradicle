@@ -1,0 +1,91 @@
+{
+  "id": "scabiosa-fata-morgana",
+  "commonName": "Scabiosa",
+  "cultivar": "Fata Morgana",
+  "botanicalName": "Scabiosa atropurpurea",
+  "family": "Caprifoliaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "focal",
+    "targetStemLengthIn": 20,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 14,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": true,
+      "pinchAtHeightIn": 6,
+      "leaveNodeCount": 3,
+      "dtmPenaltyDays": 8
+    },
+    "harvestProtocol": {
+      "stage": "marshmallow",
+      "cutFrequencyDays": 3,
+      "stemsPerPlant": 8,
+      "stemsPerLinearBedFoot": 8,
+      "recommendedPulse": "citric-acid-hydration",
+      "vaseLifeDays": 8
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 10,
+    "minGermTempF": 60,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 78
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 9,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 4
+  },
+  "timeline": {
+    "dtmFromField": 98,
+    "fieldHoldingDays": 28,
+    "isMulticut": true,
+    "regrowthDays": 3,
+    "maxHarvests": 10,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "moderate"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.04,
+    "targetYieldLbsPerBedFoot": 0.32,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.65,
+    "targetDirectPriceUsd": 1.25
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.4,
+    "pRemovalLbsPer100BedFt": 0.35,
+    "kRemovalLbsPer100BedFt": 1.9
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Cut at marshmallow. Black Knight stains water — recut underwater. Net once.",
+  "swatch": "#fde68a"
+}

@@ -1,0 +1,65 @@
+{
+  "id": "squash-honeynut",
+  "commonName": "Winter squash",
+  "cultivar": "Honeynut",
+  "botanicalName": "Cucurbita moschata",
+  "family": "Cucurbitaceae",
+  "category": "cucurbits",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 18,
+    "germinationDays": 6,
+    "minGermTempF": 60,
+    "optimumGermTempF": 85,
+    "maxGermTempF": 95
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 24,
+    "seedSpacingIn": 24,
+    "plantsPerLinearFoot": 0.5
+  },
+  "timeline": {
+    "dtmFromField": 100,
+    "fieldHoldingDays": 14,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 4,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.25,
+    "targetDirectPriceUsd": 2
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 12,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.3
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 1.6,
+    "pRemovalLbsPer100BedFt": 0.5,
+    "kRemovalLbsPer100BedFt": 2.4
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "corn",
+    "bean"
+  ],
+  "avoid": [
+    "potato"
+  ],
+  "notes": "Personal butternut. High $/lb. Same geometry.",
+  "swatch": "#ea580c"
+}

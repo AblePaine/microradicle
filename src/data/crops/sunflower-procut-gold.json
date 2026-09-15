@@ -1,0 +1,91 @@
+{
+  "id": "sunflower-procut-gold",
+  "commonName": "Sunflower",
+  "cultivar": "ProCut Gold",
+  "botanicalName": "Helianthus annuus",
+  "family": "Asteraceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "focal",
+    "targetStemLengthIn": 30,
+    "supportNetting": {
+      "required": false,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 0,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "cracked-bud",
+      "cutFrequencyDays": 0,
+      "stemsPerPlant": 1,
+      "stemsPerLinearBedFoot": 4,
+      "recommendedPulse": "citric-acid-hydration",
+      "vaseLifeDays": 8
+    }
+  },
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 14,
+    "germinationDays": 5,
+    "minGermTempF": 60,
+    "optimumGermTempF": 75,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 2,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 4
+  },
+  "timeline": {
+    "dtmFromField": 55,
+    "fieldHoldingDays": 5,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 0.18,
+    "targetYieldLbsPerBedFoot": 0.72,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.1,
+    "targetDirectPriceUsd": 2
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.3
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2,
+    "pRemovalLbsPer100BedFt": 0.5,
+    "kRemovalLbsPer100BedFt": 2.8
+  },
+  "successionIntervalDays": 10,
+  "maxSuccessions": 6,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Single-stem ProCut. Do not pinch. Direct-sow or 2-week 72s. Cut when petals just lift off the disk.",
+  "swatch": "#eab308"
+}

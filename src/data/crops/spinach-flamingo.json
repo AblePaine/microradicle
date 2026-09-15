@@ -1,0 +1,66 @@
+{
+  "id": "spinach-flamingo",
+  "commonName": "Spinach",
+  "cultivar": "Flamingo",
+  "botanicalName": "Spinacia oleracea",
+  "family": "Amaranthaceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 7,
+    "minGermTempF": 35,
+    "optimumGermTempF": 55,
+    "maxGermTempF": 68
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 5,
+    "inRowSpacingIn": 2,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 30
+  },
+  "timeline": {
+    "dtmFromField": 40,
+    "fieldHoldingDays": 7,
+    "isMulticut": true,
+    "regrowthDays": 14,
+    "maxHarvests": 2,
+    "fallPhotoperiodMultiplier": 1.35,
+    "frostHardiness": "extreme"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 1.2,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 1.2,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 6,
+    "targetDirectPriceUsd": 10
+  },
+  "irrigationProfile": {
+    "linesPerBed": 3,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.2,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.4
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 6,
+  "companions": [
+    "strawberry",
+    "pea",
+    "allium"
+  ],
+  "avoid": [
+    "potato"
+  ],
+  "notes": "Semi-savoy. Fall and overwinter.",
+  "swatch": "#fb7185"
+}

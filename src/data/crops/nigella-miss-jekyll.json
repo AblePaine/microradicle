@@ -1,0 +1,91 @@
+{
+  "id": "nigella-miss-jekyll",
+  "commonName": "Nigella",
+  "cultivar": "Miss Jekyll",
+  "botanicalName": "Nigella damascena",
+  "family": "Ranunculaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "airy-texture",
+    "targetStemLengthIn": 16,
+    "supportNetting": {
+      "required": false,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 0,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 4,
+      "stemsPerPlant": 3,
+      "stemsPerLinearBedFoot": 10,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 7
+    }
+  },
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 10,
+    "minGermTempF": 50,
+    "optimumGermTempF": 60,
+    "maxGermTempF": 70
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 4,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 12
+  },
+  "timeline": {
+    "dtmFromField": 70,
+    "fieldHoldingDays": 14,
+    "isMulticut": true,
+    "regrowthDays": 4,
+    "maxHarvests": 3,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 10,
+    "avgWeightPerUnitLbs": 0.02,
+    "targetYieldLbsPerBedFoot": 0.2,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.35,
+    "targetDirectPriceUsd": 0.75
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.85
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.9,
+    "pRemovalLbsPer100BedFt": 0.2,
+    "kRemovalLbsPer100BedFt": 1.3
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 3,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Miss Jekyll. Direct-sow. Cut flowers ½ open or pods green. Airy. Hates transplanting.",
+  "swatch": "#93c5fd"
+}

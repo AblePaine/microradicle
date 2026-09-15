@@ -1,0 +1,65 @@
+{
+  "id": "basil-purple-ruffles",
+  "commonName": "Basil",
+  "cultivar": "Purple Ruffles",
+  "botanicalName": "Ocimum basilicum",
+  "family": "Lamiaceae",
+  "category": "herbs",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 6,
+    "minGermTempF": 65,
+    "optimumGermTempF": 78,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 8,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 4.5
+  },
+  "timeline": {
+    "dtmFromField": 55,
+    "fieldHoldingDays": 20,
+    "isMulticut": true,
+    "regrowthDays": 12,
+    "maxHarvests": 5,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 3.2,
+    "avgWeightPerUnitLbs": 0.22,
+    "targetYieldLbsPerBedFoot": 0.7,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 2,
+    "targetDirectPriceUsd": 3.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.2
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 3,
+  "companions": [
+    "tomato",
+    "pepper"
+  ],
+  "avoid": [
+    "rue"
+  ],
+  "notes": "Pinch above second node. Downy mildew: Prospera/Eleonora. Never refrigerate — Zone 2 50°F.",
+  "swatch": "#6b21a8"
+}

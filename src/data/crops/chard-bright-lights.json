@@ -1,0 +1,66 @@
+{
+  "id": "chard-bright-lights",
+  "commonName": "Swiss Chard",
+  "cultivar": "Bright Lights",
+  "botanicalName": "Beta vulgaris subsp. cicla",
+  "family": "Amaranthaceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 7,
+    "minGermTempF": 50,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 10,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 3.6
+  },
+  "timeline": {
+    "dtmFromField": 55,
+    "fieldHoldingDays": 21,
+    "isMulticut": true,
+    "regrowthDays": 12,
+    "maxHarvests": 8,
+    "fallPhotoperiodMultiplier": 1.05,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 2.4,
+    "avgWeightPerUnitLbs": 0.7,
+    "targetYieldLbsPerBedFoot": 4,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 2,
+    "targetDirectPriceUsd": 3.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.05
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.5,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 1.8
+  },
+  "successionIntervalDays": 30,
+  "maxSuccessions": 2,
+  "companions": [
+    "onion",
+    "lettuce",
+    "bean"
+  ],
+  "avoid": [
+    "potato"
+  ],
+  "notes": "Multi-color petioles for bunching. Cut-and-come-again all summer if watered. Leaf miner: remove eggs on undersides, insect net in June. One spring planting can run to frost.",
+  "swatch": "#eab308"
+}

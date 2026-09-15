@@ -1,0 +1,67 @@
+{
+  "id": "bean-provider",
+  "commonName": "Bush Bean",
+  "cultivar": "Provider",
+  "botanicalName": "Phaseolus vulgaris",
+  "family": "Fabaceae",
+  "category": "legumes",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 8,
+    "minGermTempF": 60,
+    "optimumGermTempF": 80,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 4,
+    "seedSpacingIn": 3,
+    "plantsPerLinearFoot": 9
+  },
+  "timeline": {
+    "dtmFromField": 50,
+    "fieldHoldingDays": 18,
+    "isMulticut": true,
+    "regrowthDays": 4,
+    "maxHarvests": 5,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 1.3,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 1.3,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 2.25,
+    "targetDirectPriceUsd": 4
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.95
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.4,
+    "pRemovalLbsPer100BedFt": 0.25,
+    "kRemovalLbsPer100BedFt": 1.1
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 4,
+  "companions": [
+    "carrot",
+    "cucumber",
+    "cabbage"
+  ],
+  "avoid": [
+    "onion",
+    "fennel"
+  ],
+  "notes": "Germinates in cool soil better than most snap beans. Three rows on 30-inch. Inoculate first year. Succession every 14 days through July.",
+  "swatch": "#65a30d"
+}

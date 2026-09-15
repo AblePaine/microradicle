@@ -1,0 +1,66 @@
+{
+  "id": "beet-chioggia",
+  "commonName": "Beet",
+  "cultivar": "Chioggia",
+  "botanicalName": "Beta vulgaris",
+  "family": "Amaranthaceae",
+  "category": "root-crops",
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 8,
+    "minGermTempF": 45,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 4,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 12
+  },
+  "timeline": {
+    "dtmFromField": 55,
+    "fieldHoldingDays": 14,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.15,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 3,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 3,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 2.5,
+    "targetDirectPriceUsd": 4.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.95
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.1,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 1.8
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 4,
+  "companions": [
+    "onion",
+    "lettuce",
+    "cabbage"
+  ],
+  "avoid": [
+    "pole bean"
+  ],
+  "notes": "Candy-stripe rings. Seed is a corky cluster — thin to 1. Greens are a second SKU. Direct sow; transplant only if spring is late.",
+  "swatch": "#e11d48"
+}

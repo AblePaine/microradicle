@@ -1,0 +1,67 @@
+{
+  "id": "kale-red-russian",
+  "commonName": "Kale",
+  "cultivar": "Red Russian",
+  "botanicalName": "Brassica napus subsp. napus",
+  "family": "Brassicaceae",
+  "category": "brassicas",
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 5,
+    "minGermTempF": 40,
+    "optimumGermTempF": 65,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 10,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 3.6
+  },
+  "timeline": {
+    "dtmFromField": 50,
+    "fieldHoldingDays": 14,
+    "isMulticut": true,
+    "regrowthDays": 10,
+    "maxHarvests": 6,
+    "fallPhotoperiodMultiplier": 1.1,
+    "frostHardiness": "extreme"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 2,
+    "avgWeightPerUnitLbs": 0.6,
+    "targetYieldLbsPerBedFoot": 3.2,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 2.25,
+    "targetDirectPriceUsd": 4
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2.1,
+    "pRemovalLbsPer100BedFt": 0.45,
+    "kRemovalLbsPer100BedFt": 2
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 3,
+  "companions": [
+    "onion",
+    "beet",
+    "lettuce"
+  ],
+  "avoid": [
+    "tomato",
+    "strawberry"
+  ],
+  "notes": "Tender oak-leaf kale. Flea beetle pressure in spring — 0.47 oz insect net from day 0. Sweetens after frost. Strip lower leaves, leave apical meristem.",
+  "swatch": "#c084fc"
+}

@@ -1,0 +1,191 @@
+[
+  {
+    "sku": "PE-050-100",
+    "sku_name": "1/2 in PE poly 100 ft",
+    "category": "pipe",
+    "specification": "SIDR 15, ID 0.600 in, C=150, 100 psi",
+    "diameter_in": 0.5,
+    "equivalent_length_ft": 0,
+    "unit": "ft"
+  },
+  {
+    "sku": "PE-075-100",
+    "sku_name": "3/4 in PE poly 100 ft",
+    "category": "pipe",
+    "specification": "SIDR 15, ID 0.824 in, C=150, 100 psi",
+    "diameter_in": 0.75,
+    "equivalent_length_ft": 0,
+    "unit": "ft"
+  },
+  {
+    "sku": "PE-100-100",
+    "sku_name": "1 in PE poly 100 ft",
+    "category": "pipe",
+    "specification": "SIDR 15, ID 1.049 in, C=150, 100 psi",
+    "diameter_in": 1.0,
+    "equivalent_length_ft": 0,
+    "unit": "ft"
+  },
+  {
+    "sku": "PE-125-100",
+    "sku_name": "1-1/4 in PE poly 100 ft",
+    "category": "pipe",
+    "specification": "SIDR 15, ID 1.380 in, C=150, 100 psi",
+    "diameter_in": 1.25,
+    "equivalent_length_ft": 0,
+    "unit": "ft"
+  },
+  {
+    "sku": "PE-150-100",
+    "sku_name": "1-1/2 in PE poly 100 ft",
+    "category": "pipe",
+    "specification": "SIDR 15, ID 1.610 in, C=150, 100 psi",
+    "diameter_in": 1.5,
+    "equivalent_length_ft": 0,
+    "unit": "ft"
+  },
+  {
+    "sku": "TAPE-08-080-042",
+    "sku_name": "Drip tape 8 mil 8 in 0.42 GPH",
+    "category": "tape",
+    "specification": "8 mil, 8 in emitter spacing, 0.42 GPH, 8–12 psi",
+    "diameter_in": 0.625,
+    "equivalent_length_ft": 0,
+    "unit": "ft"
+  },
+  {
+    "sku": "TAPE-FIT-625",
+    "sku_name": "Tape start fitting 5/8 in",
+    "category": "fitting",
+    "specification": "Barb × PE insert, with valve",
+    "diameter_in": 0.625,
+    "equivalent_length_ft": 2,
+    "unit": "ea"
+  },
+  {
+    "sku": "TAPE-END-625",
+    "sku_name": "Tape end sleeve",
+    "category": "fitting",
+    "specification": "Figure-8 / sleeve close",
+    "diameter_in": 0.625,
+    "equivalent_length_ft": 0,
+    "unit": "ea"
+  },
+  {
+    "sku": "EL-050",
+    "sku_name": "1/2 in insert elbow",
+    "category": "fitting",
+    "specification": "PE insert 90°",
+    "diameter_in": 0.5,
+    "equivalent_length_ft": 2.5,
+    "unit": "ea"
+  },
+  {
+    "sku": "EL-075",
+    "sku_name": "3/4 in insert elbow",
+    "category": "fitting",
+    "specification": "PE insert 90°",
+    "diameter_in": 0.75,
+    "equivalent_length_ft": 3,
+    "unit": "ea"
+  },
+  {
+    "sku": "EL-100",
+    "sku_name": "1 in insert elbow",
+    "category": "fitting",
+    "specification": "PE insert 90°",
+    "diameter_in": 1.0,
+    "equivalent_length_ft": 4,
+    "unit": "ea"
+  },
+  {
+    "sku": "TE-075",
+    "sku_name": "3/4 in insert tee",
+    "category": "fitting",
+    "specification": "PE insert tee",
+    "diameter_in": 0.75,
+    "equivalent_length_ft": 6,
+    "unit": "ea"
+  },
+  {
+    "sku": "TE-100",
+    "sku_name": "1 in insert tee",
+    "category": "fitting",
+    "specification": "PE insert tee",
+    "diameter_in": 1.0,
+    "equivalent_length_ft": 8,
+    "unit": "ea"
+  },
+  {
+    "sku": "VALVE-075-24V",
+    "sku_name": "3/4 in 24V solenoid valve",
+    "category": "valve",
+    "specification": "Glass-filled nylon, 24 VAC latching",
+    "diameter_in": 0.75,
+    "equivalent_length_ft": 12,
+    "unit": "ea"
+  },
+  {
+    "sku": "VALVE-100-24V",
+    "sku_name": "1 in 24V solenoid valve",
+    "category": "valve",
+    "specification": "Glass-filled nylon, 24 VAC latching",
+    "diameter_in": 1.0,
+    "equivalent_length_ft": 14,
+    "unit": "ea"
+  },
+  {
+    "sku": "VALVE-125-24V",
+    "sku_name": "1-1/4 in 24V solenoid valve",
+    "category": "valve",
+    "specification": "Glass-filled nylon, 24 VAC latching",
+    "diameter_in": 1.25,
+    "equivalent_length_ft": 16,
+    "unit": "ea"
+  },
+  {
+    "sku": "FILTER-100-155",
+    "sku_name": "1 in 155 mesh disc filter",
+    "category": "filter",
+    "specification": "155 mesh / 100 micron, spin-clean",
+    "diameter_in": 1.0,
+    "equivalent_length_ft": 8,
+    "unit": "ea"
+  },
+  {
+    "sku": "FILTER-150-155",
+    "sku_name": "1-1/2 in 155 mesh disc filter",
+    "category": "filter",
+    "specification": "155 mesh / 100 micron, spin-clean",
+    "diameter_in": 1.5,
+    "equivalent_length_ft": 10,
+    "unit": "ea"
+  },
+  {
+    "sku": "PR-040-12",
+    "sku_name": "40–12 psi preset regulator",
+    "category": "regulator",
+    "specification": "Preset 12 psi, 0.5–8 GPM",
+    "diameter_in": 0.75,
+    "equivalent_length_ft": 6,
+    "unit": "ea"
+  },
+  {
+    "sku": "PR-100-12",
+    "sku_name": "1 in 12 psi regulator",
+    "category": "regulator",
+    "specification": "Preset 12 psi, 2–20 GPM",
+    "diameter_in": 1.0,
+    "equivalent_length_ft": 8,
+    "unit": "ea"
+  },
+  {
+    "sku": "FLUSH-075",
+    "sku_name": "3/4 in flush valve",
+    "category": "valve",
+    "specification": "Manual ball, header end",
+    "diameter_in": 0.75,
+    "equivalent_length_ft": 3,
+    "unit": "ea"
+  }
+]

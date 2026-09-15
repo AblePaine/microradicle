@@ -1,0 +1,91 @@
+{
+  "id": "sweet-pea-royal-family",
+  "commonName": "Sweet pea",
+  "cultivar": "Royal Family Mix",
+  "botanicalName": "Lathyrus odoratus",
+  "family": "Fabaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "airy-texture",
+    "targetStemLengthIn": 12,
+    "supportNetting": {
+      "required": true,
+      "layers": 2,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 12,
+      "secondLayerHeightIn": 30
+    },
+    "pinching": {
+      "required": true,
+      "pinchAtHeightIn": 6,
+      "leaveNodeCount": 2,
+      "dtmPenaltyDays": 8
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 1,
+      "stemsPerPlant": 8,
+      "stemsPerLinearBedFoot": 10,
+      "recommendedPulse": "citric-acid-hydration",
+      "vaseLifeDays": 5
+    }
+  },
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 28,
+    "germinationDays": 10,
+    "minGermTempF": 50,
+    "optimumGermTempF": 60,
+    "maxGermTempF": 70
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 2,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 4
+  },
+  "timeline": {
+    "dtmFromField": 88,
+    "fieldHoldingDays": 21,
+    "isMulticut": true,
+    "regrowthDays": 3,
+    "maxHarvests": 10,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 10,
+    "avgWeightPerUnitLbs": 0.03,
+    "targetYieldLbsPerBedFoot": 0.3,
+    "standardCullRate": 0.15,
+    "targetWholesalePriceUsd": 0.7,
+    "targetDirectPriceUsd": 1.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.2,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.8
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Royal Family. Nick seed. Two Hortonova layers as a trellis. Cut daily — pods kill bloom. Cool crop.",
+  "swatch": "#f9a8d4"
+}

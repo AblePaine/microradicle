@@ -1,0 +1,67 @@
+{
+  "id": "kale-white-russian",
+  "commonName": "Kale",
+  "cultivar": "White Russian",
+  "botanicalName": "Brassica oleracea var. sabellica",
+  "family": "Brassicaceae",
+  "category": "brassicas",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 32,
+    "germinationDays": 6,
+    "minGermTempF": 40,
+    "optimumGermTempF": 68,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 2,
+    "inRowSpacingIn": 12,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 2
+  },
+  "timeline": {
+    "dtmFromField": 50,
+    "fieldHoldingDays": 40,
+    "isMulticut": true,
+    "regrowthDays": 12,
+    "maxHarvests": 8,
+    "fallPhotoperiodMultiplier": 1.05,
+    "frostHardiness": "extreme"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 1.6,
+    "avgWeightPerUnitLbs": 0.75,
+    "targetYieldLbsPerBedFoot": 1.2,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 2.5,
+    "targetDirectPriceUsd": 4
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2.2,
+    "pRemovalLbsPer100BedFt": 0.55,
+    "kRemovalLbsPer100BedFt": 2.4
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 3,
+  "companions": [
+    "allium",
+    "beet",
+    "lettuce"
+  ],
+  "avoid": [
+    "strawberry",
+    "tomato"
+  ],
+  "notes": "Siberian, tender. Faster than Red Russian, less cold-hardy.",
+  "swatch": "#15803d"
+}

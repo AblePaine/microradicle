@@ -1,0 +1,67 @@
+{
+  "id": "bean-kentucky-wonder",
+  "commonName": "Snap bean",
+  "cultivar": "Kentucky Wonder",
+  "botanicalName": "Phaseolus vulgaris",
+  "family": "Fabaceae",
+  "category": "legumes",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 7,
+    "minGermTempF": 60,
+    "optimumGermTempF": 80,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 2,
+    "inRowSpacingIn": 3,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 65,
+    "fieldHoldingDays": 12,
+    "isMulticut": true,
+    "regrowthDays": 5,
+    "maxHarvests": 4,
+    "fallPhotoperiodMultiplier": 1.1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 1.4,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 1.4,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 2.75,
+    "targetDirectPriceUsd": 4.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.8,
+    "pRemovalLbsPer100BedFt": 0.35,
+    "kRemovalLbsPer100BedFt": 1.2
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 5,
+  "companions": [
+    "carrot",
+    "cucumber",
+    "corn"
+  ],
+  "avoid": [
+    "allium",
+    "fennel"
+  ],
+  "notes": "Pole. Heirloom, string if late.",
+  "swatch": "#16a34a"
+}

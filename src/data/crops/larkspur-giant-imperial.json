@@ -1,0 +1,91 @@
+{
+  "id": "larkspur-giant-imperial",
+  "commonName": "Larkspur",
+  "cultivar": "Giant Imperial Mix",
+  "botanicalName": "Consolida ajacis",
+  "family": "Ranunculaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "spike",
+    "targetStemLengthIn": 28,
+    "supportNetting": {
+      "required": true,
+      "layers": 2,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 12,
+      "secondLayerHeightIn": 24
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 0,
+      "stemsPerPlant": 1,
+      "stemsPerLinearBedFoot": 6,
+      "recommendedPulse": "citric-acid-hydration",
+      "vaseLifeDays": 7
+    }
+  },
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 14,
+    "minGermTempF": 50,
+    "optimumGermTempF": 58,
+    "maxGermTempF": 68
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 6
+  },
+  "timeline": {
+    "dtmFromField": 90,
+    "fieldHoldingDays": 10,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 6,
+    "avgWeightPerUnitLbs": 0.05,
+    "targetYieldLbsPerBedFoot": 0.3,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.7,
+    "targetDirectPriceUsd": 1.35
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.4,
+    "pRemovalLbsPer100BedFt": 0.35,
+    "kRemovalLbsPer100BedFt": 2
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Giant Imperial. Fall-sow or pre-chill seed. Two net layers. Cut when ⅓ florets open.",
+  "swatch": "#818cf8"
+}

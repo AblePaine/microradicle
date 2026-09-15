@@ -1,0 +1,91 @@
+{
+  "id": "zinnia-benarys-giant-wine",
+  "commonName": "Zinnia",
+  "cultivar": "Benary's Giant Wine",
+  "botanicalName": "Zinnia elegans",
+  "family": "Asteraceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "focal",
+    "targetStemLengthIn": 24,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 8,
+      "firstLayerHeightIn": 18,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": true,
+      "pinchAtHeightIn": 10,
+      "leaveNodeCount": 4,
+      "dtmPenaltyDays": 12
+    },
+    "harvestProtocol": {
+      "stage": "fully-open",
+      "cutFrequencyDays": 3,
+      "stemsPerPlant": 6,
+      "stemsPerLinearBedFoot": 8,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 7
+    }
+  },
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 21,
+    "germinationDays": 5,
+    "minGermTempF": 70,
+    "optimumGermTempF": 80,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 9,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 4
+  },
+  "timeline": {
+    "dtmFromField": 87,
+    "fieldHoldingDays": 21,
+    "isMulticut": true,
+    "regrowthDays": 3,
+    "maxHarvests": 8,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.06,
+    "targetYieldLbsPerBedFoot": 0.48,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.55,
+    "targetDirectPriceUsd": 1.1
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1.1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.6,
+    "pRemovalLbsPer100BedFt": 0.4,
+    "kRemovalLbsPer100BedFt": 2.2
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 3,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Pinch at 8–12 in. Hortonova 8 in mesh at 18 in. Cut fully open — zinnias do not continue to open in the vase. No cold box below 45°F.",
+  "swatch": "#9f1239"
+}

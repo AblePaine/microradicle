@@ -1,0 +1,68 @@
+{
+  "id": "tomato-amish-paste",
+  "commonName": "Tomato",
+  "cultivar": "Amish Paste",
+  "botanicalName": "Solanum lycopersicum",
+  "family": "Solanaceae",
+  "category": "solanaceous",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 52,
+    "germinationDays": 6,
+    "minGermTempF": 60,
+    "optimumGermTempF": 78,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 24,
+    "seedSpacingIn": 24,
+    "plantsPerLinearFoot": 0.5
+  },
+  "timeline": {
+    "dtmFromField": 80,
+    "fieldHoldingDays": 50,
+    "isMulticut": true,
+    "regrowthDays": 4,
+    "maxHarvests": 12,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 4,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 2.25,
+    "targetDirectPriceUsd": 3.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 12,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.6
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2.8,
+    "pRemovalLbsPer100BedFt": 0.9,
+    "kRemovalLbsPer100BedFt": 4.2
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "basil",
+    "carrot",
+    "onion"
+  ],
+  "avoid": [
+    "fennel",
+    "potato",
+    "brassica"
+  ],
+  "notes": "Indeterminate on 30-inch, one row. Late blight: Defiant/Mountain Magic. Never refrigerate.",
+  "swatch": "#ef4444"
+}

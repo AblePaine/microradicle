@@ -1,0 +1,91 @@
+{
+  "id": "craspedia-golf-beauty",
+  "commonName": "Craspedia",
+  "cultivar": "Golf Beauty",
+  "botanicalName": "Craspedia globosa",
+  "family": "Asteraceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "filler",
+    "targetStemLengthIn": 18,
+    "supportNetting": {
+      "required": false,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 0,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "fully-open",
+      "cutFrequencyDays": 4,
+      "stemsPerPlant": 6,
+      "stemsPerLinearBedFoot": 8,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 14
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 42,
+    "germinationDays": 12,
+    "minGermTempF": 65,
+    "optimumGermTempF": 75,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 6
+  },
+  "timeline": {
+    "dtmFromField": 95,
+    "fieldHoldingDays": 21,
+    "isMulticut": true,
+    "regrowthDays": 4,
+    "maxHarvests": 6,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.02,
+    "targetYieldLbsPerBedFoot": 0.16,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 0.4,
+    "targetDirectPriceUsd": 0.8
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.85
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 1,
+    "pRemovalLbsPer100BedFt": 0.25,
+    "kRemovalLbsPer100BedFt": 1.4
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Billy buttons. Cut when balls are fully colored. Dries. Golf Beauty.",
+  "swatch": "#facc15"
+}

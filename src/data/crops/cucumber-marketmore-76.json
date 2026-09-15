@@ -1,0 +1,67 @@
+{
+  "id": "cucumber-marketmore-76",
+  "commonName": "Cucumber",
+  "cultivar": "Marketmore 76",
+  "botanicalName": "Cucumis sativus",
+  "family": "Cucurbitaceae",
+  "category": "cucurbits",
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 21,
+    "germinationDays": 5,
+    "minGermTempF": 60,
+    "optimumGermTempF": 80,
+    "maxGermTempF": 95
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 12,
+    "seedSpacingIn": 12,
+    "plantsPerLinearFoot": 1
+  },
+  "timeline": {
+    "dtmFromField": 58,
+    "fieldHoldingDays": 42,
+    "isMulticut": true,
+    "regrowthDays": 2,
+    "maxHarvests": 18,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 8,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 1.1,
+    "targetDirectPriceUsd": 2.25
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 12,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.4
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2,
+    "pRemovalLbsPer100BedFt": 0.7,
+    "kRemovalLbsPer100BedFt": 3.2
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 3,
+  "companions": [
+    "bean",
+    "lettuce",
+    "radish"
+  ],
+  "avoid": [
+    "potato",
+    "sage"
+  ],
+  "notes": "Trellis on Hortonova or cattle panel down the 30-inch bed center. Straight fruit, scab and mosaic tolerance. Pick small to keep plants loading.",
+  "swatch": "#22c55e"
+}

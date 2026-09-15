@@ -1,0 +1,91 @@
+{
+  "id": "zinnia-oklahoma-salmon",
+  "commonName": "Zinnia",
+  "cultivar": "Oklahoma Salmon",
+  "botanicalName": "Zinnia elegans",
+  "family": "Asteraceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "focal",
+    "targetStemLengthIn": 18,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 8,
+      "firstLayerHeightIn": 16,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": true,
+      "pinchAtHeightIn": 8,
+      "leaveNodeCount": 4,
+      "dtmPenaltyDays": 10
+    },
+    "harvestProtocol": {
+      "stage": "fully-open",
+      "cutFrequencyDays": 3,
+      "stemsPerPlant": 5,
+      "stemsPerLinearBedFoot": 10,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 6
+    }
+  },
+  "propagation": {
+    "method": "both",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 21,
+    "germinationDays": 5,
+    "minGermTempF": 70,
+    "optimumGermTempF": 80,
+    "maxGermTempF": 90
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 75,
+    "fieldHoldingDays": 18,
+    "isMulticut": true,
+    "regrowthDays": 3,
+    "maxHarvests": 8,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 10,
+    "avgWeightPerUnitLbs": 0.04,
+    "targetYieldLbsPerBedFoot": 0.4,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.4,
+    "targetDirectPriceUsd": 0.85
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.5,
+    "pRemovalLbsPer100BedFt": 0.35,
+    "kRemovalLbsPer100BedFt": 2
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 3,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Oklahoma / Queen class. Tighter spacing, smaller bloom, more stems. Same pinch and no-chill rule as Benary's.",
+  "swatch": "#fdba74"
+}

@@ -1,0 +1,91 @@
+{
+  "id": "feverfew-vegmo-snowball",
+  "commonName": "Feverfew",
+  "cultivar": "Vegmo Snowball",
+  "botanicalName": "Tanacetum parthenium",
+  "family": "Asteraceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "filler",
+    "targetStemLengthIn": 18,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 8,
+      "firstLayerHeightIn": 14,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": true,
+      "pinchAtHeightIn": 6,
+      "leaveNodeCount": 3,
+      "dtmPenaltyDays": 8
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 4,
+      "stemsPerPlant": 8,
+      "stemsPerLinearBedFoot": 9,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 8
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 35,
+    "germinationDays": 10,
+    "minGermTempF": 60,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 78
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 9,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 4
+  },
+  "timeline": {
+    "dtmFromField": 93,
+    "fieldHoldingDays": 21,
+    "isMulticut": true,
+    "regrowthDays": 4,
+    "maxHarvests": 6,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 9,
+    "avgWeightPerUnitLbs": 0.03,
+    "targetYieldLbsPerBedFoot": 0.27,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 0.45,
+    "targetDirectPriceUsd": 0.9
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.2,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.7
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Vegmo Snowball. Cut when 50% of buttons are open. Perennial treated as hardy annual.",
+  "swatch": "#fafafa"
+}

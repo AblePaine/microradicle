@@ -1,0 +1,67 @@
+{
+  "id": "lettuce-salanova-green-butter",
+  "commonName": "Lettuce",
+  "cultivar": "Salanova Green Butter",
+  "botanicalName": "Lactuca sativa var. capitata",
+  "family": "Asteraceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 24,
+    "germinationDays": 5,
+    "minGermTempF": 40,
+    "optimumGermTempF": 68,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 0.5,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 52,
+    "fieldHoldingDays": 10,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.15,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "head",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.4,
+    "targetYieldLbsPerBedFoot": 3.2,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 1.75,
+    "targetDirectPriceUsd": 3
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.4,
+    "pRemovalLbsPer100BedFt": 0.35,
+    "kRemovalLbsPer100BedFt": 1.6
+  },
+  "successionIntervalDays": 7,
+  "maxSuccessions": 14,
+  "companions": [
+    "carrot",
+    "onion",
+    "radish"
+  ],
+  "avoid": [
+    "broccoli",
+    "fennel"
+  ],
+  "notes": "One-cut green butter. Core snap, 10–12 uniform leaves. Same 4-row 6 in as Salanova Butterhead.",
+  "swatch": "#86efac"
+}

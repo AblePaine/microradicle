@@ -1,0 +1,65 @@
+{
+  "id": "cilantro-cruiser",
+  "commonName": "Cilantro",
+  "cultivar": "Cruiser",
+  "botanicalName": "Coriandrum sativum",
+  "family": "Apiaceae",
+  "category": "herbs",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 8,
+    "minGermTempF": 50,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 2,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 24
+  },
+  "timeline": {
+    "dtmFromField": 50,
+    "fieldHoldingDays": 6,
+    "isMulticut": true,
+    "regrowthDays": 14,
+    "maxHarvests": 2,
+    "fallPhotoperiodMultiplier": 1.25,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 0.2,
+    "targetYieldLbsPerBedFoot": 0.8,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 1.75,
+    "targetDirectPriceUsd": 3
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.95
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.7,
+    "pRemovalLbsPer100BedFt": 0.22,
+    "kRemovalLbsPer100BedFt": 0.9
+  },
+  "successionIntervalDays": 10,
+  "maxSuccessions": 10,
+  "companions": [
+    "anise",
+    "spinach"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Upright, slow bolt, machine-harvestable bunches.",
+  "swatch": "#4ade80"
+}

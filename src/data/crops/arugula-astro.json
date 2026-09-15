@@ -1,0 +1,63 @@
+{
+  "id": "arugula-astro",
+  "commonName": "Arugula",
+  "cultivar": "Astro",
+  "botanicalName": "Eruca vesicaria",
+  "family": "Brassicaceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 4,
+    "minGermTempF": 40,
+    "optimumGermTempF": 60,
+    "maxGermTempF": 75
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 5,
+    "inRowSpacingIn": 1,
+    "seedSpacingIn": 0.5,
+    "plantsPerLinearFoot": 60
+  },
+  "timeline": {
+    "dtmFromField": 32,
+    "fieldHoldingDays": 7,
+    "isMulticut": true,
+    "regrowthDays": 10,
+    "maxHarvests": 2,
+    "fallPhotoperiodMultiplier": 1.2,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 0.45,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 0.45,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 6,
+    "targetDirectPriceUsd": 10
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.25,
+    "weeklyWaterRequirementIn": 0.75
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 0.8,
+    "pRemovalLbsPer100BedFt": 0.2,
+    "kRemovalLbsPer100BedFt": 0.7
+  },
+  "successionIntervalDays": 7,
+  "maxSuccessions": 16,
+  "companions": [
+    "lettuce",
+    "onion"
+  ],
+  "avoid": [],
+  "notes": "Milder than wild rocket. 7-day successions, 5-line seeder. Bolts in 80°F long days — switch to shade cloth or pause June–August. Flea beetles: insect net.",
+  "swatch": "#84cc16"
+}

@@ -1,0 +1,65 @@
+{
+  "id": "arugula-slow-bolt",
+  "commonName": "Arugula",
+  "cultivar": "Slow Bolt",
+  "botanicalName": "Eruca vesicaria",
+  "family": "Brassicaceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 4,
+    "minGermTempF": 40,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 5,
+    "inRowSpacingIn": 1.5,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 40
+  },
+  "timeline": {
+    "dtmFromField": 35,
+    "fieldHoldingDays": 5,
+    "isMulticut": true,
+    "regrowthDays": 12,
+    "maxHarvests": 2,
+    "fallPhotoperiodMultiplier": 1.3,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 0.5,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 0.5,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 8,
+    "targetDirectPriceUsd": 12
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.9,
+    "pRemovalLbsPer100BedFt": 0.22,
+    "kRemovalLbsPer100BedFt": 1
+  },
+  "successionIntervalDays": 10,
+  "maxSuccessions": 12,
+  "companions": [
+    "lettuce",
+    "carrot"
+  ],
+  "avoid": [
+    "strawberry"
+  ],
+  "notes": "Standard garden arugula selected for delayed bolt.",
+  "swatch": "#65a30d"
+}

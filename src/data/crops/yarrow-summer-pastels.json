@@ -1,0 +1,91 @@
+{
+  "id": "yarrow-summer-pastels",
+  "commonName": "Yarrow",
+  "cultivar": "Summer Pastels",
+  "botanicalName": "Achillea millefolium",
+  "family": "Asteraceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "filler",
+    "targetStemLengthIn": 20,
+    "supportNetting": {
+      "required": false,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 0,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": false,
+      "pinchAtHeightIn": 0,
+      "leaveNodeCount": 0,
+      "dtmPenaltyDays": 0
+    },
+    "harvestProtocol": {
+      "stage": "fully-open",
+      "cutFrequencyDays": 5,
+      "stemsPerPlant": 6,
+      "stemsPerLinearBedFoot": 5,
+      "recommendedPulse": "plain-cold-water",
+      "vaseLifeDays": 10
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 42,
+    "germinationDays": 12,
+    "minGermTempF": 60,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 78
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 12,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 3
+  },
+  "timeline": {
+    "dtmFromField": 90,
+    "fieldHoldingDays": 21,
+    "isMulticut": true,
+    "regrowthDays": 5,
+    "maxHarvests": 5,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 5,
+    "avgWeightPerUnitLbs": 0.05,
+    "targetYieldLbsPerBedFoot": 0.25,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 0.6,
+    "targetDirectPriceUsd": 1.2
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.8
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 1.1,
+    "pRemovalLbsPer100BedFt": 0.3,
+    "kRemovalLbsPer100BedFt": 1.8
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Summer Pastels. Cut when umbel is 80% colored. Drought-lean. Dries.",
+  "swatch": "#fde68a"
+}

@@ -1,0 +1,65 @@
+{
+  "id": "eggplant-ichiban",
+  "commonName": "Eggplant",
+  "cultivar": "Ichiban",
+  "botanicalName": "Solanum melongena",
+  "family": "Solanaceae",
+  "category": "solanaceous",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 72,
+    "nurseryLeadDays": 56,
+    "germinationDays": 10,
+    "minGermTempF": 70,
+    "optimumGermTempF": 85,
+    "maxGermTempF": 95
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 1,
+    "inRowSpacingIn": 18,
+    "seedSpacingIn": 18,
+    "plantsPerLinearFoot": 0.67
+  },
+  "timeline": {
+    "dtmFromField": 58,
+    "fieldHoldingDays": 40,
+    "isMulticut": true,
+    "regrowthDays": 5,
+    "maxHarvests": 10,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "tender"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 2.5,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 2.5,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 2.5,
+    "targetDirectPriceUsd": 4
+  },
+  "irrigationProfile": {
+    "linesPerBed": 1,
+    "emitterSpacingIn": 12,
+    "emitterGph": 0.5,
+    "weeklyWaterRequirementIn": 1.5
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "heavy",
+    "nRemovalLbsPer100BedFt": 2.2,
+    "pRemovalLbsPer100BedFt": 0.65,
+    "kRemovalLbsPer100BedFt": 3
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "pepper",
+    "bean"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Asian slender. Higher count, 2-row 12 in possible.",
+  "swatch": "#6b21a8"
+}

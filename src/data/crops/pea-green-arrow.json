@@ -1,0 +1,66 @@
+{
+  "id": "pea-green-arrow",
+  "commonName": "Snap pea",
+  "cultivar": "Green Arrow",
+  "botanicalName": "Pisum sativum",
+  "family": "Fabaceae",
+  "category": "legumes",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 10,
+    "minGermTempF": 40,
+    "optimumGermTempF": 60,
+    "maxGermTempF": 75
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 2,
+    "inRowSpacingIn": 2,
+    "seedSpacingIn": 1.5,
+    "plantsPerLinearFoot": 12
+  },
+  "timeline": {
+    "dtmFromField": 68,
+    "fieldHoldingDays": 18,
+    "isMulticut": true,
+    "regrowthDays": 3,
+    "maxHarvests": 8,
+    "fallPhotoperiodMultiplier": 1.1,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "pound",
+    "unitsPerBedFoot": 1.2,
+    "avgWeightPerUnitLbs": 1,
+    "targetYieldLbsPerBedFoot": 1.2,
+    "standardCullRate": 0.1,
+    "targetWholesalePriceUsd": 3.5,
+    "targetDirectPriceUsd": 6
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.9
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.7,
+    "pRemovalLbsPer100BedFt": 0.28,
+    "kRemovalLbsPer100BedFt": 1.1
+  },
+  "successionIntervalDays": 14,
+  "maxSuccessions": 3,
+  "companions": [
+    "carrot",
+    "radish",
+    "turnip"
+  ],
+  "avoid": [
+    "allium"
+  ],
+  "notes": "Shelling pea. 2-row. High shell-out.",
+  "swatch": "#86efac"
+}

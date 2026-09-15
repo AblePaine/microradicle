@@ -1,0 +1,91 @@
+{
+  "id": "phlox-cherry-caramel",
+  "commonName": "Annual phlox",
+  "cultivar": "Cherry Caramel",
+  "botanicalName": "Phlox drummondii",
+  "family": "Polemoniaceae",
+  "category": "cut-flowers",
+  "flowerSpecifics": {
+    "primaryUse": "focal",
+    "targetStemLengthIn": 16,
+    "supportNetting": {
+      "required": true,
+      "layers": 1,
+      "meshSizeIn": 6,
+      "firstLayerHeightIn": 12,
+      "secondLayerHeightIn": null
+    },
+    "pinching": {
+      "required": true,
+      "pinchAtHeightIn": 6,
+      "leaveNodeCount": 3,
+      "dtmPenaltyDays": 8
+    },
+    "harvestProtocol": {
+      "stage": "one-half-open",
+      "cutFrequencyDays": 3,
+      "stemsPerPlant": 6,
+      "stemsPerLinearBedFoot": 8,
+      "recommendedPulse": "citric-acid-hydration",
+      "vaseLifeDays": 7
+    }
+  },
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 28,
+    "germinationDays": 8,
+    "minGermTempF": 60,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 80
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 9,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 4
+  },
+  "timeline": {
+    "dtmFromField": 83,
+    "fieldHoldingDays": 21,
+    "isMulticut": true,
+    "regrowthDays": 3,
+    "maxHarvests": 8,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "moderate"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "stem",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.04,
+    "targetYieldLbsPerBedFoot": 0.32,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 0.65,
+    "targetDirectPriceUsd": 1.25
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.4,
+    "pRemovalLbsPer100BedFt": 0.35,
+    "kRemovalLbsPer100BedFt": 1.9
+  },
+  "successionIntervalDays": 21,
+  "maxSuccessions": 2,
+  "companions": [
+    "basil",
+    "dill",
+    "alyssum"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Cherry Caramel. Cut when ⅓ of the head is open. Fragrant mixer.",
+  "swatch": "#d6d3d1"
+}

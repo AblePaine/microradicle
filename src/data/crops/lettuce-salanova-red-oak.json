@@ -1,0 +1,66 @@
+{
+  "id": "lettuce-salanova-red-oak",
+  "commonName": "Lettuce",
+  "cultivar": "Salanova Red Oak",
+  "botanicalName": "Lactuca sativa",
+  "family": "Asteraceae",
+  "category": "leafy-greens",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 24,
+    "germinationDays": 5,
+    "minGermTempF": 40,
+    "optimumGermTempF": 68,
+    "maxGermTempF": 78
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 6,
+    "seedSpacingIn": 0.5,
+    "plantsPerLinearFoot": 8
+  },
+  "timeline": {
+    "dtmFromField": 55,
+    "fieldHoldingDays": 10,
+    "isMulticut": false,
+    "regrowthDays": null,
+    "maxHarvests": 1,
+    "fallPhotoperiodMultiplier": 1.15,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "head",
+    "unitsPerBedFoot": 8,
+    "avgWeightPerUnitLbs": 0.35,
+    "targetYieldLbsPerBedFoot": 2.8,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 1.85,
+    "targetDirectPriceUsd": 3.25
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 1
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 1.3,
+    "pRemovalLbsPer100BedFt": 0.32,
+    "kRemovalLbsPer100BedFt": 1.5
+  },
+  "successionIntervalDays": 7,
+  "maxSuccessions": 14,
+  "companions": [
+    "carrot",
+    "onion",
+    "beet"
+  ],
+  "avoid": [
+    "broccoli"
+  ],
+  "notes": "Anthocyanin holds in cool weather; greens out above 80°F. Mix 50/50 with butterhead for color in mixed boxes. Same 4-row 6-inch grid as Salanova butter.",
+  "swatch": "#f87171"
+}

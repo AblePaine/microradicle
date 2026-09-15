@@ -1,0 +1,65 @@
+{
+  "id": "cilantro-santo",
+  "commonName": "Cilantro",
+  "cultivar": "Santo",
+  "botanicalName": "Coriandrum sativum",
+  "family": "Apiaceae",
+  "category": "herbs",
+  "propagation": {
+    "method": "direct-seed",
+    "recommendedCellSize": null,
+    "nurseryLeadDays": 0,
+    "germinationDays": 10,
+    "minGermTempF": 50,
+    "optimumGermTempF": 65,
+    "maxGermTempF": 75
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 4,
+    "inRowSpacingIn": 2,
+    "seedSpacingIn": 1,
+    "plantsPerLinearFoot": 24
+  },
+  "timeline": {
+    "dtmFromField": 50,
+    "fieldHoldingDays": 10,
+    "isMulticut": true,
+    "regrowthDays": 8,
+    "maxHarvests": 2,
+    "fallPhotoperiodMultiplier": 1.15,
+    "frostHardiness": "hardy"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 4,
+    "avgWeightPerUnitLbs": 0.1,
+    "targetYieldLbsPerBedFoot": 0.4,
+    "standardCullRate": 0.12,
+    "targetWholesalePriceUsd": 1.5,
+    "targetDirectPriceUsd": 2.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.25,
+    "weeklyWaterRequirementIn": 0.8
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "moderate",
+    "nRemovalLbsPer100BedFt": 0.7,
+    "pRemovalLbsPer100BedFt": 0.25,
+    "kRemovalLbsPer100BedFt": 0.6
+  },
+  "successionIntervalDays": 10,
+  "maxSuccessions": 10,
+  "companions": [
+    "anise",
+    "spinach"
+  ],
+  "avoid": [
+    "fennel"
+  ],
+  "notes": "Slow-bolt Santo. Direct only — taproot hates pots. 10-day successions spring and fall. Split seed (coriander) before sowing for faster germ. Harvest whole plants for bunches.",
+  "swatch": "#bef264"
+}

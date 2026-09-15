@@ -1,0 +1,63 @@
+{
+  "id": "sage-common",
+  "commonName": "Sage",
+  "cultivar": "Common Sage",
+  "botanicalName": "Salvia officinalis",
+  "family": "Lamiaceae",
+  "category": "herbs",
+  "propagation": {
+    "method": "transplant",
+    "recommendedCellSize": 128,
+    "nurseryLeadDays": 35,
+    "germinationDays": 10,
+    "minGermTempF": 55,
+    "optimumGermTempF": 70,
+    "maxGermTempF": 85
+  },
+  "fieldGeometry": {
+    "standardBedWidthIn": 30,
+    "rowsPerBed": 3,
+    "inRowSpacingIn": 8,
+    "seedSpacingIn": 2,
+    "plantsPerLinearFoot": 4.5
+  },
+  "timeline": {
+    "dtmFromField": 70,
+    "fieldHoldingDays": 60,
+    "isMulticut": true,
+    "regrowthDays": 14,
+    "maxHarvests": 6,
+    "fallPhotoperiodMultiplier": 1,
+    "frostHardiness": "moderate"
+  },
+  "yieldAndRevenue": {
+    "salesUnit": "bunch",
+    "unitsPerBedFoot": 2.4,
+    "avgWeightPerUnitLbs": 0.15,
+    "targetYieldLbsPerBedFoot": 0.36,
+    "standardCullRate": 0.08,
+    "targetWholesalePriceUsd": 2,
+    "targetDirectPriceUsd": 3.5
+  },
+  "irrigationProfile": {
+    "linesPerBed": 2,
+    "emitterSpacingIn": 8,
+    "emitterGph": 0.42,
+    "weeklyWaterRequirementIn": 0.8
+  },
+  "soilExtractionProfile": {
+    "fertilityDemand": "light",
+    "nRemovalLbsPer100BedFt": 0.5,
+    "pRemovalLbsPer100BedFt": 0.18,
+    "kRemovalLbsPer100BedFt": 0.7
+  },
+  "successionIntervalDays": 0,
+  "maxSuccessions": 1,
+  "companions": [
+    "cabbage",
+    "tomato"
+  ],
+  "avoid": [],
+  "notes": "Woody. 2-row 12 in. Year-2 yield.",
+  "swatch": "#84cc16"
+}
