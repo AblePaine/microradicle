@@ -103,17 +103,28 @@
 
 @media print {
   header,
+  nav,
   .no-print {
     display: none !important;
   }
 
   body {
     background: #fff !important;
-    color: #18181b !important;
+    color: #000 !important;
   }
 
   .clipboard-sheet {
-    color: #18181b;
+    color: #000;
+    background: #fff;
+  }
+
+  .clipboard-sheet table {
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: none;
   }
 }
 

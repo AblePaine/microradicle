@@ -49,7 +49,14 @@ export function Navigation() {
         </Link>
         <nav className="flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto">
           {LINKS.map((l) => {
-            const active = l.to === "/" ? pathname === "/" : pathname.startsWith(l.to);
+            const active =
+              l.to === "/"
+                ? pathname === "/"
+                : l.to === "/clipboard"
+                  ? pathname.startsWith("/clipboard") ||
+                    pathname.startsWith("/clip") ||
+                    pathname.startsWith("/print/clipboard")
+                  : pathname.startsWith(l.to);
             return (
               <Link
                 key={l.to}

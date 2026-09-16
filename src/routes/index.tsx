@@ -139,9 +139,9 @@ function Gateway() {
           <ModuleCard
             k="Offline ops"
             t="Field clipboards"
-            d="Print this week's sow list and planting log. High-contrast sheets for the field, not a phone in the rain."
+            d="Print today's paddock pulls, 1020 soaks and cuts, and bed sow / pinch / net / harvest on one sheet."
             href="/clipboard"
-            cta="Print this week →"
+            cta="Print today's sheet →"
           />
         </div>
       </section>

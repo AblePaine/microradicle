@@ -1,4 +1,5 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { Analytics } from "@vercel/analytics/react";
+import { createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { Navigation } from "@/components/Navigation";
@@ -35,6 +36,11 @@ export const Route = createRootRoute({
   component: RootDocument,
 });
 
+function VercelAnalytics() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  return <Analytics route={pathname} path={pathname} />;
+}
+
 function RootDocument() {
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
@@ -47,6 +53,7 @@ function RootDocument() {
           <Navigation />
           <Outlet />
         </AuthProvider>
+        <VercelAnalytics />
         <Scripts />
       </body>
     </html>

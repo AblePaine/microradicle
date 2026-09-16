@@ -10,6 +10,7 @@ import { getMicrogreen } from "@/lib/nursery";
 import { computeBatch } from "@/lib/nurseryMath";
 import { getSpecies } from "@/lib/pasture";
 import { computeRotation, inferLivestockClass, isPastureStand } from "@/lib/pastureMath";
+import { coerceNurseryLedgerItem, coercePastureLedgerItem } from "@/lib/clipboardIngestion";
 import { defaultNetwork, PIPE_DIAMETERS } from "@/lib/hydraulics";
 import { DEFAULT_AMENDMENT_IDS, DEFAULT_SOIL } from "@/lib/soilMath";
 import { DEFAULT_ECONOMICS } from "@/lib/economicsMath";
@@ -17,6 +18,7 @@ import { computeSuccession, iso, recomputeFarm } from "@/lib/math";
 
 export const FARM_STORAGE_KEY = "microradicle:farm:v3";
 export const PASTURE_LEDGER_KEY = "microradicle_pasture_batches_v1";
+export const NURSERY_LEDGER_KEY = "microradicle_nursery_batches_v1";
 export const LEGACY_FARM_KEYS = [
   "microradicle:farm:v2",
   "microradicle:farm:v1",
@@ -383,63 +385,44 @@ function parseEconomics(raw: unknown): EconomicsSettings | undefined {
 }
 
 function parseNurseryBatch(raw: unknown): NurseryBatchQueueItem | null {
-  const b = asRecord(raw);
-  const id = pickStr(b, "id");
-  const cultivar_id = pickStr(b, "cultivar_id", "cultivarId");
-  const sow_date = pickStr(b, "sow_date", "sowDate");
-  if (!id || !cultivar_id || !sow_date) return null;
-  const crop = getMicrogreen(cultivar_id);
-  const trays = pickNum(b, "tray_count", "trayCount") ?? 1;
-  if (crop) return computeBatch(crop, trays, sow_date, id);
-  const soak = pickStr(b, "soak_start_date", "soakStartDate") ?? null;
-  return {
-    id,
-    cultivar_id,
-    cultivar_name: pickStr(b, "cultivar_name", "cultivarName") ?? cultivar_id,
-    tray_count: Math.max(1, Math.round(trays)),
-    sow_date,
-    soak_start_date: soak && soak.length ? soak : null,
-    unstack_date: pickStr(b, "unstack_date", "unstackDate") ?? sow_date,
-    harvest_date: pickStr(b, "harvest_date", "harvestDate") ?? sow_date,
-    total_seed_grams_needed: pickNum(b, "total_seed_grams_needed", "totalSeedGramsNeeded") ?? 0,
-    projected_yield_oz: pickNum(b, "projected_yield_oz", "projectedYieldOz") ?? 0,
-    projected_gross_revenue_usd: pickNum(b, "projected_gross_revenue_usd", "projectedGrossRevenueUsd") ?? 0,
-  };
+  const row = coerceNurseryLedgerItem(raw);
+  if (!row) return null;
+  const crop = getMicrogreen(row.cultivar_id);
+  if (crop) return computeBatch(crop, row.tray_count, row.sow_date, row.id);
+  return row;
 }
 
 function parsePastureRotation(raw: unknown): PastureRotationQueueItem | null {
+  const row = coercePastureLedgerItem(raw);
+  if (!row) return null;
   const b = asRecord(raw);
-  const id = pickStr(b, "id");
-  const species_id = pickStr(b, "species_id", "speciesId");
-  const start_date = pickStr(b, "start_date", "startDate");
-  if (!id || !species_id || !start_date) return null;
   const standRaw = pickStr(b, "stand") ?? "standard-perennial-mix";
   const stand: PastureForageStand = isPastureStand(standRaw) ? standRaw : "standard-perennial-mix";
-  const spec = getSpecies(species_id);
-  const head = pickNum(b, "head_count", "headCount") ?? 1;
-  const move = pickNum(b, "move_interval_days", "moveIntervalDays") ?? spec?.recommendedMoveFrequencyDays ?? 1;
-  const allocated = pickNum(b, "allocated_paddock_sqft", "allocatedPaddockSqft") ?? 0;
-  if (spec) return computeRotation(spec, head, stand, start_date, move, allocated, id);
+  const spec = getSpecies(row.species_id);
+  const start = row.start_date;
+  if (spec && start) {
+    return computeRotation(spec, row.head_count, stand, start, row.move_interval_days, row.allocated_paddock_sqft, row.id);
+  }
   return {
-    id,
-    species_id,
-    species_name: pickStr(b, "species_name", "speciesName") ?? species_id,
-    head_count: Math.max(1, Math.round(head)),
+    id: row.id,
+    species_id: row.species_id,
+    species_name: row.species_name,
+    head_count: row.head_count,
     stand,
-    start_date,
-    move_interval_days: Math.max(1, Math.round(move)),
-    allocated_paddock_sqft: allocated,
+    start_date: start ?? "",
+    move_interval_days: row.move_interval_days,
+    allocated_paddock_sqft: row.allocated_paddock_sqft,
     total_daily_dm_lbs: pickNum(b, "total_daily_dm_lbs", "totalDailyDmLbs") ?? 0,
     recommended_paddock_sqft: pickNum(b, "recommended_paddock_sqft", "recommendedPaddockSqft") ?? 0,
     shelter_sqft_needed: pickNum(b, "shelter_sqft_needed", "shelterSqftNeeded") ?? 0,
-    recommended_netting_rolls: pickNum(b, "recommended_netting_rolls", "recommendedNettingRolls") ?? 0,
+    recommended_netting_rolls: row.recommended_netting_rolls,
     spring_rest_days: pickNum(b, "spring_rest_days", "springRestDays") ?? 24,
     summer_rest_days: pickNum(b, "summer_rest_days", "summerRestDays") ?? 36,
     manure_n_lbs: pickNum(b, "manure_n_lbs", "manureNLbs") ?? 0,
     manure_p2o5_lbs: pickNum(b, "manure_p2o5_lbs", "manureP2o5Lbs") ?? 0,
     manure_k2o_lbs: pickNum(b, "manure_k2o_lbs", "manureK2oLbs") ?? 0,
     overgrazing_warning: Boolean(b.overgrazing_warning ?? b.overgrazingWarning),
-    livestock_class: inferLivestockClass(species_id, pickStr(b, "livestock_class", "livestockClass")),
+    livestock_class: inferLivestockClass(row.species_id, row.livestock_class ?? pickStr(b, "livestock_class", "livestockClass")),
     saved_at: pickStr(b, "saved_at", "savedAt"),
   };
 }
@@ -504,6 +487,24 @@ export function savePastureLedger(items: PastureRotationQueueItem[]): void {
   localStorage.setItem(PASTURE_LEDGER_KEY, JSON.stringify(items));
 }
 
+export function loadNurseryLedger(): NurseryBatchQueueItem[] {
+  if (typeof localStorage === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(NURSERY_LEDGER_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map(parseNurseryBatch).filter((b): b is NurseryBatchQueueItem => b !== null);
+  } catch {
+    return [];
+  }
+}
+
+export function saveNurseryLedger(items: NurseryBatchQueueItem[]): void {
+  if (typeof localStorage === "undefined") return;
+  localStorage.setItem(NURSERY_LEDGER_KEY, JSON.stringify(items));
+}
+
 function mergePastureLedger(farm: FarmState): FarmState {
   const ledger = loadPastureLedger();
   if (!ledger.length) return farm;
@@ -513,14 +514,23 @@ function mergePastureLedger(farm: FarmState): FarmState {
   return { ...farm, pasture_rotations: [...(farm.pasture_rotations ?? []), ...extra] };
 }
 
+function mergeNurseryLedger(farm: FarmState): FarmState {
+  const ledger = loadNurseryLedger();
+  if (!ledger.length) return farm;
+  const have = new Set((farm.nursery_batches ?? []).map((r) => r.id));
+  const extra = ledger.filter((r) => !have.has(r.id));
+  if (!extra.length) return farm;
+  return { ...farm, nursery_batches: [...(farm.nursery_batches ?? []), ...extra] };
+}
+
 export function loadFarm(): FarmState {
   if (typeof localStorage === "undefined") return createDefaultFarm();
   try {
     const raw =
       localStorage.getItem(FARM_STORAGE_KEY) ??
       LEGACY_FARM_KEYS.map((k) => localStorage.getItem(k)).find((v) => v);
-    if (!raw) return mergePastureLedger(createDefaultFarm());
-    return mergePastureLedger(parseFarm(JSON.parse(raw)));
+    if (!raw) return mergeNurseryLedger(mergePastureLedger(createDefaultFarm()));
+    return mergeNurseryLedger(mergePastureLedger(parseFarm(JSON.parse(raw))));
   } catch {
     return createDefaultFarm();
   }
@@ -530,6 +540,7 @@ export function saveFarm(farm: FarmState): void {
   if (typeof localStorage === "undefined") return;
   localStorage.setItem(FARM_STORAGE_KEY, JSON.stringify(farm));
   savePastureLedger(farm.pasture_rotations ?? []);
+  saveNurseryLedger(farm.nursery_batches ?? []);
 }
 
 export function exportFarmJson(farm: FarmState): string {

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ClipRouteImport } from './routes/clip'
 import { Route as ClipboardRouteImport } from './routes/clipboard'
 import { Route as EngineRouteImport } from './routes/engine'
 import { Route as CropSlugRouteImport } from './routes/crop/$slug'
@@ -22,12 +23,18 @@ import { Route as NurseryIndexRouteImport } from './routes/nursery/index'
 import { Route as NurserySlugRouteImport } from './routes/nursery/$slug'
 import { Route as PastureIndexRouteImport } from './routes/pasture/index'
 import { Route as PastureSlugRouteImport } from './routes/pasture/$slug'
+import { Route as PrintClipboardRouteImport } from './routes/print.clipboard'
 import { Route as SoilIndexRouteImport } from './routes/soil/index'
 import { Route as SoilSlugRouteImport } from './routes/soil/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClipRoute = ClipRouteImport.update({
+  id: '/clip',
+  path: '/clip',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClipboardRoute = ClipboardRouteImport.update({
@@ -90,6 +97,11 @@ const PastureSlugRoute = PastureSlugRouteImport.update({
   path: '/pasture/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrintClipboardRoute = PrintClipboardRouteImport.update({
+  id: '/print/clipboard',
+  path: '/print/clipboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SoilIndexRoute = SoilIndexRouteImport.update({
   id: '/soil/',
   path: '/soil/',
@@ -103,6 +115,7 @@ const SoilSlugRoute = SoilSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/clip': typeof ClipRoute
   '/clipboard': typeof ClipboardRoute
   '/engine': typeof EngineRoute
   '/crop/$slug': typeof CropSlugRoute
@@ -110,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/irrigation/$slug': typeof IrrigationSlugRoute
   '/nursery/$slug': typeof NurserySlugRoute
   '/pasture/$slug': typeof PastureSlugRoute
+  '/print/clipboard': typeof PrintClipboardRoute
   '/soil/$slug': typeof SoilSlugRoute
   '/crops/': typeof CropsIndexRoute
   '/economics/': typeof EconomicsIndexRoute
@@ -120,6 +134,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clip': typeof ClipRoute
   '/clipboard': typeof ClipboardRoute
   '/engine': typeof EngineRoute
   '/crop/$slug': typeof CropSlugRoute
@@ -127,6 +142,7 @@ export interface FileRoutesByTo {
   '/irrigation/$slug': typeof IrrigationSlugRoute
   '/nursery/$slug': typeof NurserySlugRoute
   '/pasture/$slug': typeof PastureSlugRoute
+  '/print/clipboard': typeof PrintClipboardRoute
   '/soil/$slug': typeof SoilSlugRoute
   '/crops': typeof CropsIndexRoute
   '/economics': typeof EconomicsIndexRoute
@@ -138,6 +154,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/clip': typeof ClipRoute
   '/clipboard': typeof ClipboardRoute
   '/engine': typeof EngineRoute
   '/crop/$slug': typeof CropSlugRoute
@@ -145,6 +162,7 @@ export interface FileRoutesById {
   '/irrigation/$slug': typeof IrrigationSlugRoute
   '/nursery/$slug': typeof NurserySlugRoute
   '/pasture/$slug': typeof PastureSlugRoute
+  '/print/clipboard': typeof PrintClipboardRoute
   '/soil/$slug': typeof SoilSlugRoute
   '/crops/': typeof CropsIndexRoute
   '/economics/': typeof EconomicsIndexRoute
@@ -157,6 +175,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/clip'
     | '/clipboard'
     | '/engine'
     | '/crop/$slug'
@@ -164,6 +183,7 @@ export interface FileRouteTypes {
     | '/irrigation/$slug'
     | '/nursery/$slug'
     | '/pasture/$slug'
+    | '/print/clipboard'
     | '/soil/$slug'
     | '/crops/'
     | '/economics/'
@@ -174,6 +194,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/clip'
     | '/clipboard'
     | '/engine'
     | '/crop/$slug'
@@ -181,6 +202,7 @@ export interface FileRouteTypes {
     | '/irrigation/$slug'
     | '/nursery/$slug'
     | '/pasture/$slug'
+    | '/print/clipboard'
     | '/soil/$slug'
     | '/crops'
     | '/economics'
@@ -191,6 +213,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/clip'
     | '/clipboard'
     | '/engine'
     | '/crop/$slug'
@@ -198,6 +221,7 @@ export interface FileRouteTypes {
     | '/irrigation/$slug'
     | '/nursery/$slug'
     | '/pasture/$slug'
+    | '/print/clipboard'
     | '/soil/$slug'
     | '/crops/'
     | '/economics/'
@@ -209,6 +233,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClipRoute: typeof ClipRoute
   ClipboardRoute: typeof ClipboardRoute
   EngineRoute: typeof EngineRoute
   CropSlugRoute: typeof CropSlugRoute
@@ -216,6 +241,7 @@ export interface RootRouteChildren {
   IrrigationSlugRoute: typeof IrrigationSlugRoute
   NurserySlugRoute: typeof NurserySlugRoute
   PastureSlugRoute: typeof PastureSlugRoute
+  PrintClipboardRoute: typeof PrintClipboardRoute
   SoilSlugRoute: typeof SoilSlugRoute
   CropsIndexRoute: typeof CropsIndexRoute
   EconomicsIndexRoute: typeof EconomicsIndexRoute
@@ -232,6 +258,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clip': {
+      id: '/clip'
+      path: '/clip'
+      fullPath: '/clip'
+      preLoaderRoute: typeof ClipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clipboard': {
@@ -318,6 +351,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PastureSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/print/clipboard': {
+      id: '/print/clipboard'
+      path: '/print/clipboard'
+      fullPath: '/print/clipboard'
+      preLoaderRoute: typeof PrintClipboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/soil/': {
       id: '/soil/'
       path: '/soil'
@@ -337,6 +377,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClipRoute: ClipRoute,
   ClipboardRoute: ClipboardRoute,
   EngineRoute: EngineRoute,
   CropSlugRoute: CropSlugRoute,
@@ -344,6 +385,7 @@ const rootRouteChildren: RootRouteChildren = {
   IrrigationSlugRoute: IrrigationSlugRoute,
   NurserySlugRoute: NurserySlugRoute,
   PastureSlugRoute: PastureSlugRoute,
+  PrintClipboardRoute: PrintClipboardRoute,
   SoilSlugRoute: SoilSlugRoute,
   CropsIndexRoute: CropsIndexRoute,
   EconomicsIndexRoute: EconomicsIndexRoute,

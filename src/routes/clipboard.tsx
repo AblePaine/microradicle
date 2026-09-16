@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FieldClipboardPrint } from "@/components/FieldClipboardPrint";
+import { UnifiedClipboard } from "@/components/UnifiedClipboard";
 import { useFarmStore } from "@/lib/farm-store";
 
 export const Route = createFileRoute("/clipboard")({
@@ -10,18 +10,24 @@ export const Route = createFileRoute("/clipboard")({
       {
         name: "description",
         content:
-          "Printable sow, field, and harvest clipboard for a 30-inch market garden. Local-first. No account.",
+          "Printable daily sheet for 30-inch beds, 1020 racks, and paddock moves. Local-first. No account.",
       },
     ],
   }),
 });
 
+function isoToday(): string {
+  const d = new Date();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
 function ClipboardPage() {
   const farm = useFarmStore((s) => s.farm);
-  const today = new Date();
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-      <FieldClipboardPrint farm={farm} today={today} />
+      <UnifiedClipboard farm={farm} todayIso={isoToday()} />
     </main>
   );
 }
