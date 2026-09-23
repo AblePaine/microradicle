@@ -7,7 +7,7 @@ export const IN_TO_CM = 2.54;
 export const FT_TO_M = 0.3048;
 export const LB_TO_KG = 0.453592;
 /** Gallons in one inch of water over one square foot. */
-export const GAL_PER_INCH_SQFT = 0.623337;
+export const GAL_PER_INCH_SQFT = 0.623377;
 
 export function inToCm(inches: number): number {
   return inches * IN_TO_CM;
