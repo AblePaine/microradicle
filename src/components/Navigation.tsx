@@ -15,6 +15,7 @@ const LINKS = [
   { to: "/irrigation", label: "Irrigation" },
   { to: "/soil", label: "Soil" },
   { to: "/economics", label: "Pack" },
+  { to: "/guides", label: "Guides" },
 ] as const;
 
 export function Navigation() {
