@@ -88,7 +88,7 @@ export interface SoilAmendmentBalance {
   };
   amendment_recipe: {
     feather_meal_12_0_0_lbs: number;
-    bone_meal_1_13_0_lbs: number;
+    bone_meal_3_15_0_lbs: number;
     potash_0_0_50_lbs: number;
   };
   amendment_recipe_cups: {

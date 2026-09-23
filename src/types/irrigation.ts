@@ -41,6 +41,7 @@ export interface ZoneHydraulicAudit {
   bed_count: number;
   total_bed_feet: number;
   total_drip_tape_feet: number;
+  total_tape_lines: number;
   active_emitters_count: number;
   gross_demand_gpm: number;
   supply_capacity_gpm: number;

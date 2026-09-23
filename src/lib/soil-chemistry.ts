@@ -42,8 +42,12 @@ export function clampTempF(t: number): number {
 /** Q10 rate vs 70°F. Below 40°F mineralization is essentially off. */
 export function q10Factor(soilTempF: number): number {
   const t = clampTempF(soilTempF);
+  const full = Math.pow(Q10, (t - Q10_REF_F) / 18);
   if (t <= 40) return 0.08;
-  return Math.pow(Q10, (t - Q10_REF_F) / 18);
+  // m2: blend smoothly from the 0.08 floor at 40°F back to the Q10 curve
+  // over 40–50°F, instead of a 4× step at the boundary.
+  const blend = Math.min(1, (t - 40) / 10);
+  return 0.08 + blend * (full - 0.08);
 }
 
 /**

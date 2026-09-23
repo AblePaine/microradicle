@@ -222,7 +222,7 @@ export function SoilNutrientBalancer({ farm, onPatchSoil, blockId }: Props) {
               <span className="text-accent">{fmtMass(credit.available_n_lbs, units, 2)} plant-available N</span>,{" "}
               {fmtMass(credit.available_p2o5_lbs, units, 2)} P₂O₅, and {fmtMass(credit.available_k2o_lbs, units, 2)} K₂O
               on these beds. That stands in for about {fmtMass(equiv.feather_meal_12_0_0_lbs, units, 1)} feather meal
-              12-0-0, {fmtMass(equiv.bone_meal_1_13_0_lbs, units, 1)} bone meal, and{" "}
+              12-0-0, {fmtMass(equiv.bone_meal_3_15_0_lbs, units, 1)} bone meal, and{" "}
               {fmtMass(equiv.potash_0_0_50_lbs, units, 1)} sulfate of potash — roughly $
               {bridge.commercial_savings_usd.toFixed(0)} of bags left on the pallet.
             </p>

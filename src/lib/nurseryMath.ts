@@ -69,7 +69,8 @@ export function wholesaleUsdForTrays(crop: MicrogreenCultivar, trayCount: number
 }
 
 export function clamshellsForTrays(crop: MicrogreenCultivar, trayCount: number): number {
-  return Math.max(0, Math.round(yieldOzForTrays(crop, trayCount) / CLAMSHELL_OZ));
+  // m5: floor — a partial clamshell isn't a sellable unit.
+  return Math.max(0, Math.floor(yieldOzForTrays(crop, trayCount) / CLAMSHELL_OZ));
 }
 
 export function clamshellUsdForTrays(crop: MicrogreenCultivar, trayCount: number): number {

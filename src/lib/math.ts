@@ -251,10 +251,11 @@ export function computeSuccession(
   climate: FarmClimate,
 ): BedSuccession {
   const harvest = parseISO(draft.target_harvest_date);
-  const year = harvest.getFullYear();
-  const firstFrost = parseMd(climate.first_fall_frost, year);
   let dtm = crop.timeline.dtmFromField;
   let field = addDays(harvest, -dtm);
+  // m4: use the field-date year for the fall frost check, so overwintered
+  // crops (field date in year N, harvest in year N+1) get year N's frost.
+  const firstFrost = parseMd(climate.first_fall_frost, field.getFullYear());
   dtm = dtmAdjusted(crop, field, firstFrost);
   field = addDays(harvest, -dtm);
   const nursery = addDays(field, -crop.propagation.nurseryLeadDays);
@@ -350,10 +351,12 @@ export function successionPhase(succession: BedSuccession, today: Date): Plantin
   const field = parseISO(succession.field_transplant_date);
   const harvest = parseISO(succession.target_harvest_date);
   const end = parseISO(succession.harvest_end_date);
-  if (today.getTime() < nursery.getTime()) return "planned";
-  if (today.getTime() < field.getTime()) return "seeded";
-  if (today.getTime() < harvest.getTime()) return "growing";
-  if (today.getTime() <= end.getTime()) return "harvest";
+  // m3: compare calendar days so the whole harvest_end_date counts as harvest,
+  // not just its midnight instant.
+  if (differenceInCalendarDays(today, nursery) < 0) return "planned";
+  if (differenceInCalendarDays(today, field) < 0) return "seeded";
+  if (differenceInCalendarDays(today, harvest) < 0) return "growing";
+  if (differenceInCalendarDays(today, end) <= 0) return "harvest";
   return "complete";
 }
 

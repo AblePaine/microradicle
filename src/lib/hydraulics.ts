@@ -1,4 +1,5 @@
 import fittingsCatalog from "../data/irrigation/fittings.json" with { type: "json" };
+import { differenceInCalendarDays } from "date-fns";
 import type { Crop } from "@/types/crop";
 import type { FarmState, FieldBlock } from "@/types/farm";
 import type {
@@ -61,6 +62,11 @@ export const DEFAULT_NETWORK: Omit<IrrigationNetwork, "zones"> = {
 };
 
 export function headerEquivalentLengthFt(headerLengthFt: number, diameter: PipeDiameterInches): number {
+  // 2 elbows + 1 tee takeoff + 1 zone valve + 1 flush
+  return headerLengthFt + headerFittingEqFt(diameter);
+}
+
+function headerFittingEqFt(diameter: PipeDiameterInches): number {
   const elbows = FITTINGS.filter((f) => f.sku_name.includes("elbow") && f.diameter_in === diameter);
   const tees = FITTINGS.filter((f) => f.sku_name.includes("tee") && f.diameter_in === diameter);
   const valves = FITTINGS.filter((f) => f.category === "valve" && f.diameter_in === diameter);
@@ -68,7 +74,26 @@ export function headerEquivalentLengthFt(headerLengthFt: number, diameter: PipeD
   const teeEq = tees[0]?.equivalent_length_ft ?? 6;
   const valveEq = valves[0]?.equivalent_length_ft ?? 12;
   // 2 elbows + 1 tee takeoff + 1 zone valve + 1 flush
-  return headerLengthFt + elbowEq * 2 + teeEq + valveEq + 3;
+  return elbowEq * 2 + teeEq + valveEq + 3;
+}
+
+/** Christiansen multiple-outlet factor for Hazen-Williams (m = 1.852). */
+function christiansenF(outlets: number): number {
+  const n = Math.max(1, Math.round(outlets));
+  if (n <= 1) return 1;
+  return 1 / 2.852 + 1 / (2 * n);
+}
+
+/**
+ * Effective header length for friction. The supply/takeoff section plus
+ * fittings carry full flow, but along the distributed section (one lateral
+ * takeoff per bed on 4 ft centers) flow drops at each outlet — that section
+ * is scaled by the Christiansen multiple-outlet factor.
+ */
+function headerEffectiveLengthFt(headerLengthFt: number, bedCount: number, diameter: PipeDiameterInches): number {
+  const distributedFt = Math.max(0, Math.min(headerLengthFt, bedCount * 4));
+  const fullFlowFt = headerLengthFt - distributedFt + headerFittingEqFt(diameter);
+  return fullFlowFt + christiansenF(bedCount) * distributedFt;
 }
 
 function defaultHeaderLength(block: FieldBlock): number {
@@ -126,7 +151,8 @@ function tapeForBed(farm: FarmState, block: FieldBlock, bedIndex: number, crops:
   const onBed = successionsOnBed(farm, block.id, bedIndex);
   const live = onBed.find((s) => {
     const o = occupancy(s);
-    return today >= o.start && today <= o.end;
+    // m3: calendar-day comparison so the bed stays live through harvest_end_date.
+    return differenceInCalendarDays(today, o.start) >= 0 && differenceInCalendarDays(today, o.end) <= 0;
   });
   const pick = live ?? onBed[0];
   const crop = pick ? crops.get(pick.crop_id) : undefined;
@@ -172,12 +198,14 @@ function filterSku(diameter: PipeDiameterInches): IrrigationFitting {
 function buildBom(
   audit: Pick<
     ZoneHydraulicAudit,
-    "total_drip_tape_feet" | "bed_count" | "recommended_header_diameter_in" | "header_friction_loss_psi" | "gross_demand_gpm"
+    "total_drip_tape_feet" | "total_tape_lines" | "bed_count" | "recommended_header_diameter_in" | "header_friction_loss_psi" | "gross_demand_gpm"
   >,
   zone: IrrigationZone,
   mainlineFt: number,
+  mainlineDiameterIn: PipeDiameterInches,
 ): BomLine[] {
   const header = pipeSku(audit.recommended_header_diameter_in);
+  const mainline = pipeSku(mainlineDiameterIn);
   const valve = valveSku(audit.recommended_header_diameter_in);
   const tape = fittingBySku("TAPE-08-080-042")!;
   const start = fittingBySku("TAPE-FIT-625")!;
@@ -186,14 +214,30 @@ function buildBom(
   const reg = regulatorSku(audit.gross_demand_gpm);
   const filter = filterSku(audit.recommended_header_diameter_in);
   const elbow = FITTINGS.find((f) => f.sku_name.includes("elbow") && f.diameter_in === audit.recommended_header_diameter_in);
-  const linesPerBed = STANDARD_TAPE.linesPerBed;
-  const lineCount = audit.bed_count * linesPerBed;
+  // M2: connectors follow each bed's actual tape layout, not the fixed standard.
+  const lineCount = audit.total_tape_lines;
+  const headerQty = Math.ceil(zone.header_length_ft);
+  const mainlineQty = Math.ceil(mainlineFt);
   const lines: BomLine[] = [
     {
       sku_name: header.sku_name,
-      quantity: Math.ceil(zone.header_length_ft + mainlineFt * 0.15),
+      quantity: headerQty,
       specification: header.specification,
     },
+  ];
+  // M3: the mainline is its own line item at its own diameter, not a fudge
+  // factor on the header. It's shared farm infrastructure — order once.
+  if (mainline.sku === header.sku) {
+    lines[0]!.quantity = headerQty + mainlineQty;
+    lines[0]!.specification = `${header.specification} — incl. ${mainlineQty} ft shared mainline (order once, shown on each zone)`;
+  } else {
+    lines.push({
+      sku_name: mainline.sku_name,
+      quantity: mainlineQty,
+      specification: `${mainline.specification} — shared farm mainline (order once, shown on each zone)`,
+    });
+  }
+  lines.push(
     {
       sku_name: tape.sku_name,
       quantity: Math.ceil(audit.total_drip_tape_feet),
@@ -229,7 +273,7 @@ function buildBom(
       quantity: 1,
       specification: flush.specification,
     },
-  ];
+  );
   if (elbow) {
     lines.push({ sku_name: elbow.sku_name, quantity: 2, specification: elbow.specification });
   }
@@ -247,6 +291,7 @@ export function auditZone(
   let bed_count = 0;
   let total_bed_feet = 0;
   let total_drip_tape_feet = 0;
+  let total_tape_lines = 0;
   let active_emitters_count = 0;
   let totalGph = 0;
   const mix = new Map<string, { bed_count: number; demand_gpm: number }>();
@@ -261,6 +306,7 @@ export function auditZone(
         : emittersFromTape(block.bed_length_ft, tape);
       const gph = emitters * tape.emitterGph;
       total_drip_tape_feet += tape.linesPerBed * block.bed_length_ft;
+      total_tape_lines += tape.linesPerBed;
       active_emitters_count += emitters;
       totalGph += gph;
       const key = tape.cropId ?? "standard-tape";
@@ -272,7 +318,9 @@ export function auditZone(
   }
 
   const gross_demand_gpm = totalGph / 60;
-  const eqLen = headerEquivalentLengthFt(zone.header_length_ft, zone.header_diameter_in);
+  // m1: effective length applies the Christiansen multiple-outlet factor to
+  // the distributed section, so displayed loss and pipe sizing aren't 2.6× high.
+  const eqLen = headerEffectiveLengthFt(zone.header_length_ft, bed_count, zone.header_diameter_in);
   const recommended = smallestPipeForGpm(gross_demand_gpm, eqLen);
   const selected = pipeFor(zone.header_diameter_in);
   const header_friction_loss_psi = hazenWilliamsPsi(gross_demand_gpm, eqLen, selected);
@@ -292,6 +340,7 @@ export function auditZone(
 
   const partial = {
     total_drip_tape_feet,
+    total_tape_lines,
     bed_count,
     recommended_header_diameter_in: recommended.nominal_diameter_in,
     header_friction_loss_psi,
@@ -304,6 +353,7 @@ export function auditZone(
     bed_count,
     total_bed_feet,
     total_drip_tape_feet,
+    total_tape_lines,
     active_emitters_count,
     gross_demand_gpm: round2(gross_demand_gpm),
     supply_capacity_gpm,
@@ -315,7 +365,7 @@ export function auditZone(
     header_velocity_fps: round2(header_velocity_fps),
     requires_zone_split,
     suggested_split_count: requires_zone_split ? suggested_split_count : 1,
-    bill_of_materials: buildBom(partial, zone, network.mainline_length_ft),
+    bill_of_materials: buildBom(partial, zone, network.mainline_length_ft, network.mainline_diameter_in),
     crop_mix: [...mix.entries()].map(([crop_id, v]) => ({
       crop_id,
       bed_count: v.bed_count,
@@ -354,12 +404,21 @@ export function mainlineStations(
   const n = Math.max(1, network.zones.length);
   const spacing = network.mainline_length_ft / n;
 
-  const flows: number[] = network.zones.map((z, i) => {
-    if (mode === "simultaneous") return audits[i]?.gross_demand_gpm ?? 0;
+  const flows: number[] = (() => {
+    if (mode === "simultaneous") return network.zones.map((z, i) => audits[i]?.gross_demand_gpm ?? 0);
+    // Peak-zone mode: exactly one zone open — the first at peak demand.
+    // (Ties are common on new farms; opening all tied zones misreports pressure.)
     const peak = peakSequentialGpm(audits);
-    const a = audits[i];
-    return a && a.gross_demand_gpm === peak ? peak : 0;
-  });
+    let peakAssigned = false;
+    return network.zones.map((z, i) => {
+      const a = audits[i];
+      if (a && a.gross_demand_gpm === peak && !peakAssigned) {
+        peakAssigned = true;
+        return peak;
+      }
+      return 0;
+    });
+  })();
   if (mode === "peak-zone" && !flows.some((f) => f > 0) && audits[0]) {
     flows[0] = audits[0].gross_demand_gpm;
   }

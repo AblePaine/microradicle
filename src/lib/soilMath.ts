@@ -207,7 +207,7 @@ export function soilAmendmentBalance(
   const net = netNeedAfterCredit(deficit, credit);
   const remaining = {
     feather_meal_12_0_0_lbs: round2(recipeLbsById(plan.recipe, FEATHER_MEAL_ID)),
-    bone_meal_1_13_0_lbs: round2(recipeLbsById(plan.recipe, BONE_MEAL_ID)),
+    bone_meal_3_15_0_lbs: round2(recipeLbsById(plan.recipe, BONE_MEAL_ID)),
     potash_0_0_50_lbs: round2(recipeLbsById(plan.recipe, POTASH_ID)),
   };
   const equiv = equivalentMealLbs(credit);
@@ -222,7 +222,7 @@ export function soilAmendmentBalance(
     amendment_recipe: remaining,
     amendment_recipe_cups: {
       feather_meal_cups: cupsFromLbs(FEATHER_MEAL_ID, remaining.feather_meal_12_0_0_lbs),
-      bone_meal_cups: cupsFromLbs(BONE_MEAL_ID, remaining.bone_meal_1_13_0_lbs),
+      bone_meal_cups: cupsFromLbs(BONE_MEAL_ID, remaining.bone_meal_3_15_0_lbs),
       potash_cups: cupsFromLbs(POTASH_ID, remaining.potash_0_0_50_lbs),
     },
     commercial_savings_usd: mealSavingsUsd(equiv),

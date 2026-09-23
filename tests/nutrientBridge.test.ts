@@ -87,7 +87,7 @@ describe("Cornish Cross 80-head 1-day tractor", () => {
 
     const bags = equivalentMealLbs(credit);
     assert.ok(Math.abs(bags.feather_meal_12_0_0_lbs - 0.88 / 0.12) < 0.02);
-    assert.ok(Math.abs(bags.bone_meal_1_13_0_lbs - 1.28 / 0.15) < 0.02);
+    assert.ok(Math.abs(bags.bone_meal_3_15_0_lbs - 1.28 / 0.15) < 0.02);
     assert.ok(Math.abs(bags.potash_0_0_50_lbs - 0.96 / 0.5) < 0.02);
     assert.ok(mealSavingsUsd(bags) > 0);
   });

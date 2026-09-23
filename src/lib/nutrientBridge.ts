@@ -66,15 +66,15 @@ export function manurePOverload(deficit: BedNutrientDeficit, credit: ManureNutri
 
 export function equivalentMealLbs(credit: ManureNutrientCredit | null): {
   feather_meal_12_0_0_lbs: number;
-  bone_meal_1_13_0_lbs: number;
+  bone_meal_3_15_0_lbs: number;
   potash_0_0_50_lbs: number;
 } {
   if (!credit) {
-    return { feather_meal_12_0_0_lbs: 0, bone_meal_1_13_0_lbs: 0, potash_0_0_50_lbs: 0 };
+    return { feather_meal_12_0_0_lbs: 0, bone_meal_3_15_0_lbs: 0, potash_0_0_50_lbs: 0 };
   }
   return {
     feather_meal_12_0_0_lbs: round2(credit.available_n_lbs / FEATHER_N_PCT),
-    bone_meal_1_13_0_lbs: round2(credit.available_p2o5_lbs / BONE_P2O5_PCT),
+    bone_meal_3_15_0_lbs: round2(credit.available_p2o5_lbs / BONE_P2O5_PCT),
     potash_0_0_50_lbs: round2(credit.available_k2o_lbs / POTASH_K2O_PCT),
   };
 }
@@ -82,7 +82,7 @@ export function equivalentMealLbs(credit: ManureNutrientCredit | null): {
 export function mealSavingsUsd(equiv: ReturnType<typeof equivalentMealLbs>): number {
   return round2(
     equiv.feather_meal_12_0_0_lbs * MEAL_USD_PER_LB.feather +
-      equiv.bone_meal_1_13_0_lbs * MEAL_USD_PER_LB.bone +
+      equiv.bone_meal_3_15_0_lbs * MEAL_USD_PER_LB.bone +
       equiv.potash_0_0_50_lbs * MEAL_USD_PER_LB.potash,
   );
 }
