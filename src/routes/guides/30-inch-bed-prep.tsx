@@ -53,7 +53,7 @@ function Guide() {
       </p>
       <p className="mt-3 text-sm leading-relaxed text-muted">
         This sequence assumes drip irrigation, hand tools, and soil you can sink a broadfork
-        into. If the ground is standing water, wait.
+        into. If the ground is holding standing water, wait for it to drain.
       </p>
 
       <h2 className="mt-8 font-mono text-[11px] tracking-[0.18em] text-accent uppercase">

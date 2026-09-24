@@ -42,7 +42,7 @@ export const Route = createFileRoute("/engine")({
   validateSearch: (s: Record<string, unknown>): EngineSearch => engineSearchFromUnknown(s),
   component: EnginePage,
   head: () => ({
-    meta: [{ title: "Engine — MicroRadicle" }],
+    meta: [{ title: "Planner — MicroRadicle" }],
   }),
 });
 

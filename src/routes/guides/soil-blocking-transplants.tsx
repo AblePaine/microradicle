@@ -169,7 +169,7 @@ function Guide() {
       </p>
 
       <h2 className="mt-8 font-mono text-[11px] tracking-[0.18em] text-accent uppercase">
-        Setting to the 30-inch bed
+        Planting blocks into the bed
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-fg">
         Plant the whole block. Do not shake mix off. Seat it so the top of the block is 1/4–1/2

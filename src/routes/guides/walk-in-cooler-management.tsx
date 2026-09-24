@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 
 const TITLE = "Walk-In Cooler Management: Temperature, Humidity, and Ethylene";
 const DESCRIPTION =
-  "Set points for a farm walk-in — 34°F greens, 50°F tomatoes, humidity targets, and which crops cannot share a wall.";
+  "Set points for a farm walk-in — 34°F greens, 50°F tomatoes, humidity targets, and which crops can't share a wall.";
 const SLUG = "walk-in-cooler-management";
 
 export const Route = createFileRoute("/guides/walk-in-cooler-management")({
@@ -99,7 +99,7 @@ function Guide() {
       </p>
 
       <h2 className="mt-8 font-mono text-[11px] tracking-[0.18em] text-accent uppercase">
-        Humidity that does not rot the walls
+        Humidity that doesn't rot the walls
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-fg">
         Greens wilt from vapor pressure deficit, not from &quot;not enough water in the
@@ -116,12 +116,12 @@ function Guide() {
         <li>Do not fog so hard that water drips on electricals.</li>
       </ul>
       <p className="mt-3 text-sm leading-relaxed text-fg">
-        Condensation on the evaporator that never stops is a coil iced over. Defrost. A iced
-        coil cools the air and strips water out of the crop.
+        Condensation on the evaporator that never stops means the coil is iced over. Defrost. An
+        iced coil cools the air and strips water out of the crop.
       </p>
 
       <h2 className="mt-8 font-mono text-[11px] tracking-[0.18em] text-accent uppercase">
-        Ethylene: who cannot share a wall
+        Ethylene: who can't share a wall
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-fg">
         Ethylene is a gas ripe fruit makes. Leafy crops and brassicas yellow and pit in it.
@@ -164,7 +164,7 @@ function Guide() {
       </p>
 
       <h2 className="mt-8 font-mono text-[11px] tracking-[0.18em] text-accent uppercase">
-        A working set of numbers for a 8×10 box
+        A working set of numbers for an 8×10 box
       </h2>
       <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-fg marker:text-accent">
         <li>Thermostat: 34°F.</li>

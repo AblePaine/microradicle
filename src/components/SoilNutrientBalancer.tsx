@@ -243,25 +243,25 @@ export function SoilNutrientBalancer({ farm, onPatchSoil, blockId }: Props) {
 
       {empty ? (
         <p className="rounded-md border border-border bg-elevated px-3 py-2 font-mono text-xs text-muted">
-          No crop extraction on this {blockId ? "block" : "farm"}. Drop successions in the engine first.
+          No crop extraction on this {blockId ? "block" : "farm"}. Drop successions in the planner first.
         </p>
       ) : manureP ? (
         <p className="rounded-md border border-danger/40 bg-elevated px-3 py-2 font-mono text-xs text-danger">
-          Phosphorus cap — manure P₂O₅ is over 125% of crop removal. Do not add bone meal.
+          Phosphorus cap — manure P₂O₅ is over 125% of crop removal. Don't add bone meal.
         </p>
       ) : pOver ? (
         <p className="rounded-md border border-danger/40 bg-elevated px-3 py-2 font-mono text-xs text-danger">
-          P OVERLOAD — available P exceeds deficit × {P_OVERLOAD_RATIO}. Drop manure/compost/bone or add a 0-P N source
-          (feather, blood).
+          P overload — available P exceeds deficit × {P_OVERLOAD_RATIO}. Drop the manure, compost,
+          or bone meal, or add a 0-P N source (feather meal, blood meal).
         </p>
       ) : nShort || kShort ? (
         <p className="rounded-md border border-accent/40 bg-elevated px-3 py-2 font-mono text-xs text-accent">
-          {nShort ? "N short at this temperature — raise soil temp, extend the horizon, or add a hotter N meal. " : ""}
-          {kShort ? "K short — keep sulfate of potash or langbeinite on the palette." : ""}
+          {nShort ? "Short on N at this temperature — raise the soil temp, extend the horizon, or add a hotter N meal. " : ""}
+          {kShort ? "Short on K — keep sulfate of potash or langbeinite on the palette." : ""}
         </p>
       ) : (
         <p className="rounded-md border border-ok/30 bg-elevated px-3 py-2 font-mono text-xs text-ok">
-          Recipe meets N and K after manure. P held at ≤ {Math.round((P_OVERLOAD_RATIO - 1) * 100)}% over removal.
+          Recipe covers N and K after manure. P held at ≤ {Math.round((P_OVERLOAD_RATIO - 1) * 100)}% over removal.
         </p>
       )}
 
@@ -343,7 +343,7 @@ export function SoilNutrientBalancer({ farm, onPatchSoil, blockId }: Props) {
               {plan.recipe.length === 0 ? (
                 <tr>
                   <td colSpan={10} className="px-3 py-8 text-center text-muted">
-                    {empty ? "Nothing to replace." : "Palette cannot build a non-negative recipe. Add feather + SOP + bone."}
+                    {empty ? "Nothing to replace." : "The palette can't build a recipe without going negative. Add feather meal, sulfate of potash, and bone meal."}
                   </td>
                 </tr>
               ) : null}

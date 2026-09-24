@@ -121,7 +121,7 @@ export function HydraulicZoneSizer({ farm, onSupply, onAddZone, onRemoveZone, on
 
       <section className="overflow-hidden rounded-lg border border-border bg-surface">
         <header className="flex items-center justify-between border-b border-border px-3 py-1.5">
-          <p className="font-mono text-[10px] tracking-[0.18em] text-subtle uppercase">Zones · hydraulic audit</p>
+          <p className="font-mono text-[10px] tracking-[0.18em] text-subtle uppercase">Zones · pressure check</p>
           <button
             type="button"
             onClick={onAddZone}

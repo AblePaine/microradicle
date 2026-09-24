@@ -16,30 +16,30 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Planning tools for ¼–3 acre market farms. 30-inch beds, drip, soil, cooler, and tray nursery. Saved on this machine — no account.",
+          "Stop guessing your beds, water, fertilizer, and cooler. Real numbers for ¼–3 acre market farms — for growers who would rather farm than calculate. Saved on this machine, no account.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "MicroRadicle" },
       {
         property: "og:title",
-        content: "MicroRadicle — Farm Operating System for ¼–3 Acre Market Farms",
+        content: "MicroRadicle — Farm Tools for ¼–3 Acre Market Farms",
       },
       {
         property: "og:description",
         content:
-          "Planning tools for ¼–3 acre market farms. 30-inch beds, drip, soil, cooler, and tray nursery. Saved on this machine — no account.",
+          "Stop guessing your beds, water, fertilizer, and cooler. Real numbers for ¼–3 acre market farms — for growers who would rather farm than calculate. Saved on this machine, no account.",
       },
       { property: "og:url", content: "https://microradicle.com/" },
       { property: "og:image", content: "https://microradicle.com/og.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "MicroRadicle — Farm Operating System for ¼–3 Acre Market Farms",
+        content: "MicroRadicle — Farm Tools for ¼–3 Acre Market Farms",
       },
       {
         name: "twitter:description",
         content:
-          "Planning tools for ¼–3 acre market farms. 30-inch beds, drip, soil, cooler, and tray nursery. Saved on this machine — no account.",
+          "Stop guessing your beds, water, fertilizer, and cooler. Real numbers for ¼–3 acre market farms — for growers who would rather farm than calculate. Saved on this machine, no account.",
       },
       { name: "twitter:image", content: "https://microradicle.com/og.jpg" },
       { name: "theme-color", content: "#09090b" },

@@ -42,7 +42,7 @@ function PastureIndex() {
           This is the grass, not the 30-inch beds. Size a daily tractor pull, an egg-mobile yard, or a
           polywire break from how much dry matter the animals eat. Net is counted in {NET_ROLL_FT}-foot
           commercial rolls. Leave the paddock alone for the rest window or you graze it twice and it
-          does not come back.
+          doesn't come back.
         </p>
       </header>
 

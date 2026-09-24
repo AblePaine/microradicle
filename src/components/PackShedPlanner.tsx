@@ -180,7 +180,7 @@ export function PackShedPlanner({ farm, onPatch, cropId, zoneId }: Props) {
               .
             </>
           ) : (
-            " Drop harvest dates in the engine first."
+            " Drop harvest dates in the planner first."
           )}
         </p>
       ) : (

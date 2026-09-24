@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "A straightforward workspace for human-scale growers. Plan 30-inch beds, size drip, balance fertilizer, run a tray nursery, rotate a small flock, and manage the cooler — free, in the browser, no account.",
+          "Plan 30-inch beds, size drip, balance fertilizer, run a tray nursery, rotate a small flock, and manage the cooler — free, in the browser, no account.",
       },
     ],
   }),
@@ -25,16 +25,16 @@ function Gateway() {
           <div className="max-w-3xl space-y-3">
             <p className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] text-accent uppercase">
               <span className="size-2 shrink-0 bg-accent" aria-hidden />
-              Open operating tools for 0.25 to 3-acre bio-intensive farms
+              Farm tools that do the math
             </p>
             <h1 className="font-display text-4xl font-semibold tracking-wide text-fg sm:text-6xl">
               MICRORADICLE
             </h1>
             <p className="max-w-2xl text-sm leading-relaxed text-muted">
-              A straightforward, reliable workspace for human-scale growers. Plan out your bed
-              successions around real daylight, size your drip lines, balance your organic fertilizer,
-              and manage cold-room storage—all completely free, right in your browser, with no accounts
-              or cloud tracking.
+              Plan your bed successions around real daylight, size your drip
+              lines, balance your fertilizer, and keep the cooler honest — free,
+              in your browser, with nothing leaving this machine. For growers on
+              ¼–3 acres who would rather farm than calculate.
             </p>
             <div className="flex flex-wrap gap-2 pt-1 text-[11px]">
               <StatusChip k="Storage" v="Saved locally in your browser" ok />
@@ -44,7 +44,7 @@ function Gateway() {
           </div>
           <div className="grid min-w-[240px] grid-cols-2 gap-2 sm:min-w-[280px]">
             <Kpi k="Cultivars" v={String(CULTIVAR_COUNT)} d="In the library" />
-            <Kpi k="Tools live" v="4 live" d="Beds + pasture" accent />
+            <Kpi k="Live now" v="4 tools" d="Beds & pasture" accent />
             <Kpi k="Market veg" v={String(VEGETABLE_COUNT)} d="8 crop types" />
             <Kpi k="Cut flowers" v={String(FLOWER_COUNT)} d="Stem crops" />
           </div>
@@ -55,10 +55,10 @@ function Gateway() {
         <div className="flex items-end justify-between gap-4 border-b border-border pb-2">
           <div>
             <p className="text-[10px] tracking-[0.22em] text-accent uppercase">What you grow</p>
-            <h2 className="font-display text-2xl font-semibold tracking-wide text-fg">PRODUCTION HUBS</h2>
+            <h2 className="font-display text-2xl font-semibold tracking-wide text-fg">CROPS & ANIMALS</h2>
           </div>
           <p className="hidden text-[11px] tracking-[0.16em] text-subtle uppercase sm:block">
-            Pick a crop, then plant it
+            Pick one, then plant it
           </p>
         </div>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
@@ -66,7 +66,7 @@ function Gateway() {
             live
             count={`${VEGETABLE_COUNT} cv.`}
             title="Market vegetables"
-            body="Salad greens, brassicas, roots, and tomatoes. Row spacing, seeder rollers, and how long a bed is tied up — including slower fall days."
+            body="Salad greens, brassicas, roots, and tomatoes. Row spacing, seeder rollers, and how long each bed stays planted — with fall's short days already in the math."
             cta="Open veg beds →"
             to="/engine"
             search={{ category: "vegetables" }}
@@ -107,7 +107,7 @@ function Gateway() {
           <div>
             <p className="text-[10px] tracking-[0.22em] text-accent uppercase">The rest of the farm</p>
             <h2 className="font-display text-2xl font-semibold tracking-wide text-fg">
-              WATER, SOIL, COOLER, CLIPBOARDS
+              WATER, SOIL, COOLER, CLIPBOARD
             </h2>
           </div>
           <p className="hidden text-[11px] tracking-[0.16em] text-subtle uppercase sm:block">
@@ -116,28 +116,28 @@ function Gateway() {
         </div>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
           <ModuleCard
-            k="Module 02"
+            k="Water"
             t="Drip lines"
             d="How much water each bed wants. Sizes headers and poly so the last emitter still has pressure."
             href="/irrigation"
             cta="Open drip →"
           />
           <ModuleCard
-            k="Module 03"
+            k="Fertility"
             t="Soil & fertilizer"
             d="What the crops took out, and which bag puts it back. Won't dump extra phosphorus on you."
             href="/soil"
             cta="Open soil →"
           />
           <ModuleCard
-            k="Module 04"
+            k="Postharvest"
             t="Pack-shed & cooler"
             d="How much heat walked in with harvest, and whether the CoolBot can knock it down before the greens wilt."
             href="/economics"
             cta="Open pack-shed →"
           />
           <ModuleCard
-            k="Offline ops"
+            k="Field work"
             t="Field clipboards"
             d="Print today's paddock pulls, 1020 soaks and cuts, and bed sow / pinch / net / harvest on one sheet."
             href="/clipboard"
@@ -153,8 +153,8 @@ function Gateway() {
         <div className="grid grid-cols-1 gap-6 text-xs leading-relaxed text-muted md:grid-cols-3">
           <div>
             <span className="mb-1 block font-semibold text-fg">01 // Work backwards from market day</span>
-            You pick the harvest date. We count back to sow and transplant. Short days in fall slow the
-            crop down — the calendar already knows that.
+            You pick the harvest date. We count back to sow and transplant. Fall's short days slow the
+            crop down — the calendar already knows.
           </div>
           <div>
             <span className="mb-1 block font-semibold text-fg">02 // Real numbers, not guesses</span>

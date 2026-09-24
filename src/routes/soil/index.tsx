@@ -14,7 +14,7 @@ export const Route = createFileRoute("/soil/")({
       {
         name: "description",
         content:
-          "What the beds took out, which bags put N, P, and K back, and how a paddock stay cuts the ticket.",
+          "What the beds took out, which bags put N, P, and K back, and how crediting a paddock move cuts the fertilizer bill.",
       },
     ],
   }),
@@ -39,12 +39,12 @@ function SoilIndex() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <header className="mb-6">
-        <p className="font-mono text-[11px] tracking-[0.22em] text-accent uppercase">Module 03 · fertility</p>
-        <h1 className="font-display mt-1 text-4xl font-semibold tracking-wide sm:text-5xl">NPK BALANCER</h1>
+        <p className="font-mono text-[11px] tracking-[0.22em] text-accent uppercase">Soil & fertilizer</p>
+        <h1 className="font-display mt-1 text-4xl font-semibold tracking-wide sm:text-5xl">NUTRIENT BALANCER</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
           The successions on this farm pulled nitrogen, phosphorus, and potassium. Credit a saved paddock
           move first — that manure is already on the ground — then buy only the remaining bags. Phosphate
-          stays capped so you do not stack bone meal on broiler litter.
+          stays capped so you don't stack bone meal on broiler litter.
         </p>
       </header>
 

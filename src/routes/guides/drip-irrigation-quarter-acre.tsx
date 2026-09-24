@@ -57,7 +57,7 @@ function Guide() {
       </p>
 
       <h2 className="mt-8 font-mono text-[11px] tracking-[0.18em] text-accent uppercase">
-        How much garden you are actually watering
+        How much garden you're actually watering
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-fg">
         A quarter acre is 10,890 square feet. With 30-inch beds and 16-inch paths, about 60–65%
@@ -115,7 +115,7 @@ function Guide() {
       </div>
 
       <h2 className="mt-8 font-mono text-[11px] tracking-[0.18em] text-accent uppercase">
-        Zones so the pump does not starve
+        Zones so the pump doesn't starve
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-fg">
         Most 3/4-inch headers and 1-inch mainlines want zones of 8–12 GPM (480–720 GPH) to stay

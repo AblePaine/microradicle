@@ -78,7 +78,7 @@ export function OpsBoard({ farm, today, onSelectTask }: Props) {
         <ul className="min-h-[220px] flex-1 overflow-auto">
           {tasks.length === 0 ? (
             <li className="px-3 py-10 text-center font-mono text-xs text-muted">
-              No tasks in this window.
+              Nothing scheduled in this window.
             </li>
           ) : (
             tasks.map((task) => (

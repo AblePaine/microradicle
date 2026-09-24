@@ -208,7 +208,7 @@ function Guide() {
       </p>
 
       <h2 className="mt-8 font-mono text-[11px] tracking-[0.18em] text-accent uppercase">
-        A July–September worked example
+        A July–September walk-through
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-fg">
         July 15: 50-foot bed comes out of spring lettuce. Broadcast 4.5 oz buckwheat, rake, drip

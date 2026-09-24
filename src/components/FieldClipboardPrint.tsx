@@ -163,7 +163,7 @@ export function FieldClipboardPrint({ farm, today }: Props) {
 
         {days.length === 0 ? (
           <p className="py-12 text-center font-mono text-sm text-muted print:text-zinc-600">
-            No sow, field, or cut work in this window. Schedule a succession in the engine.
+            No sow, field, or cut work in this window. Schedule a succession in the planner.
           </p>
         ) : (
           <div className="mt-5 space-y-6">
@@ -296,7 +296,7 @@ export function FieldClipboardPrint({ farm, today }: Props) {
         <footer className="mt-8 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-4 font-mono text-[10px] tracking-widest text-faint uppercase print:border-zinc-400 print:text-zinc-500">
           <p>Free · local-first · no account · no paywall</p>
           <Link to="/engine" className="no-print text-accent hover:text-accent-soft">
-            Open engine →
+            Open planner →
           </Link>
         </footer>
       </section>

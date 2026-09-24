@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 
-const TITLE = "Succession Planting Salad Greens: Intervals for a Continuous Harvest";
+const TITLE = "Planting Salad Greens in Succession: Sowing Intervals for a Weekly Harvest";
 const DESCRIPTION =
-  "Exact sowing intervals for lettuce, spinach, and baby mix on 30-inch beds so harvest stays weekly instead of arriving in one glut.";
+  "Sowing intervals for lettuce, spinach, and baby mix on 30-inch beds — so you harvest weekly instead of drowning in one glut.";
 const SLUG = "succession-planting-salad-greens";
 
 export const Route = createFileRoute("/guides/succession-planting-salad-greens")({
@@ -42,7 +42,7 @@ function Guide() {
           Field guide · Succession
         </p>
         <h1 className="font-display mt-1 text-3xl font-semibold tracking-wide uppercase sm:text-4xl">
-          Succession Planting Salad Greens: Intervals for a Continuous Harvest
+          Planting Salad Greens in Succession: Sowing Intervals for a Weekly Harvest
         </h1>
       </header>
 

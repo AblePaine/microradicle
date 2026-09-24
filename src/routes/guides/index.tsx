@@ -11,9 +11,9 @@ const GUIDES = [
   {
     slug: "succession-planting-salad-greens",
     kicker: "Succession",
-    title: "Succession Planting Salad Greens: Intervals for a Continuous Harvest",
+    title: "Planting Salad Greens in Succession: Sowing Intervals for a Weekly Harvest",
     description:
-      "Exact sowing intervals for lettuce, spinach, and baby mix on 30-inch beds so harvest stays weekly instead of arriving in one glut.",
+      "Sowing intervals for lettuce, spinach, and baby mix on 30-inch beds — so you harvest weekly instead of drowning in one glut.",
   },
   {
     slug: "drip-irrigation-quarter-acre",
@@ -34,7 +34,7 @@ const GUIDES = [
     kicker: "Postharvest",
     title: "Walk-In Cooler Management: Temperature, Humidity, and Ethylene",
     description:
-      "Set points for a farm walk-in — 34°F greens, 50°F tomatoes, humidity targets, and which crops cannot share a wall.",
+      "Set points for a farm walk-in — 34°F greens, 50°F tomatoes, humidity targets, and which crops can't share a wall.",
   },
   {
     slug: "cover-crops-small-acreage",
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/guides/")({
       {
         name: "description",
         content:
-          "Numbers-first field guides for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops.",
+          "Field guides with real numbers for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops — written to be used at the bed.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "MicroRadicle" },
@@ -61,7 +61,7 @@ export const Route = createFileRoute("/guides/")({
       {
         property: "og:description",
         content:
-          "Numbers-first field guides for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops.",
+          "Field guides with real numbers for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops — written to be used at the bed.",
       },
       { property: "og:url", content: "https://microradicle.com/guides" },
       { property: "og:image", content: "https://microradicle.com/og.jpg" },
@@ -70,7 +70,7 @@ export const Route = createFileRoute("/guides/")({
       {
         name: "twitter:description",
         content:
-          "Numbers-first field guides for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops.",
+          "Field guides with real numbers for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops — written to be used at the bed.",
       },
       { name: "twitter:image", content: "https://microradicle.com/og.jpg" },
     ],
@@ -89,7 +89,7 @@ function GuidesIndex() {
           Guides
         </h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-          Numbers-first field guides for ¼–3 acre market farms. Every rate, interval, and set
+          Field guides with real numbers for ¼–3 acre market farms. Every rate, interval, and set
           point below is written to be used at the bed, not admired from the porch.
         </p>
       </header>

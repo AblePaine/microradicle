@@ -7,7 +7,7 @@ import { readFarmFile } from "@/lib/storage";
 
 const LINKS = [
   { to: "/", label: "Hub" },
-  { to: "/engine", label: "Engine" },
+  { to: "/engine", label: "Planner" },
   { to: "/nursery", label: "Nursery" },
   { to: "/pasture", label: "Pasture" },
   { to: "/crops", label: "Cultivars" },

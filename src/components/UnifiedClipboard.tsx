@@ -75,7 +75,7 @@ export function UnifiedClipboard({ farm, todayIso }: Props) {
         <header className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-border pb-3 print:border-black">
           <div>
             <p className="font-mono text-[10px] tracking-[0.22em] text-subtle uppercase print:text-black">
-              MicroRadicle farm operating log
+              Farm operating log
             </p>
             <h2 className="font-display mt-1 text-3xl font-semibold tracking-wide uppercase print:text-black">
               Daily field & bench assignments
@@ -93,7 +93,7 @@ export function UnifiedClipboard({ farm, todayIso }: Props) {
         <TaskTable
           n="1"
           id="clip-pasture"
-          title="Livestock shifts & paddock rotations"
+          title="Livestock moves & paddock rotations"
           tag="Pasture"
           columns={["Cohort / flock", "Head", "Action / move", "Paddock / fence"]}
           rows={sheet.pasture}
@@ -116,7 +116,7 @@ export function UnifiedClipboard({ farm, todayIso }: Props) {
           n="3"
           id="clip-field"
           title="In-ground beds & flower canopy"
-          tag="Field engine · 30 in"
+          tag="Field · 30 in"
           columns={["Location", "Cultivar", "Length", "Operation", "Canopy / pinch / net"]}
           rows={sheet.field}
           empty="No sow, pinch, net, or cut on the beds today."

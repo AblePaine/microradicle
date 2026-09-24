@@ -106,7 +106,7 @@ function CropSpec() {
           search={{ crop: crop.id }}
           className="inline-flex h-11 items-center gap-2 rounded-md bg-accent px-5 font-display text-lg font-semibold tracking-wide text-accent-fg transition-transform duration-150 active:scale-[0.96]"
         >
-          Plant in engine
+          Plant in planner
           <ArrowRight className="size-4" />
         </Link>
       </div>
