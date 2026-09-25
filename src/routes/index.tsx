@@ -94,7 +94,7 @@ function Gateway() {
             live
             count={`${SPECIES_COUNT} breeds`}
             title="Rotational pasture"
-            body="Broiler tractors, egg-mobiles, hair sheep, and a handful of cattle. Daily dry matter, 164-foot net rolls, rest days, and what the manure puts back."
+            body="Broiler tractors, egg-mobiles, and hair sheep in mixed-farm rotations. Daily dry matter, 164-foot net rolls, rest days, and what the manure puts back."
             cta="Open pasture →"
             to="/pasture"
             accentCta
