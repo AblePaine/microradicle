@@ -43,6 +43,48 @@ const GUIDES = [
     description:
       "Which cover crops fit 30-inch beds, when to sow them, and how to terminate with a scythe, tarp, or crimp — no tractor required.",
   },
+  {
+    slug: "succession-planting-schedule",
+    kicker: "Succession",
+    title: "Succession Planting Schedule: Relay Intervals from Holding Windows",
+    description:
+      "One sowing is one harvest. Set the next sow date from days to maturity plus the holding window — the relay-interval math, worked on real cultivar sheets.",
+  },
+  {
+    slug: "days-to-maturity-fall-harvest",
+    kicker: "Planning",
+    title: "Days to Maturity Chart: When to Plant for Fall Harvest",
+    description:
+      "A days to maturity chart is a countdown, not a start date. Pick the harvest, then count back — with fall's short days already in the math.",
+  },
+  {
+    slug: "microgreens-seed-density",
+    kicker: "Nursery",
+    title: "Microgreens Seed Density Chart: Grams per 1020 Tray",
+    description:
+      "Grams of seed per 1020 tray for 31 cultivars, soak rules, and the 7–14 day cut cycle — density is the profit line.",
+  },
+  {
+    slug: "pasture-rest-days",
+    kicker: "Pasture",
+    title: "Rotational Grazing Rest Period for Pasture Chickens",
+    description:
+      "Rest days are the whole game: 24 days in spring, 36 in summer for poultry — paddock sizing from dry matter, net in 164-foot rolls.",
+  },
+  {
+    slug: "drip-irrigation-run-time",
+    kicker: "Irrigation",
+    title: "Drip Irrigation Run Time: Turning Gallons into Timer Hours",
+    description:
+      "Emitter flow times emitters per foot times hours is the gallons you applied. Read the inches and the gallons per hour off the cultivar — then divide.",
+  },
+  {
+    slug: "direct-sow-vs-transplant",
+    kicker: "Planting",
+    title: "Direct Sow vs Transplant Chart: What Vegetables to Transplant",
+    description:
+      "Some crops resent a tray. Some never finish if you wait to direct sow. The method, the cell, and the nursery lead — per cultivar.",
+  },
 ] as const;
 
 export const Route = createFileRoute("/guides/")({
