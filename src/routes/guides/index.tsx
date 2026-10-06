@@ -85,6 +85,48 @@ const GUIDES = [
     description:
       "Some crops resent a tray. Some never finish if you wait to direct sow. The method, the cell, and the nursery lead — per cultivar.",
   },
+  {
+    slug: "cut-flower-succession-planting",
+    kicker: "Succession",
+    title: "Cut Flower Succession Planting: Count Back from the Bouquet",
+    description:
+      "Cut flower succession planting counted back from the bouquet date. Sunflowers, zinnias, and celosia relay. Single-cut crops do not.",
+  },
+  {
+    slug: "chicken-tractor-move-frequency",
+    kicker: "Pasture",
+    title: "How Often to Move a Chicken Tractor",
+    description:
+      "How often to move a chicken tractor: the move is the feed. Broiler pulls versus layer stays, and what a late move does to the grass.",
+  },
+  {
+    slug: "vegetable-spacing-chart",
+    kicker: "Planting",
+    title: "Vegetable Spacing Chart for 30-Inch Beds",
+    description:
+      "Vegetable spacing chart for 30-inch beds. In-row spacing times row count is a yield decision, not a suggestion on the seed packet.",
+  },
+  {
+    slug: "post-harvest-handling",
+    kicker: "Postharvest",
+    title: "Post Harvest Handling for a Small Farm",
+    description:
+      "Post harvest handling for a small farm starts at field heat. Wash water, the cooler, and what has to cure first.",
+  },
+  {
+    slug: "how-to-read-a-soil-test",
+    kicker: "Soil",
+    title: "How to Read a Soil Test",
+    description:
+      "How to read a soil test: pH, organic matter, NPK, and CEC. Which numbers change this season, and the misread that wastes the bag.",
+  },
+  {
+    slug: "rotating-laying-hens",
+    kicker: "Pasture",
+    title: "Rotating Laying Hens on Pasture",
+    description:
+      "Rotating laying hens on pasture: paddock size, rest, and what the eggs say about the grass. Slower moves than a broiler tractor.",
+  },
 ] as const;
 
 export const Route = createFileRoute("/guides/")({

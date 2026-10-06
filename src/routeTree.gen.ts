@@ -19,16 +19,22 @@ import { Route as EconomicsIndexRouteImport } from './routes/economics/index'
 import { Route as EconomicsSlugRouteImport } from './routes/economics/$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as Guides30InchBedPrepRouteImport } from './routes/guides/30-inch-bed-prep'
+import { Route as GuidesChickenTractorMoveFrequencyRouteImport } from './routes/guides/chicken-tractor-move-frequency'
 import { Route as GuidesCoverCropsSmallAcreageRouteImport } from './routes/guides/cover-crops-small-acreage'
+import { Route as GuidesCutFlowerSuccessionPlantingRouteImport } from './routes/guides/cut-flower-succession-planting'
 import { Route as GuidesDaysToMaturityFallHarvestRouteImport } from './routes/guides/days-to-maturity-fall-harvest'
 import { Route as GuidesDirectSowVsTransplantRouteImport } from './routes/guides/direct-sow-vs-transplant'
 import { Route as GuidesDripIrrigationQuarterAcreRouteImport } from './routes/guides/drip-irrigation-quarter-acre'
 import { Route as GuidesDripIrrigationRunTimeRouteImport } from './routes/guides/drip-irrigation-run-time'
+import { Route as GuidesHowToReadASoilTestRouteImport } from './routes/guides/how-to-read-a-soil-test'
 import { Route as GuidesMicrogreensSeedDensityRouteImport } from './routes/guides/microgreens-seed-density'
 import { Route as GuidesPastureRestDaysRouteImport } from './routes/guides/pasture-rest-days'
+import { Route as GuidesPostHarvestHandlingRouteImport } from './routes/guides/post-harvest-handling'
+import { Route as GuidesRotatingLayingHensRouteImport } from './routes/guides/rotating-laying-hens'
 import { Route as GuidesSoilBlockingTransplantsRouteImport } from './routes/guides/soil-blocking-transplants'
 import { Route as GuidesSuccessionPlantingSaladGreensRouteImport } from './routes/guides/succession-planting-salad-greens'
 import { Route as GuidesSuccessionPlantingScheduleRouteImport } from './routes/guides/succession-planting-schedule'
+import { Route as GuidesVegetableSpacingChartRouteImport } from './routes/guides/vegetable-spacing-chart'
 import { Route as GuidesWalkInCoolerManagementRouteImport } from './routes/guides/walk-in-cooler-management'
 import { Route as IrrigationIndexRouteImport } from './routes/irrigation/index'
 import { Route as IrrigationSlugRouteImport } from './routes/irrigation/$slug'
@@ -90,10 +96,22 @@ const Guides30InchBedPrepRoute = Guides30InchBedPrepRouteImport.update({
   path: '/guides/30-inch-bed-prep',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesChickenTractorMoveFrequencyRoute =
+  GuidesChickenTractorMoveFrequencyRouteImport.update({
+    id: '/guides/chicken-tractor-move-frequency',
+    path: '/guides/chicken-tractor-move-frequency',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesCoverCropsSmallAcreageRoute =
   GuidesCoverCropsSmallAcreageRouteImport.update({
     id: '/guides/cover-crops-small-acreage',
     path: '/guides/cover-crops-small-acreage',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesCutFlowerSuccessionPlantingRoute =
+  GuidesCutFlowerSuccessionPlantingRouteImport.update({
+    id: '/guides/cut-flower-succession-planting',
+    path: '/guides/cut-flower-succession-planting',
     getParentRoute: () => rootRouteImport,
   } as any)
 const GuidesDaysToMaturityFallHarvestRoute =
@@ -120,6 +138,12 @@ const GuidesDripIrrigationRunTimeRoute =
     path: '/guides/drip-irrigation-run-time',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuidesHowToReadASoilTestRoute =
+  GuidesHowToReadASoilTestRouteImport.update({
+    id: '/guides/how-to-read-a-soil-test',
+    path: '/guides/how-to-read-a-soil-test',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesMicrogreensSeedDensityRoute =
   GuidesMicrogreensSeedDensityRouteImport.update({
     id: '/guides/microgreens-seed-density',
@@ -131,6 +155,18 @@ const GuidesPastureRestDaysRoute = GuidesPastureRestDaysRouteImport.update({
   path: '/guides/pasture-rest-days',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesPostHarvestHandlingRoute =
+  GuidesPostHarvestHandlingRouteImport.update({
+    id: '/guides/post-harvest-handling',
+    path: '/guides/post-harvest-handling',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesRotatingLayingHensRoute =
+  GuidesRotatingLayingHensRouteImport.update({
+    id: '/guides/rotating-laying-hens',
+    path: '/guides/rotating-laying-hens',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesSoilBlockingTransplantsRoute =
   GuidesSoilBlockingTransplantsRouteImport.update({
     id: '/guides/soil-blocking-transplants',
@@ -147,6 +183,12 @@ const GuidesSuccessionPlantingScheduleRoute =
   GuidesSuccessionPlantingScheduleRouteImport.update({
     id: '/guides/succession-planting-schedule',
     path: '/guides/succession-planting-schedule',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesVegetableSpacingChartRoute =
+  GuidesVegetableSpacingChartRouteImport.update({
+    id: '/guides/vegetable-spacing-chart',
+    path: '/guides/vegetable-spacing-chart',
     getParentRoute: () => rootRouteImport,
   } as any)
 const GuidesWalkInCoolerManagementRoute =
@@ -209,16 +251,22 @@ export interface FileRoutesByFullPath {
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/guides/30-inch-bed-prep': typeof Guides30InchBedPrepRoute
+  '/guides/chicken-tractor-move-frequency': typeof GuidesChickenTractorMoveFrequencyRoute
   '/guides/cover-crops-small-acreage': typeof GuidesCoverCropsSmallAcreageRoute
+  '/guides/cut-flower-succession-planting': typeof GuidesCutFlowerSuccessionPlantingRoute
   '/guides/days-to-maturity-fall-harvest': typeof GuidesDaysToMaturityFallHarvestRoute
   '/guides/direct-sow-vs-transplant': typeof GuidesDirectSowVsTransplantRoute
   '/guides/drip-irrigation-quarter-acre': typeof GuidesDripIrrigationQuarterAcreRoute
   '/guides/drip-irrigation-run-time': typeof GuidesDripIrrigationRunTimeRoute
+  '/guides/how-to-read-a-soil-test': typeof GuidesHowToReadASoilTestRoute
   '/guides/microgreens-seed-density': typeof GuidesMicrogreensSeedDensityRoute
   '/guides/pasture-rest-days': typeof GuidesPastureRestDaysRoute
+  '/guides/post-harvest-handling': typeof GuidesPostHarvestHandlingRoute
+  '/guides/rotating-laying-hens': typeof GuidesRotatingLayingHensRoute
   '/guides/soil-blocking-transplants': typeof GuidesSoilBlockingTransplantsRoute
   '/guides/succession-planting-salad-greens': typeof GuidesSuccessionPlantingSaladGreensRoute
   '/guides/succession-planting-schedule': typeof GuidesSuccessionPlantingScheduleRoute
+  '/guides/vegetable-spacing-chart': typeof GuidesVegetableSpacingChartRoute
   '/guides/walk-in-cooler-management': typeof GuidesWalkInCoolerManagementRoute
   '/irrigation/$slug': typeof IrrigationSlugRoute
   '/nursery/$slug': typeof NurserySlugRoute
@@ -241,16 +289,22 @@ export interface FileRoutesByTo {
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/guides/30-inch-bed-prep': typeof Guides30InchBedPrepRoute
+  '/guides/chicken-tractor-move-frequency': typeof GuidesChickenTractorMoveFrequencyRoute
   '/guides/cover-crops-small-acreage': typeof GuidesCoverCropsSmallAcreageRoute
+  '/guides/cut-flower-succession-planting': typeof GuidesCutFlowerSuccessionPlantingRoute
   '/guides/days-to-maturity-fall-harvest': typeof GuidesDaysToMaturityFallHarvestRoute
   '/guides/direct-sow-vs-transplant': typeof GuidesDirectSowVsTransplantRoute
   '/guides/drip-irrigation-quarter-acre': typeof GuidesDripIrrigationQuarterAcreRoute
   '/guides/drip-irrigation-run-time': typeof GuidesDripIrrigationRunTimeRoute
+  '/guides/how-to-read-a-soil-test': typeof GuidesHowToReadASoilTestRoute
   '/guides/microgreens-seed-density': typeof GuidesMicrogreensSeedDensityRoute
   '/guides/pasture-rest-days': typeof GuidesPastureRestDaysRoute
+  '/guides/post-harvest-handling': typeof GuidesPostHarvestHandlingRoute
+  '/guides/rotating-laying-hens': typeof GuidesRotatingLayingHensRoute
   '/guides/soil-blocking-transplants': typeof GuidesSoilBlockingTransplantsRoute
   '/guides/succession-planting-salad-greens': typeof GuidesSuccessionPlantingSaladGreensRoute
   '/guides/succession-planting-schedule': typeof GuidesSuccessionPlantingScheduleRoute
+  '/guides/vegetable-spacing-chart': typeof GuidesVegetableSpacingChartRoute
   '/guides/walk-in-cooler-management': typeof GuidesWalkInCoolerManagementRoute
   '/irrigation/$slug': typeof IrrigationSlugRoute
   '/nursery/$slug': typeof NurserySlugRoute
@@ -274,16 +328,22 @@ export interface FileRoutesById {
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/guides/30-inch-bed-prep': typeof Guides30InchBedPrepRoute
+  '/guides/chicken-tractor-move-frequency': typeof GuidesChickenTractorMoveFrequencyRoute
   '/guides/cover-crops-small-acreage': typeof GuidesCoverCropsSmallAcreageRoute
+  '/guides/cut-flower-succession-planting': typeof GuidesCutFlowerSuccessionPlantingRoute
   '/guides/days-to-maturity-fall-harvest': typeof GuidesDaysToMaturityFallHarvestRoute
   '/guides/direct-sow-vs-transplant': typeof GuidesDirectSowVsTransplantRoute
   '/guides/drip-irrigation-quarter-acre': typeof GuidesDripIrrigationQuarterAcreRoute
   '/guides/drip-irrigation-run-time': typeof GuidesDripIrrigationRunTimeRoute
+  '/guides/how-to-read-a-soil-test': typeof GuidesHowToReadASoilTestRoute
   '/guides/microgreens-seed-density': typeof GuidesMicrogreensSeedDensityRoute
   '/guides/pasture-rest-days': typeof GuidesPastureRestDaysRoute
+  '/guides/post-harvest-handling': typeof GuidesPostHarvestHandlingRoute
+  '/guides/rotating-laying-hens': typeof GuidesRotatingLayingHensRoute
   '/guides/soil-blocking-transplants': typeof GuidesSoilBlockingTransplantsRoute
   '/guides/succession-planting-salad-greens': typeof GuidesSuccessionPlantingSaladGreensRoute
   '/guides/succession-planting-schedule': typeof GuidesSuccessionPlantingScheduleRoute
+  '/guides/vegetable-spacing-chart': typeof GuidesVegetableSpacingChartRoute
   '/guides/walk-in-cooler-management': typeof GuidesWalkInCoolerManagementRoute
   '/irrigation/$slug': typeof IrrigationSlugRoute
   '/nursery/$slug': typeof NurserySlugRoute
@@ -308,16 +368,22 @@ export interface FileRouteTypes {
     | '/crop/$slug'
     | '/economics/$slug'
     | '/guides/30-inch-bed-prep'
+    | '/guides/chicken-tractor-move-frequency'
     | '/guides/cover-crops-small-acreage'
+    | '/guides/cut-flower-succession-planting'
     | '/guides/days-to-maturity-fall-harvest'
     | '/guides/direct-sow-vs-transplant'
     | '/guides/drip-irrigation-quarter-acre'
     | '/guides/drip-irrigation-run-time'
+    | '/guides/how-to-read-a-soil-test'
     | '/guides/microgreens-seed-density'
     | '/guides/pasture-rest-days'
+    | '/guides/post-harvest-handling'
+    | '/guides/rotating-laying-hens'
     | '/guides/soil-blocking-transplants'
     | '/guides/succession-planting-salad-greens'
     | '/guides/succession-planting-schedule'
+    | '/guides/vegetable-spacing-chart'
     | '/guides/walk-in-cooler-management'
     | '/irrigation/$slug'
     | '/nursery/$slug'
@@ -340,16 +406,22 @@ export interface FileRouteTypes {
     | '/crop/$slug'
     | '/economics/$slug'
     | '/guides/30-inch-bed-prep'
+    | '/guides/chicken-tractor-move-frequency'
     | '/guides/cover-crops-small-acreage'
+    | '/guides/cut-flower-succession-planting'
     | '/guides/days-to-maturity-fall-harvest'
     | '/guides/direct-sow-vs-transplant'
     | '/guides/drip-irrigation-quarter-acre'
     | '/guides/drip-irrigation-run-time'
+    | '/guides/how-to-read-a-soil-test'
     | '/guides/microgreens-seed-density'
     | '/guides/pasture-rest-days'
+    | '/guides/post-harvest-handling'
+    | '/guides/rotating-laying-hens'
     | '/guides/soil-blocking-transplants'
     | '/guides/succession-planting-salad-greens'
     | '/guides/succession-planting-schedule'
+    | '/guides/vegetable-spacing-chart'
     | '/guides/walk-in-cooler-management'
     | '/irrigation/$slug'
     | '/nursery/$slug'
@@ -372,16 +444,22 @@ export interface FileRouteTypes {
     | '/crop/$slug'
     | '/economics/$slug'
     | '/guides/30-inch-bed-prep'
+    | '/guides/chicken-tractor-move-frequency'
     | '/guides/cover-crops-small-acreage'
+    | '/guides/cut-flower-succession-planting'
     | '/guides/days-to-maturity-fall-harvest'
     | '/guides/direct-sow-vs-transplant'
     | '/guides/drip-irrigation-quarter-acre'
     | '/guides/drip-irrigation-run-time'
+    | '/guides/how-to-read-a-soil-test'
     | '/guides/microgreens-seed-density'
     | '/guides/pasture-rest-days'
+    | '/guides/post-harvest-handling'
+    | '/guides/rotating-laying-hens'
     | '/guides/soil-blocking-transplants'
     | '/guides/succession-planting-salad-greens'
     | '/guides/succession-planting-schedule'
+    | '/guides/vegetable-spacing-chart'
     | '/guides/walk-in-cooler-management'
     | '/irrigation/$slug'
     | '/nursery/$slug'
@@ -405,16 +483,22 @@ export interface RootRouteChildren {
   CropSlugRoute: typeof CropSlugRoute
   EconomicsSlugRoute: typeof EconomicsSlugRoute
   Guides30InchBedPrepRoute: typeof Guides30InchBedPrepRoute
+  GuidesChickenTractorMoveFrequencyRoute: typeof GuidesChickenTractorMoveFrequencyRoute
   GuidesCoverCropsSmallAcreageRoute: typeof GuidesCoverCropsSmallAcreageRoute
+  GuidesCutFlowerSuccessionPlantingRoute: typeof GuidesCutFlowerSuccessionPlantingRoute
   GuidesDaysToMaturityFallHarvestRoute: typeof GuidesDaysToMaturityFallHarvestRoute
   GuidesDirectSowVsTransplantRoute: typeof GuidesDirectSowVsTransplantRoute
   GuidesDripIrrigationQuarterAcreRoute: typeof GuidesDripIrrigationQuarterAcreRoute
   GuidesDripIrrigationRunTimeRoute: typeof GuidesDripIrrigationRunTimeRoute
+  GuidesHowToReadASoilTestRoute: typeof GuidesHowToReadASoilTestRoute
   GuidesMicrogreensSeedDensityRoute: typeof GuidesMicrogreensSeedDensityRoute
   GuidesPastureRestDaysRoute: typeof GuidesPastureRestDaysRoute
+  GuidesPostHarvestHandlingRoute: typeof GuidesPostHarvestHandlingRoute
+  GuidesRotatingLayingHensRoute: typeof GuidesRotatingLayingHensRoute
   GuidesSoilBlockingTransplantsRoute: typeof GuidesSoilBlockingTransplantsRoute
   GuidesSuccessionPlantingSaladGreensRoute: typeof GuidesSuccessionPlantingSaladGreensRoute
   GuidesSuccessionPlantingScheduleRoute: typeof GuidesSuccessionPlantingScheduleRoute
+  GuidesVegetableSpacingChartRoute: typeof GuidesVegetableSpacingChartRoute
   GuidesWalkInCoolerManagementRoute: typeof GuidesWalkInCoolerManagementRoute
   IrrigationSlugRoute: typeof IrrigationSlugRoute
   NurserySlugRoute: typeof NurserySlugRoute
@@ -502,11 +586,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Guides30InchBedPrepRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/chicken-tractor-move-frequency': {
+      id: '/guides/chicken-tractor-move-frequency'
+      path: '/guides/chicken-tractor-move-frequency'
+      fullPath: '/guides/chicken-tractor-move-frequency'
+      preLoaderRoute: typeof GuidesChickenTractorMoveFrequencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/cover-crops-small-acreage': {
       id: '/guides/cover-crops-small-acreage'
       path: '/guides/cover-crops-small-acreage'
       fullPath: '/guides/cover-crops-small-acreage'
       preLoaderRoute: typeof GuidesCoverCropsSmallAcreageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/cut-flower-succession-planting': {
+      id: '/guides/cut-flower-succession-planting'
+      path: '/guides/cut-flower-succession-planting'
+      fullPath: '/guides/cut-flower-succession-planting'
+      preLoaderRoute: typeof GuidesCutFlowerSuccessionPlantingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/days-to-maturity-fall-harvest': {
@@ -537,6 +635,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesDripIrrigationRunTimeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/how-to-read-a-soil-test': {
+      id: '/guides/how-to-read-a-soil-test'
+      path: '/guides/how-to-read-a-soil-test'
+      fullPath: '/guides/how-to-read-a-soil-test'
+      preLoaderRoute: typeof GuidesHowToReadASoilTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/microgreens-seed-density': {
       id: '/guides/microgreens-seed-density'
       path: '/guides/microgreens-seed-density'
@@ -549,6 +654,20 @@ declare module '@tanstack/react-router' {
       path: '/guides/pasture-rest-days'
       fullPath: '/guides/pasture-rest-days'
       preLoaderRoute: typeof GuidesPastureRestDaysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/post-harvest-handling': {
+      id: '/guides/post-harvest-handling'
+      path: '/guides/post-harvest-handling'
+      fullPath: '/guides/post-harvest-handling'
+      preLoaderRoute: typeof GuidesPostHarvestHandlingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/rotating-laying-hens': {
+      id: '/guides/rotating-laying-hens'
+      path: '/guides/rotating-laying-hens'
+      fullPath: '/guides/rotating-laying-hens'
+      preLoaderRoute: typeof GuidesRotatingLayingHensRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/soil-blocking-transplants': {
@@ -570,6 +689,13 @@ declare module '@tanstack/react-router' {
       path: '/guides/succession-planting-schedule'
       fullPath: '/guides/succession-planting-schedule'
       preLoaderRoute: typeof GuidesSuccessionPlantingScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/vegetable-spacing-chart': {
+      id: '/guides/vegetable-spacing-chart'
+      path: '/guides/vegetable-spacing-chart'
+      fullPath: '/guides/vegetable-spacing-chart'
+      preLoaderRoute: typeof GuidesVegetableSpacingChartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/walk-in-cooler-management': {
@@ -653,17 +779,25 @@ const rootRouteChildren: RootRouteChildren = {
   CropSlugRoute: CropSlugRoute,
   EconomicsSlugRoute: EconomicsSlugRoute,
   Guides30InchBedPrepRoute: Guides30InchBedPrepRoute,
+  GuidesChickenTractorMoveFrequencyRoute:
+    GuidesChickenTractorMoveFrequencyRoute,
   GuidesCoverCropsSmallAcreageRoute: GuidesCoverCropsSmallAcreageRoute,
+  GuidesCutFlowerSuccessionPlantingRoute:
+    GuidesCutFlowerSuccessionPlantingRoute,
   GuidesDaysToMaturityFallHarvestRoute: GuidesDaysToMaturityFallHarvestRoute,
   GuidesDirectSowVsTransplantRoute: GuidesDirectSowVsTransplantRoute,
   GuidesDripIrrigationQuarterAcreRoute: GuidesDripIrrigationQuarterAcreRoute,
   GuidesDripIrrigationRunTimeRoute: GuidesDripIrrigationRunTimeRoute,
+  GuidesHowToReadASoilTestRoute: GuidesHowToReadASoilTestRoute,
   GuidesMicrogreensSeedDensityRoute: GuidesMicrogreensSeedDensityRoute,
   GuidesPastureRestDaysRoute: GuidesPastureRestDaysRoute,
+  GuidesPostHarvestHandlingRoute: GuidesPostHarvestHandlingRoute,
+  GuidesRotatingLayingHensRoute: GuidesRotatingLayingHensRoute,
   GuidesSoilBlockingTransplantsRoute: GuidesSoilBlockingTransplantsRoute,
   GuidesSuccessionPlantingSaladGreensRoute:
     GuidesSuccessionPlantingSaladGreensRoute,
   GuidesSuccessionPlantingScheduleRoute: GuidesSuccessionPlantingScheduleRoute,
+  GuidesVegetableSpacingChartRoute: GuidesVegetableSpacingChartRoute,
   GuidesWalkInCoolerManagementRoute: GuidesWalkInCoolerManagementRoute,
   IrrigationSlugRoute: IrrigationSlugRoute,
   NurserySlugRoute: NurserySlugRoute,
