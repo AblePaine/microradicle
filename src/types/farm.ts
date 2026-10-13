@@ -2,6 +2,7 @@ import type { CropSpecification } from "./crop";
 import type { IrrigationNetwork } from "./irrigation";
 import type { SoilSettings } from "./soil";
 import type { EconomicsSettings } from "./economics";
+import type { FeedSettings } from "./feed";
 import type { NurseryBatchQueueItem } from "./nursery";
 import type { PastureRotationQueueItem } from "./pasture";
 
@@ -52,6 +53,8 @@ export interface FarmState {
   soil?: SoilSettings;
   /** Optional pack-shed labor, channel, and cooler geometry. */
   economics?: EconomicsSettings;
+  /** Optional saved poultry rations (Feed Studio). Absent farms get the example layer ration. */
+  feed?: FeedSettings;
   /** Optional 1020-tray microgreen queue. Absent farms start empty. */
   nursery_batches?: NurseryBatchQueueItem[];
   /** Optional paddock rotations. Absent farms start empty. */

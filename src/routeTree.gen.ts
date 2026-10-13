@@ -17,6 +17,8 @@ import { Route as CropSlugRouteImport } from './routes/crop/$slug'
 import { Route as CropsIndexRouteImport } from './routes/crops/index'
 import { Route as EconomicsIndexRouteImport } from './routes/economics/index'
 import { Route as EconomicsSlugRouteImport } from './routes/economics/$slug'
+import { Route as FeedIndexRouteImport } from './routes/feed/index'
+import { Route as FeedSlugRouteImport } from './routes/feed/$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as Guides30InchBedPrepRouteImport } from './routes/guides/30-inch-bed-prep'
 import { Route as GuidesChickenTractorMoveFrequencyRouteImport } from './routes/guides/chicken-tractor-move-frequency'
@@ -84,6 +86,16 @@ const EconomicsIndexRoute = EconomicsIndexRouteImport.update({
 const EconomicsSlugRoute = EconomicsSlugRouteImport.update({
   id: '/economics/$slug',
   path: '/economics/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeedIndexRoute = FeedIndexRouteImport.update({
+  id: '/feed/',
+  path: '/feed/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeedSlugRoute = FeedSlugRouteImport.update({
+  id: '/feed/$slug',
+  path: '/feed/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesIndexRoute = GuidesIndexRouteImport.update({
@@ -250,6 +262,7 @@ export interface FileRoutesByFullPath {
   '/engine': typeof EngineRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
+  '/feed/$slug': typeof FeedSlugRoute
   '/guides/30-inch-bed-prep': typeof Guides30InchBedPrepRoute
   '/guides/chicken-tractor-move-frequency': typeof GuidesChickenTractorMoveFrequencyRoute
   '/guides/cover-crops-small-acreage': typeof GuidesCoverCropsSmallAcreageRoute
@@ -275,6 +288,7 @@ export interface FileRoutesByFullPath {
   '/soil/$slug': typeof SoilSlugRoute
   '/crops/': typeof CropsIndexRoute
   '/economics/': typeof EconomicsIndexRoute
+  '/feed/': typeof FeedIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/irrigation/': typeof IrrigationIndexRoute
   '/nursery/': typeof NurseryIndexRoute
@@ -288,6 +302,7 @@ export interface FileRoutesByTo {
   '/engine': typeof EngineRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
+  '/feed/$slug': typeof FeedSlugRoute
   '/guides/30-inch-bed-prep': typeof Guides30InchBedPrepRoute
   '/guides/chicken-tractor-move-frequency': typeof GuidesChickenTractorMoveFrequencyRoute
   '/guides/cover-crops-small-acreage': typeof GuidesCoverCropsSmallAcreageRoute
@@ -313,6 +328,7 @@ export interface FileRoutesByTo {
   '/soil/$slug': typeof SoilSlugRoute
   '/crops': typeof CropsIndexRoute
   '/economics': typeof EconomicsIndexRoute
+  '/feed': typeof FeedIndexRoute
   '/guides': typeof GuidesIndexRoute
   '/irrigation': typeof IrrigationIndexRoute
   '/nursery': typeof NurseryIndexRoute
@@ -327,6 +343,7 @@ export interface FileRoutesById {
   '/engine': typeof EngineRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
+  '/feed/$slug': typeof FeedSlugRoute
   '/guides/30-inch-bed-prep': typeof Guides30InchBedPrepRoute
   '/guides/chicken-tractor-move-frequency': typeof GuidesChickenTractorMoveFrequencyRoute
   '/guides/cover-crops-small-acreage': typeof GuidesCoverCropsSmallAcreageRoute
@@ -352,6 +369,7 @@ export interface FileRoutesById {
   '/soil/$slug': typeof SoilSlugRoute
   '/crops/': typeof CropsIndexRoute
   '/economics/': typeof EconomicsIndexRoute
+  '/feed/': typeof FeedIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/irrigation/': typeof IrrigationIndexRoute
   '/nursery/': typeof NurseryIndexRoute
@@ -367,6 +385,7 @@ export interface FileRouteTypes {
     | '/engine'
     | '/crop/$slug'
     | '/economics/$slug'
+    | '/feed/$slug'
     | '/guides/30-inch-bed-prep'
     | '/guides/chicken-tractor-move-frequency'
     | '/guides/cover-crops-small-acreage'
@@ -392,6 +411,7 @@ export interface FileRouteTypes {
     | '/soil/$slug'
     | '/crops/'
     | '/economics/'
+    | '/feed/'
     | '/guides/'
     | '/irrigation/'
     | '/nursery/'
@@ -405,6 +425,7 @@ export interface FileRouteTypes {
     | '/engine'
     | '/crop/$slug'
     | '/economics/$slug'
+    | '/feed/$slug'
     | '/guides/30-inch-bed-prep'
     | '/guides/chicken-tractor-move-frequency'
     | '/guides/cover-crops-small-acreage'
@@ -430,6 +451,7 @@ export interface FileRouteTypes {
     | '/soil/$slug'
     | '/crops'
     | '/economics'
+    | '/feed'
     | '/guides'
     | '/irrigation'
     | '/nursery'
@@ -443,6 +465,7 @@ export interface FileRouteTypes {
     | '/engine'
     | '/crop/$slug'
     | '/economics/$slug'
+    | '/feed/$slug'
     | '/guides/30-inch-bed-prep'
     | '/guides/chicken-tractor-move-frequency'
     | '/guides/cover-crops-small-acreage'
@@ -468,6 +491,7 @@ export interface FileRouteTypes {
     | '/soil/$slug'
     | '/crops/'
     | '/economics/'
+    | '/feed/'
     | '/guides/'
     | '/irrigation/'
     | '/nursery/'
@@ -482,6 +506,7 @@ export interface RootRouteChildren {
   EngineRoute: typeof EngineRoute
   CropSlugRoute: typeof CropSlugRoute
   EconomicsSlugRoute: typeof EconomicsSlugRoute
+  FeedSlugRoute: typeof FeedSlugRoute
   Guides30InchBedPrepRoute: typeof Guides30InchBedPrepRoute
   GuidesChickenTractorMoveFrequencyRoute: typeof GuidesChickenTractorMoveFrequencyRoute
   GuidesCoverCropsSmallAcreageRoute: typeof GuidesCoverCropsSmallAcreageRoute
@@ -507,6 +532,7 @@ export interface RootRouteChildren {
   SoilSlugRoute: typeof SoilSlugRoute
   CropsIndexRoute: typeof CropsIndexRoute
   EconomicsIndexRoute: typeof EconomicsIndexRoute
+  FeedIndexRoute: typeof FeedIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
   IrrigationIndexRoute: typeof IrrigationIndexRoute
   NurseryIndexRoute: typeof NurseryIndexRoute
@@ -570,6 +596,20 @@ declare module '@tanstack/react-router' {
       path: '/economics/$slug'
       fullPath: '/economics/$slug'
       preLoaderRoute: typeof EconomicsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feed/': {
+      id: '/feed/'
+      path: '/feed'
+      fullPath: '/feed/'
+      preLoaderRoute: typeof FeedIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feed/$slug': {
+      id: '/feed/$slug'
+      path: '/feed/$slug'
+      fullPath: '/feed/$slug'
+      preLoaderRoute: typeof FeedSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/': {
@@ -778,6 +818,7 @@ const rootRouteChildren: RootRouteChildren = {
   EngineRoute: EngineRoute,
   CropSlugRoute: CropSlugRoute,
   EconomicsSlugRoute: EconomicsSlugRoute,
+  FeedSlugRoute: FeedSlugRoute,
   Guides30InchBedPrepRoute: Guides30InchBedPrepRoute,
   GuidesChickenTractorMoveFrequencyRoute:
     GuidesChickenTractorMoveFrequencyRoute,
@@ -806,6 +847,7 @@ const rootRouteChildren: RootRouteChildren = {
   SoilSlugRoute: SoilSlugRoute,
   CropsIndexRoute: CropsIndexRoute,
   EconomicsIndexRoute: EconomicsIndexRoute,
+  FeedIndexRoute: FeedIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
   IrrigationIndexRoute: IrrigationIndexRoute,
   NurseryIndexRoute: NurseryIndexRoute,

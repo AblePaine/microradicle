@@ -1,0 +1,188 @@
+[
+  {
+    "avail_p": {
+      "max": null,
+      "min": 0.45
+    },
+    "bird_class": "broiler",
+    "ca": {
+      "max": 1.0,
+      "min": 0.95
+    },
+    "cp": {
+      "max": 23,
+      "min": 22
+    },
+    "default_intake_lb_per_day": 0.1,
+    "fiber_max_pct": 6,
+    "id": "broiler-starter",
+    "label": "Broiler starter (0\u20133 wk)",
+    "lys": {
+      "max": null,
+      "min": 1.3
+    },
+    "me_kcal_kg": {
+      "max": 3100,
+      "min": 3000
+    },
+    "met": {
+      "max": null,
+      "min": 0.5
+    }
+  },
+  {
+    "avail_p": {
+      "max": null,
+      "min": 0.4
+    },
+    "bird_class": "broiler",
+    "ca": {
+      "max": 0.95,
+      "min": 0.85
+    },
+    "cp": {
+      "max": 21,
+      "min": 19
+    },
+    "default_intake_lb_per_day": 0.22,
+    "fiber_max_pct": 6,
+    "id": "broiler-grower",
+    "label": "Broiler grower (3\u20136 wk)",
+    "lys": {
+      "max": null,
+      "min": 1.15
+    },
+    "me_kcal_kg": {
+      "max": 3150,
+      "min": 3050
+    },
+    "met": {
+      "max": null,
+      "min": 0.45
+    }
+  },
+  {
+    "avail_p": {
+      "max": null,
+      "min": 0.35
+    },
+    "bird_class": "broiler",
+    "ca": {
+      "max": 0.9,
+      "min": 0.8
+    },
+    "cp": {
+      "max": 19,
+      "min": 17
+    },
+    "default_intake_lb_per_day": 0.35,
+    "fiber_max_pct": 6,
+    "id": "broiler-finisher",
+    "label": "Broiler finisher (6 wk+)",
+    "lys": {
+      "max": null,
+      "min": 0.95
+    },
+    "me_kcal_kg": {
+      "max": 3200,
+      "min": 3100
+    },
+    "met": {
+      "max": null,
+      "min": 0.38
+    }
+  },
+  {
+    "avail_p": {
+      "max": null,
+      "min": 0.45
+    },
+    "bird_class": "pullet",
+    "ca": {
+      "max": 1.0,
+      "min": 0.9
+    },
+    "cp": {
+      "max": 20,
+      "min": 18
+    },
+    "default_intake_lb_per_day": 0.06,
+    "fiber_max_pct": 7,
+    "id": "pullet-starter",
+    "label": "Pullet starter (0\u20136 wk)",
+    "lys": {
+      "max": null,
+      "min": 1.1
+    },
+    "me_kcal_kg": {
+      "max": 2950,
+      "min": 2850
+    },
+    "met": {
+      "max": null,
+      "min": 0.45
+    }
+  },
+  {
+    "avail_p": {
+      "max": null,
+      "min": 0.4
+    },
+    "bird_class": "pullet",
+    "ca": {
+      "max": 1.0,
+      "min": 0.85
+    },
+    "cp": {
+      "max": 17,
+      "min": 15
+    },
+    "default_intake_lb_per_day": 0.15,
+    "fiber_max_pct": 7,
+    "id": "pullet-grower",
+    "label": "Pullet grower (7\u201318 wk)",
+    "lys": {
+      "max": null,
+      "min": 0.8
+    },
+    "me_kcal_kg": {
+      "max": 2900,
+      "min": 2800
+    },
+    "met": {
+      "max": null,
+      "min": 0.35
+    }
+  },
+  {
+    "avail_p": {
+      "max": 0.5,
+      "min": 0.35
+    },
+    "bird_class": "layer",
+    "ca": {
+      "max": 4.5,
+      "min": 3.5
+    },
+    "cp": {
+      "max": 18,
+      "min": 16
+    },
+    "default_intake_lb_per_day": 0.24,
+    "fiber_max_pct": 7,
+    "id": "layer-production",
+    "label": "Layer, in production",
+    "lys": {
+      "max": 0.85,
+      "min": 0.75
+    },
+    "me_kcal_kg": {
+      "max": 2900,
+      "min": 2800
+    },
+    "met": {
+      "max": 0.45,
+      "min": 0.35
+    }
+  }
+]

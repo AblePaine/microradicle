@@ -44,7 +44,7 @@ function Gateway() {
           </div>
           <div className="grid min-w-[240px] grid-cols-2 gap-2 sm:min-w-[280px]">
             <Kpi k="Cultivars" v={String(CULTIVAR_COUNT)} d="In the library" />
-            <Kpi k="Live now" v="4 tools" d="Beds & pasture" accent />
+            <Kpi k="Live now" v="5 tools" d="Beds & pasture" accent />
             <Kpi k="Market veg" v={String(VEGETABLE_COUNT)} d="8 crop types" />
             <Kpi k="Cut flowers" v={String(FLOWER_COUNT)} d="Stem crops" />
           </div>
@@ -107,7 +107,7 @@ function Gateway() {
           <div>
             <p className="text-[10px] tracking-[0.22em] text-accent uppercase">The rest of the farm</p>
             <h2 className="font-display text-2xl font-semibold tracking-wide text-fg">
-              WATER, SOIL, COOLER, CLIPBOARD
+              WATER, SOIL, FEED, COOLER, CLIPBOARD
             </h2>
           </div>
           <p className="hidden text-[11px] tracking-[0.16em] text-subtle uppercase sm:block">
@@ -128,6 +128,13 @@ function Gateway() {
             d="What the crops took out, and which bag puts it back. Won't dump extra phosphorus on you."
             href="/soil"
             cta="Open soil →"
+          />
+          <ModuleCard
+            k="Feed"
+            t="Feed Studio"
+            d="Balance a poultry ration from local bags — protein squared, minerals checked, batch priced per bird per day."
+            href="/feed"
+            cta="Open feed →"
           />
           <ModuleCard
             k="Postharvest"
@@ -309,7 +316,7 @@ function ModuleCard({
   k: string;
   t: string;
   d: string;
-  href: "/irrigation" | "/soil" | "/economics" | "/clipboard";
+  href: "/irrigation" | "/soil" | "/feed" | "/economics" | "/clipboard";
   cta: string;
 }) {
   return (

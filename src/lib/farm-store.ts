@@ -4,6 +4,7 @@ import { MAX_BED_LENGTH_FT, MAX_BEDS_PER_BLOCK } from "@/types/farm";
 import type { IrrigationNetwork, IrrigationZone } from "@/types/irrigation";
 import type { SoilSettings } from "@/types/soil";
 import type { EconomicsSettings } from "@/types/economics";
+import type { FeedSettings } from "@/types/feed";
 import { cropBySlug, getCrop } from "@/lib/crops";
 import { getMicrogreen } from "@/lib/nursery";
 import { computeBatch } from "@/lib/nurseryMath";
@@ -13,6 +14,7 @@ import type { PastureForageStand } from "@/types/pasture";
 import { defaultZoneForBlock, resolveNetwork } from "@/lib/hydraulics";
 import { resolveSoil } from "@/lib/soilMath";
 import { resolveEconomics } from "@/lib/economicsMath";
+import { resolveFeed } from "@/lib/feedMath";
 import { bedKey, computeSuccession, recomputeFarm } from "@/lib/math";
 import {
   createDefaultFarm,
@@ -50,6 +52,7 @@ type FarmStore = {
   patchZone: (id: string, patch: Partial<Omit<IrrigationZone, "id">>) => void;
   patchSoil: (partial: Partial<SoilSettings>) => void;
   patchEconomics: (partial: Partial<EconomicsSettings>) => void;
+  patchFeed: (partial: Partial<FeedSettings>) => void;
   addNurseryBatch: (cultivarId: string, trayCount: number, sowDate: string) => string;
   updateNurseryBatch: (id: string, patch: { tray_count?: number; sow_date?: string; cultivar_id?: string }) => void;
   removeNurseryBatch: (id: string) => void;
@@ -286,6 +289,11 @@ export const useFarmStore = create<FarmStore>((set, get) => ({
     const farm = get().farm;
     const current = resolveEconomics(farm);
     set({ farm: persist({ ...farm, economics: { ...current, ...partial } }) });
+  },
+  patchFeed: (partial) => {
+    const farm = get().farm;
+    const current = resolveFeed(farm);
+    set({ farm: persist({ ...farm, feed: { ...current, ...partial } }) });
   },
   addNurseryBatch: (cultivarId, trayCount, sowDate) => {
     const farm = get().farm;

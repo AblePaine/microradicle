@@ -3,6 +3,7 @@ import type { BedSuccession, FarmClimate, FarmState, FieldBlock, Units } from "@
 import type { IrrigationNetwork, IrrigationZone, PipeDiameterInches } from "@/types/irrigation";
 import type { SoilSettings, SoilTexture } from "@/types/soil";
 import type { EconomicsSettings, SalesChannel } from "@/types/economics";
+import type { FeedSettings } from "@/types/feed";
 import type { NurseryBatchQueueItem } from "@/types/nursery";
 import type { PastureForageStand, PastureRotationQueueItem } from "@/types/pasture";
 import { cropBySlug, getCrop } from "@/lib/crops";
@@ -14,6 +15,7 @@ import { coerceNurseryLedgerItem, coercePastureLedgerItem } from "@/lib/clipboar
 import { defaultNetwork, PIPE_DIAMETERS } from "@/lib/hydraulics";
 import { DEFAULT_AMENDMENT_IDS, DEFAULT_SOIL } from "@/lib/soilMath";
 import { DEFAULT_ECONOMICS } from "@/lib/economicsMath";
+import { cloneDefaultFeed, resolveFeed } from "@/lib/feedMath";
 import { computeSuccession, iso, recomputeFarm } from "@/lib/math";
 
 export const FARM_STORAGE_KEY = "microradicle:farm:v3";
@@ -192,6 +194,7 @@ export function createDefaultFarm(): FarmState {
     }),
     soil: { ...DEFAULT_SOIL },
     economics: { ...DEFAULT_ECONOMICS },
+    feed: cloneDefaultFeed(),
     nursery_batches,
     pasture_rotations,
   };
@@ -384,6 +387,14 @@ function parseEconomics(raw: unknown): EconomicsSettings | undefined {
   };
 }
 
+function parseFeed(raw: unknown): FeedSettings | undefined {
+  if (!raw || typeof raw !== "object") return undefined;
+  const o = asRecord(raw);
+  if (!Array.isArray(o.rations)) return undefined;
+  // Value-level coercion (unknown ids dropped, pcts clamped) lives in resolveFeed.
+  return resolveFeed({ feed: o as unknown as FeedSettings } as FarmState);
+}
+
 function parseNurseryBatch(raw: unknown): NurseryBatchQueueItem | null {
   const row = coerceNurseryLedgerItem(raw);
   if (!row) return null;
@@ -450,6 +461,7 @@ export function parseFarm(raw: unknown): FarmState {
   const irrigation = parseIrrigation(o.irrigation, base);
   const soil = parseSoil(o.soil);
   const economics = parseEconomics(o.economics);
+  const feed = parseFeed(o.feed);
   const nursery_batches = Array.isArray(o.nursery_batches)
     ? o.nursery_batches.map(parseNurseryBatch).filter((b): b is NurseryBatchQueueItem => b !== null)
     : [];
@@ -462,6 +474,7 @@ export function parseFarm(raw: unknown): FarmState {
       ...(irrigation ? { irrigation } : {}),
       ...(soil ? { soil } : {}),
       ...(economics ? { economics } : {}),
+      ...(feed ? { feed } : {}),
       ...(nursery_batches.length ? { nursery_batches } : {}),
       ...(pasture_rotations.length ? { pasture_rotations } : {}),
     },
