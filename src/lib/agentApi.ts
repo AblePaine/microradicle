@@ -1,0 +1,309 @@
+/**
+ * Agent-facing API logic — the shared core behind the REST routes
+ * (src/routes/api/*), the MCP endpoint (src/routes/mcp.ts), and the
+ * OpenAPI document. Everything here wraps the same engine libraries the
+ * web UI uses (feedMath, crops) without altering their math.
+ *
+ * Conventions borrowed from the DoughMatrix agent API: partial JSON in,
+ * every field optional, house defaults applied, the normalized input
+ * echoed back beside the result.
+ */
+import { crops, FAMILIES, filterCrops, getCrop } from "./crops.ts";
+import {
+  analyzeRation,
+  DEFAULT_FEED,
+  DEFAULT_TARGET_ID,
+  effectiveTarget,
+  INGREDIENT_BY_ID,
+  INGREDIENTS,
+  TARGET_BY_ID,
+  TARGETS,
+} from "./feedMath.ts";
+import { CROP_CATEGORIES, FROST_BANDS, type CropCategory, type FrostHardiness } from "../types/crop.ts";
+import type { FeedBand, NutrientKey, RationLine, SavedRation } from "../types/feed.ts";
+
+export class ApiError extends Error {
+  status: number;
+  constructor(status: number, message: string) {
+    super(message);
+    this.status = status;
+  }
+}
+
+/** JSON.stringify that renders non-finite numbers (e.g. an infinite Ca:P ratio) as null. */
+export function stringifyJson(data: unknown): string {
+  return JSON.stringify(data, (_key, value: unknown) =>
+    typeof value === "number" && !Number.isFinite(value) ? null : value,
+  );
+}
+
+export function jsonResponse(data: unknown, status = 200): Response {
+  return new Response(stringifyJson(data), {
+    status,
+    headers: { "content-type": "application/json; charset=utf-8" },
+  });
+}
+
+export function errorResponse(err: unknown): Response {
+  if (err instanceof ApiError) return jsonResponse({ error: err.message }, err.status);
+  return jsonResponse({ error: err instanceof Error ? err.message : "Internal error" }, 500);
+}
+
+// ---------------------------------------------------------------------------
+// Feed Studio — ration calculation
+// ---------------------------------------------------------------------------
+
+const OVERRIDE_NUM_FIELDS = [
+  "cp_pct",
+  "me_kcal_kg",
+  "lys_pct",
+  "met_pct",
+  "ca_pct",
+  "total_p_pct",
+  "avail_p_pct",
+  "fiber_pct",
+  "price_usd_per_lb",
+] as const;
+
+const NUTRIENT_KEYS: NutrientKey[] = ["cp", "me", "lys", "met", "ca", "total_p", "avail_p", "fiber"];
+
+function num(value: unknown): number | undefined {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string" && value.trim() !== "") {
+    const parsed = Number(value);
+    if (Number.isFinite(parsed)) return parsed;
+  }
+  return undefined;
+}
+
+function clamp(n: number, lo: number, hi: number): number {
+  return Math.min(hi, Math.max(lo, n));
+}
+
+function coerceApiLine(raw: unknown, index: number): RationLine {
+  if (!raw || typeof raw !== "object") {
+    throw new ApiError(400, `lines[${index}] must be an object with ingredient_id and pct.`);
+  }
+  const o = raw as Record<string, unknown>;
+  const id = typeof o.ingredient_id === "string" ? o.ingredient_id : "";
+  if (!id) throw new ApiError(400, `lines[${index}].ingredient_id is required.`);
+  const name = typeof o.name === "string" && o.name.trim() ? o.name : undefined;
+  if (!INGREDIENT_BY_ID.has(id) && !name) {
+    throw new ApiError(
+      400,
+      `Unknown ingredient_id '${id}' at lines[${index}]. Use GET /api/feed/ingredients for catalog ids, or give the line a name plus its nutrient values to define a custom ingredient.`,
+    );
+  }
+  const pct = num(o.pct);
+  if (pct === undefined) throw new ApiError(400, `lines[${index}].pct must be a number.`);
+  const line: RationLine = { ingredient_id: id, pct: clamp(pct, 0, 100) };
+  if (name) line.name = name;
+  for (const f of OVERRIDE_NUM_FIELDS) {
+    const v = num(o[f]);
+    if (v !== undefined) {
+      line[f] = f === "me_kcal_kg" ? clamp(v, 0, 6000) : f === "price_usd_per_lb" ? clamp(v, 0, 100) : clamp(v, 0, 100);
+    }
+  }
+  return line;
+}
+
+function coerceBand(raw: unknown, key: string): FeedBand {
+  if (!raw || typeof raw !== "object") {
+    throw new ApiError(400, `target_overrides.${key} must be an object { min, max }.`);
+  }
+  const o = raw as Record<string, unknown>;
+  const min = num(o.min);
+  if (min === undefined) throw new ApiError(400, `target_overrides.${key}.min must be a number.`);
+  const max = o.max === null || o.max === undefined ? null : num(o.max);
+  if (o.max !== null && o.max !== undefined && max === undefined) {
+    throw new ApiError(400, `target_overrides.${key}.max must be a number or null.`);
+  }
+  return { min, max: max ?? null };
+}
+
+export interface FeedCalculateResult {
+  input: {
+    target_id: string;
+    lines: RationLine[];
+    batch_lbs: number;
+    flock_size: number;
+    intake_lb_per_day: number;
+    target_overrides?: Partial<Record<NutrientKey, FeedBand>>;
+  };
+  target: ReturnType<typeof effectiveTarget>;
+  analysis: ReturnType<typeof analyzeRation>;
+}
+
+/**
+ * Run the Feed Studio engine for an agent-supplied ration. All fields are
+ * optional; with no lines at all the built-in layer example ration is
+ * analyzed so a bare call still returns the canonical worked example.
+ * Numeric handling mirrors the UI's own coercion (feedMath.resolveFeed).
+ */
+export function calculateFeed(rawInput: unknown): FeedCalculateResult {
+  const input = (rawInput ?? {}) as Record<string, unknown>;
+  if (typeof input !== "object" || Array.isArray(input)) {
+    throw new ApiError(400, "Feed calculate expects a JSON object body.");
+  }
+
+  let target_id = DEFAULT_TARGET_ID;
+  if (input.target_id !== undefined) {
+    if (typeof input.target_id !== "string" || !TARGET_BY_ID.has(input.target_id)) {
+      throw new ApiError(
+        400,
+        `Unknown target_id '${String(input.target_id)}'. Known targets: ${TARGETS.map((t) => t.id).join(", ")}.`,
+      );
+    }
+    target_id = input.target_id;
+  }
+
+  let lines: RationLine[];
+  if (input.lines === undefined) {
+    const example = DEFAULT_FEED.rations[0]!;
+    lines = example.lines.map((l) => ({ ...l }));
+    if (input.target_id === undefined) target_id = example.target_id;
+  } else {
+    if (!Array.isArray(input.lines)) throw new ApiError(400, "lines must be an array.");
+    if (input.lines.length === 0) {
+      throw new ApiError(400, "lines must include at least one ingredient (omit lines entirely for the built-in example ration).");
+    }
+    lines = input.lines.map((l, i) => coerceApiLine(l, i));
+  }
+
+  const overrides: Partial<Record<NutrientKey, FeedBand>> = {};
+  if (input.target_overrides !== undefined) {
+    if (!input.target_overrides || typeof input.target_overrides !== "object" || Array.isArray(input.target_overrides)) {
+      throw new ApiError(400, "target_overrides must be an object keyed by nutrient (cp, me, lys, met, ca, total_p, avail_p, fiber).");
+    }
+    for (const key of NUTRIENT_KEYS) {
+      const rawBand = (input.target_overrides as Record<string, unknown>)[key];
+      if (rawBand !== undefined) overrides[key] = coerceBand(rawBand, key);
+    }
+  }
+
+  const preset = TARGET_BY_ID.get(target_id)!;
+  const ration: SavedRation = {
+    id: "api-ration",
+    name: "API ration",
+    target_id,
+    ...(Object.keys(overrides).length ? { target_overrides: overrides } : {}),
+    lines,
+    batch_lbs: clamp(num(input.batch_lbs) ?? 100, 1, 2000),
+    flock_size: Math.round(clamp(num(input.flock_size) ?? 25, 0, 100000)),
+    intake_lb_per_day: clamp(num(input.intake_lb_per_day) ?? preset.default_intake_lb_per_day, 0.01, 2),
+    updated_at: "",
+  };
+
+  const target = effectiveTarget(ration);
+  const analysis = analyzeRation(ration, target);
+  return {
+    input: {
+      target_id: ration.target_id,
+      lines: ration.lines,
+      batch_lbs: ration.batch_lbs,
+      flock_size: ration.flock_size,
+      intake_lb_per_day: ration.intake_lb_per_day,
+      ...(ration.target_overrides ? { target_overrides: ration.target_overrides } : {}),
+    },
+    target,
+    analysis,
+  };
+}
+
+/** Parse the GET form of the feed calculate call: `lines=corn:63.2,soybean-meal-44:25.3`. */
+export function feedInputFromQuery(searchParams: URLSearchParams): Record<string, unknown> {
+  const input: Record<string, unknown> = {};
+  const targetId = searchParams.get("target_id");
+  if (targetId) input.target_id = targetId;
+  const linesRaw = searchParams.get("lines");
+  if (linesRaw) {
+    input.lines = linesRaw
+      .split(",")
+      .map((pair) => pair.trim())
+      .filter(Boolean)
+      .map((pair) => {
+        const idx = pair.lastIndexOf(":");
+        if (idx <= 0) throw new ApiError(400, `lines entry '${pair}' must look like ingredient_id:pct.`);
+        return { ingredient_id: pair.slice(0, idx), pct: pair.slice(idx + 1) };
+      });
+  }
+  for (const key of ["batch_lbs", "flock_size", "intake_lb_per_day"] as const) {
+    const v = searchParams.get(key);
+    if (v !== null) input[key] = v;
+  }
+  return input;
+}
+
+export function listFeedIngredients() {
+  return { count: INGREDIENTS.length, ingredients: INGREDIENTS };
+}
+
+export function listFeedTargets() {
+  return { count: TARGETS.length, targets: TARGETS };
+}
+
+// ---------------------------------------------------------------------------
+// Crop variety library
+// ---------------------------------------------------------------------------
+
+export interface VarietySearchParams {
+  q?: unknown;
+  query?: unknown;
+  category?: unknown;
+  frost?: unknown;
+  family?: unknown;
+  limit?: unknown;
+  offset?: unknown;
+}
+
+export function searchVarieties(params: VarietySearchParams) {
+  const queryRaw = typeof params.q === "string" ? params.q : typeof params.query === "string" ? params.query : undefined;
+
+  let category: CropCategory | "all" | undefined;
+  if (params.category !== undefined && params.category !== null && params.category !== "") {
+    if (typeof params.category !== "string" || !(CROP_CATEGORIES as readonly string[]).includes(params.category)) {
+      throw new ApiError(400, `Unknown category '${String(params.category)}'. Known categories: ${CROP_CATEGORIES.join(", ")}.`);
+    }
+    category = params.category as CropCategory;
+  }
+
+  let frost: FrostHardiness | "all" | undefined;
+  if (params.frost !== undefined && params.frost !== null && params.frost !== "") {
+    if (typeof params.frost !== "string" || !(FROST_BANDS as readonly string[]).includes(params.frost)) {
+      throw new ApiError(400, `Unknown frost band '${String(params.frost)}'. Known bands: ${FROST_BANDS.join(", ")}.`);
+    }
+    frost = params.frost as FrostHardiness;
+  }
+
+  const family = typeof params.family === "string" && params.family ? params.family : undefined;
+
+  const limitRaw = num(params.limit);
+  const offsetRaw = num(params.offset);
+  if (params.limit !== undefined && limitRaw === undefined) throw new ApiError(400, "limit must be a number.");
+  if (params.offset !== undefined && offsetRaw === undefined) throw new ApiError(400, "offset must be a number.");
+  const limit = Math.min(200, Math.max(1, Math.floor(limitRaw ?? 50)));
+  const offset = Math.max(0, Math.floor(offsetRaw ?? 0));
+
+  const matches = filterCrops({ query: queryRaw, category, frost, family });
+  const page = matches.slice(offset, offset + limit);
+  return {
+    total: matches.length,
+    limit,
+    offset,
+    count: page.length,
+    families: FAMILIES,
+    varieties: page,
+  };
+}
+
+export function getVarietyById(id: string) {
+  const crop = getCrop(id);
+  if (!crop) {
+    throw new ApiError(404, `No variety with id '${id}'. Search GET /api/crops?q=... to find ids.`);
+  }
+  return crop;
+}
+
+export function varietyCount(): number {
+  return crops.length;
+}

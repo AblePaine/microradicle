@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ClipRouteImport } from './routes/clip'
 import { Route as ClipboardRouteImport } from './routes/clipboard'
 import { Route as EngineRouteImport } from './routes/engine'
+import { Route as McpRouteImport } from './routes/mcp'
+import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
 import { Route as CropSlugRouteImport } from './routes/crop/$slug'
 import { Route as CropsIndexRouteImport } from './routes/crops/index'
 import { Route as EconomicsIndexRouteImport } from './routes/economics/index'
@@ -47,6 +49,11 @@ import { Route as PastureSlugRouteImport } from './routes/pasture/$slug'
 import { Route as PrintClipboardRouteImport } from './routes/print.clipboard'
 import { Route as SoilIndexRouteImport } from './routes/soil/index'
 import { Route as SoilSlugRouteImport } from './routes/soil/$slug'
+import { Route as ApiCropsIndexRouteImport } from './routes/api/crops/index'
+import { Route as ApiCropsIdRouteImport } from './routes/api/crops/$id'
+import { Route as ApiFeedCalculateRouteImport } from './routes/api/feed/calculate'
+import { Route as ApiFeedIngredientsRouteImport } from './routes/api/feed/ingredients'
+import { Route as ApiFeedTargetsRouteImport } from './routes/api/feed/targets'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -66,6 +73,16 @@ const ClipboardRoute = ClipboardRouteImport.update({
 const EngineRoute = EngineRouteImport.update({
   id: '/engine',
   path: '/engine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
+  id: '/openapi.json',
+  path: '/openapi.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CropSlugRoute = CropSlugRouteImport.update({
@@ -254,12 +271,39 @@ const SoilSlugRoute = SoilSlugRouteImport.update({
   path: '/soil/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCropsIndexRoute = ApiCropsIndexRouteImport.update({
+  id: '/api/crops/',
+  path: '/api/crops/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCropsIdRoute = ApiCropsIdRouteImport.update({
+  id: '/api/crops/$id',
+  path: '/api/crops/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFeedCalculateRoute = ApiFeedCalculateRouteImport.update({
+  id: '/api/feed/calculate',
+  path: '/api/feed/calculate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFeedIngredientsRoute = ApiFeedIngredientsRouteImport.update({
+  id: '/api/feed/ingredients',
+  path: '/api/feed/ingredients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFeedTargetsRoute = ApiFeedTargetsRouteImport.update({
+  id: '/api/feed/targets',
+  path: '/api/feed/targets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/clip': typeof ClipRoute
   '/clipboard': typeof ClipboardRoute
   '/engine': typeof EngineRoute
+  '/mcp': typeof McpRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -294,12 +338,19 @@ export interface FileRoutesByFullPath {
   '/nursery/': typeof NurseryIndexRoute
   '/pasture/': typeof PastureIndexRoute
   '/soil/': typeof SoilIndexRoute
+  '/api/crops/$id': typeof ApiCropsIdRoute
+  '/api/feed/calculate': typeof ApiFeedCalculateRoute
+  '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
+  '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/crops/': typeof ApiCropsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/clip': typeof ClipRoute
   '/clipboard': typeof ClipboardRoute
   '/engine': typeof EngineRoute
+  '/mcp': typeof McpRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -334,6 +385,11 @@ export interface FileRoutesByTo {
   '/nursery': typeof NurseryIndexRoute
   '/pasture': typeof PastureIndexRoute
   '/soil': typeof SoilIndexRoute
+  '/api/crops/$id': typeof ApiCropsIdRoute
+  '/api/feed/calculate': typeof ApiFeedCalculateRoute
+  '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
+  '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/crops': typeof ApiCropsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -341,6 +397,8 @@ export interface FileRoutesById {
   '/clip': typeof ClipRoute
   '/clipboard': typeof ClipboardRoute
   '/engine': typeof EngineRoute
+  '/mcp': typeof McpRoute
+  '/openapi.json': typeof OpenapiDotjsonRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -375,6 +433,11 @@ export interface FileRoutesById {
   '/nursery/': typeof NurseryIndexRoute
   '/pasture/': typeof PastureIndexRoute
   '/soil/': typeof SoilIndexRoute
+  '/api/crops/$id': typeof ApiCropsIdRoute
+  '/api/feed/calculate': typeof ApiFeedCalculateRoute
+  '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
+  '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/crops/': typeof ApiCropsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -383,6 +446,8 @@ export interface FileRouteTypes {
     | '/clip'
     | '/clipboard'
     | '/engine'
+    | '/mcp'
+    | '/openapi.json'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -417,12 +482,19 @@ export interface FileRouteTypes {
     | '/nursery/'
     | '/pasture/'
     | '/soil/'
+    | '/api/crops/$id'
+    | '/api/feed/calculate'
+    | '/api/feed/ingredients'
+    | '/api/feed/targets'
+    | '/api/crops/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/clip'
     | '/clipboard'
     | '/engine'
+    | '/mcp'
+    | '/openapi.json'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -457,12 +529,19 @@ export interface FileRouteTypes {
     | '/nursery'
     | '/pasture'
     | '/soil'
+    | '/api/crops/$id'
+    | '/api/feed/calculate'
+    | '/api/feed/ingredients'
+    | '/api/feed/targets'
+    | '/api/crops'
   id:
     | '__root__'
     | '/'
     | '/clip'
     | '/clipboard'
     | '/engine'
+    | '/mcp'
+    | '/openapi.json'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -497,6 +576,11 @@ export interface FileRouteTypes {
     | '/nursery/'
     | '/pasture/'
     | '/soil/'
+    | '/api/crops/$id'
+    | '/api/feed/calculate'
+    | '/api/feed/ingredients'
+    | '/api/feed/targets'
+    | '/api/crops/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -504,6 +588,8 @@ export interface RootRouteChildren {
   ClipRoute: typeof ClipRoute
   ClipboardRoute: typeof ClipboardRoute
   EngineRoute: typeof EngineRoute
+  McpRoute: typeof McpRoute
+  OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
   CropSlugRoute: typeof CropSlugRoute
   EconomicsSlugRoute: typeof EconomicsSlugRoute
   FeedSlugRoute: typeof FeedSlugRoute
@@ -538,6 +624,11 @@ export interface RootRouteChildren {
   NurseryIndexRoute: typeof NurseryIndexRoute
   PastureIndexRoute: typeof PastureIndexRoute
   SoilIndexRoute: typeof SoilIndexRoute
+  ApiCropsIdRoute: typeof ApiCropsIdRoute
+  ApiFeedCalculateRoute: typeof ApiFeedCalculateRoute
+  ApiFeedIngredientsRoute: typeof ApiFeedIngredientsRoute
+  ApiFeedTargetsRoute: typeof ApiFeedTargetsRoute
+  ApiCropsIndexRoute: typeof ApiCropsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -568,6 +659,20 @@ declare module '@tanstack/react-router' {
       path: '/engine'
       fullPath: '/engine'
       preLoaderRoute: typeof EngineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/openapi.json': {
+      id: '/openapi.json'
+      path: '/openapi.json'
+      fullPath: '/openapi.json'
+      preLoaderRoute: typeof OpenapiDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/crop/$slug': {
@@ -808,6 +913,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SoilSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/crops/': {
+      id: '/api/crops/'
+      path: '/api/crops'
+      fullPath: '/api/crops/'
+      preLoaderRoute: typeof ApiCropsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/crops/$id': {
+      id: '/api/crops/$id'
+      path: '/api/crops/$id'
+      fullPath: '/api/crops/$id'
+      preLoaderRoute: typeof ApiCropsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/feed/calculate': {
+      id: '/api/feed/calculate'
+      path: '/api/feed/calculate'
+      fullPath: '/api/feed/calculate'
+      preLoaderRoute: typeof ApiFeedCalculateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/feed/ingredients': {
+      id: '/api/feed/ingredients'
+      path: '/api/feed/ingredients'
+      fullPath: '/api/feed/ingredients'
+      preLoaderRoute: typeof ApiFeedIngredientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/feed/targets': {
+      id: '/api/feed/targets'
+      path: '/api/feed/targets'
+      fullPath: '/api/feed/targets'
+      preLoaderRoute: typeof ApiFeedTargetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -816,6 +956,8 @@ const rootRouteChildren: RootRouteChildren = {
   ClipRoute: ClipRoute,
   ClipboardRoute: ClipboardRoute,
   EngineRoute: EngineRoute,
+  McpRoute: McpRoute,
+  OpenapiDotjsonRoute: OpenapiDotjsonRoute,
   CropSlugRoute: CropSlugRoute,
   EconomicsSlugRoute: EconomicsSlugRoute,
   FeedSlugRoute: FeedSlugRoute,
@@ -853,6 +995,11 @@ const rootRouteChildren: RootRouteChildren = {
   NurseryIndexRoute: NurseryIndexRoute,
   PastureIndexRoute: PastureIndexRoute,
   SoilIndexRoute: SoilIndexRoute,
+  ApiCropsIdRoute: ApiCropsIdRoute,
+  ApiFeedCalculateRoute: ApiFeedCalculateRoute,
+  ApiFeedIngredientsRoute: ApiFeedIngredientsRoute,
+  ApiFeedTargetsRoute: ApiFeedTargetsRoute,
+  ApiCropsIndexRoute: ApiCropsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

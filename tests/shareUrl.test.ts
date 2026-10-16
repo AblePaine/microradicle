@@ -1,11 +1,16 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  decodeRationFromParams,
+  decodeRationFromUnknown,
   decodeSuccessionFromParams,
   decodeSuccessionFromUnknown,
+  encodeRationToParams,
   encodeSuccessionToParams,
   engineSearchFromParams,
   engineSearchFromUnknown,
+  feedShareHref,
+  paramsFromRation,
   paramsFromSuccession,
   parseEngineCategory,
   successionShareHref,
@@ -138,5 +143,89 @@ describe("parseEngineCategory / gateway trade view", () => {
       units: search.units,
     });
     assert.equal(share.includes("category"), false);
+  });
+});
+
+describe("feed ration share params", () => {
+  const plainRation = {
+    targetId: "layer-production",
+    lines: [
+      { ingredient_id: "corn", pct: 63.22 },
+      { ingredient_id: "soybean-meal-44", pct: 25.28 },
+      { ingredient_id: "limestone", pct: 9 },
+    ],
+    batchLbs: 100,
+    flockSize: 25,
+    intakeLbPerDay: 0.24,
+    name: "Layer mix",
+  };
+
+  it("encodes plain catalog lines readably and round-trips", () => {
+    const sp = encodeRationToParams(plainRation);
+    assert.equal(sp.get("lines"), "corn:63.22,soybean-meal-44:25.28,limestone:9");
+    assert.equal(sp.get("lines64"), null);
+    assert.equal(sp.get("target"), "layer-production");
+    const back = decodeRationFromParams(sp);
+    assert.deepEqual(back, plainRation);
+  });
+
+  it("falls back to lines64 when a line carries overrides, and stays lossless", () => {
+    const custom = {
+      targetId: "broiler-starter",
+      lines: [
+        { ingredient_id: "corn", pct: 55 },
+        { ingredient_id: "custom-sorghum", pct: 45, name: "Sorghum (local)", cp_pct: 9.5, price_usd_per_lb: 0.12 },
+      ],
+    };
+    const sp = encodeRationToParams(custom);
+    assert.equal(sp.get("lines"), null);
+    assert.ok(sp.get("lines64"));
+    const back = decodeRationFromParams(sp);
+    assert.deepEqual(back, custom);
+  });
+
+  it("decodeRationFromUnknown accepts router search values", () => {
+    const back = decodeRationFromUnknown({
+      target: "pullet-grower",
+      lines: "corn:70,wheat:30",
+      batch: "50",
+      flock: 40,
+      intake: "0.18",
+      name: "Grower",
+    });
+    assert.deepEqual(back, {
+      targetId: "pullet-grower",
+      lines: [
+        { ingredient_id: "corn", pct: 70 },
+        { ingredient_id: "wheat", pct: 30 },
+      ],
+      batchLbs: 50,
+      flockSize: 40,
+      intakeLbPerDay: 0.18,
+      name: "Grower",
+    });
+  });
+
+  it("ignores junk line entries and bad numbers", () => {
+    const back = decodeRationFromParams(
+      new URLSearchParams("lines=corn:abc,:5,wheat:20&batch=xyz"),
+    );
+    assert.deepEqual(back.lines, [{ ingredient_id: "wheat", pct: 20 }]);
+    assert.equal(back.batchLbs, undefined);
+  });
+
+  it("paramsFromRation + feedShareHref build a /feed/<id> link", () => {
+    const ration = {
+      target_id: "layer-production",
+      lines: plainRation.lines,
+      batch_lbs: 100,
+      flock_size: 25,
+      intake_lb_per_day: 0.24,
+      name: "Layer mix",
+    };
+    const href = feedShareHref("feed-abc", paramsFromRation(ration), "https://microradicle.com");
+    assert.ok(href.startsWith("https://microradicle.com/feed/feed-abc?"));
+    const sp = new URL(href).searchParams;
+    assert.deepEqual(decodeRationFromParams(sp), plainRation);
   });
 });

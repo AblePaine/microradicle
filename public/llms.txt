@@ -1,0 +1,44 @@
+# MicroRadicle
+
+> Farm math, minus the guesswork. Precision planning engines for market gardens and small farms — succession planting, soil balancing, irrigation hydraulics, and a poultry Feed Studio — built on a library of 266 cultivar operating records.
+
+MicroRadicle (https://microradicle.com) is a free planning toolkit for small-scale growers. Its foundation is data most tools don't have: a 266-variety cultivar library where every record carries the full operating spec for a 30-inch biointensive bed — propagation, bed geometry, days-to-maturity and frost hardiness, yield and revenue targets, irrigation profile, and soil nutrient extraction. The engines plan from those records instead of generic tables.
+
+## Engines
+
+- **Succession engine** (`/engine`): pick a cultivar and a harvest date; it works backwards through nursery lead time and germination to planting dates, bed feet, and a full-season succession schedule. Shareable result links encode the calculation in the URL (`/engine?crop=lettuce-salanova-butterhead&units=368&date=2026-10-20`).
+- **Feed Studio** (`/feed`): poultry ration formulator. Pearson-square balancing, a full nutrient panel (CP, ME, lysine, methionine, Ca, P, fiber) judged against six life-stage target presets, batch weigh-out, and cost per bird per day — from an 11-ingredient catalog of locally buyable feeds. Rations carry share links too (`/feed/<id>?target=...&lines=...`).
+- **Soil balancer** (`/soil`): turns crop nutrient extraction across your blocks into an organic amendment recipe (feather meal / bone meal / potash) with mineralization timing and manure credits.
+- **Irrigation & hydraulics** (`/irrigation`): drip zone sizing and mainline pressure-loss (Hazen-Williams) from the same bed plan.
+- **Nursery planner** (`/nursery`), **pasture planner** (`/pasture`), **pack-shed economics** (`/economics`): rack scheduling for microgreens and transplants, grazing rotations with manure nutrient credits, and per-crop enterprise economics from the cultivar records.
+- **Crop library** (`/crops`): all 266 cultivar records, browsable and searchable.
+
+## Guides
+
+Plain-language deep dives at `/guides`: bed prep, cover crops, soil-test reading, drip run times, succession scheduling, post-harvest handling, and more.
+
+## For AI agents
+
+MicroRadicle exposes its Feed Studio engine and cultivar library as a free JSON API plus an MCP server — no key required. This is the same math and data as the web engines.
+
+### REST API
+
+- `POST https://microradicle.com/api/feed/calculate` — ration analysis. Body is a partial JSON object; every field optional (omit `lines` entirely to analyze the built-in layer example ration). Key fields: `target_id` (broiler-starter | broiler-grower | broiler-finisher | pullet-starter | pullet-grower | layer-production), `lines` (`[{ingredient_id, pct}]` — catalog ids from the ingredients endpoint, or a custom line with a `name` plus nutrient values), `batch_lbs`, `flock_size`, `intake_lb_per_day`, `target_overrides` (per-nutrient `{min, max}` band edits). Returns the normalized input, the effective target bands, and the analysis: nutrient panel with in/low/high states, Ca:P ratio, batch weigh-out with per-ingredient cost, cost per lb / bird-day / flock-day / flock-week, and plain-language warnings.
+- `GET https://microradicle.com/api/feed/calculate?target_id=layer-production&lines=corn:63.2,soybean-meal-44:25.3,limestone:9` — same engine via query params; `lines` is comma-separated `ingredient_id:pct` pairs.
+- `GET https://microradicle.com/api/feed/ingredients` — the 11-ingredient catalog (id, nutrient values as-fed, default price).
+- `GET https://microradicle.com/api/feed/targets` — the six life-stage target presets with nutrient bands.
+- `GET https://microradicle.com/api/crops?q=tomato&category=solanaceous&frost=tender&family=Solanaceae&limit=50&offset=0` — search the cultivar library. Free-text `q` matches name/cultivar/botanical name/family/id; `category`, `frost`, and `family` filter exactly. Returns paginated full records plus the total match count.
+- `GET https://microradicle.com/api/crops/tomato-cherokee-purple` — one full cultivar record by id.
+- `GET https://microradicle.com/openapi.json` — OpenAPI 3.1 description of the REST API with full schemas.
+
+### MCP server
+
+- `POST https://microradicle.com/mcp` — stateless streamable-HTTP MCP endpoint (JSON-RPC: initialize, ping, tools/list, tools/call). Tools: `feed_calculate`, `variety_search`, `variety_get` — the same handlers as the REST API.
+- `GET https://microradicle.com/mcp-tools.json` — machine-readable tool manifest (input schemas + HTTP bindings) for the three tools.
+
+Example:
+```
+curl -X POST https://microradicle.com/api/feed/calculate \
+  -H 'content-type: application/json' \
+  -d '{"target_id":"layer-production","lines":[{"ingredient_id":"corn","pct":63.2},{"ingredient_id":"soybean-meal-44","pct":25.3},{"ingredient_id":"limestone","pct":9},{"ingredient_id":"dicalcium-phosphate","pct":1.5},{"ingredient_id":"salt","pct":0.4},{"ingredient_id":"vitamin-mineral-premix","pct":0.6}]}'
+```
