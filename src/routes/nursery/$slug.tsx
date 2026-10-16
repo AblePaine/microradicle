@@ -20,6 +20,7 @@ import {
 } from "@/lib/nurseryMath";
 import { formatUsd, formatWeight } from "@/lib/math";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, jsonLdScript, ogMeta, webPageJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/nursery/$slug")({
   loader: ({ params }) => {
@@ -27,17 +28,20 @@ export const Route = createFileRoute("/nursery/$slug")({
     if (!crop) throw notFound();
     return { crop };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     const crop = loaderData?.crop;
     if (!crop) return { meta: [{ title: "Tray spec — MicroRadicle" }] };
+    const title = `${crop.cultivar} microgreen — MicroRadicle`;
+    const description = `${crop.cultivar} ${crop.commonName}: ${crop.seedWeightGramsPer1020} g / 1020, ${crop.totalCycleDays} d cycle, ${crop.targetYieldOzPerTray} oz cut.`;
+    const path = `/nursery/${params.slug}`;
     return {
       meta: [
-        { title: `${crop.cultivar} microgreen — MicroRadicle` },
-        {
-          name: "description",
-          content: `${crop.cultivar} ${crop.commonName}: ${crop.seedWeightGramsPer1020} g / 1020, ${crop.totalCycleDays} d cycle, ${crop.targetYieldOzPerTray} oz cut.`,
-        },
+        { title },
+        { name: "description", content: description },
+        ...ogMeta({ title, description, path }),
       ],
+      scripts: [jsonLdScript(webPageJsonLd({ name: title, description, path }))],
+      links: [canonicalLink(path)],
     };
   },
   notFoundComponent: () => (

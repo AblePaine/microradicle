@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { UnifiedClipboard } from "@/components/UnifiedClipboard";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/clipboard")({
   component: ClipboardPage,
@@ -12,7 +13,20 @@ export const Route = createFileRoute("/clipboard")({
         content:
           "Printable daily sheet for 30-inch beds, 1020 racks, and paddock moves. Local-first. No account.",
       },
+      ...ogMeta({
+        title: "Field clipboard — MicroRadicle",
+        description:
+          "Printable daily sheet for 30-inch beds, 1020 racks, and paddock moves. Local-first. No account.",
+        path: "/clipboard",
+      }),
     ],
+    scripts: [jsonLdScript(webApplicationJsonLd({
+          name: "MicroRadicle Field Clipboard",
+          description:
+            "Printable daily sheet for 30-inch beds, 1020 racks, and paddock moves. Local-first. No account.",
+          path: "/clipboard",
+        }),)],
+    links: [canonicalLink("/clipboard")],
   }),
 });
 

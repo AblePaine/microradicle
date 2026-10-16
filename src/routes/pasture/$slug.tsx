@@ -17,6 +17,7 @@ import {
 } from "@/lib/pastureMath";
 import { formatWeight } from "@/lib/math";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, jsonLdScript, ogMeta, webPageJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/pasture/$slug")({
   loader: ({ params }) => {
@@ -24,17 +25,20 @@ export const Route = createFileRoute("/pasture/$slug")({
     if (!spec) throw notFound();
     return { spec };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     const spec = loaderData?.spec;
     if (!spec) return { meta: [{ title: "Stock spec — MicroRadicle" }] };
+    const title = `${spec.breed} — MicroRadicle`;
+    const description = `${spec.breed}: ${spec.dailyForageIntakeLbs} lb forage DM/day, move every ${spec.recommendedMoveFrequencyDays} d, ${spec.shelterSqftPerHead} sqft shelter.`;
+    const path = `/pasture/${params.slug}`;
     return {
       meta: [
-        { title: `${spec.breed} — MicroRadicle` },
-        {
-          name: "description",
-          content: `${spec.breed}: ${spec.dailyForageIntakeLbs} lb forage DM/day, move every ${spec.recommendedMoveFrequencyDays} d, ${spec.shelterSqftPerHead} sqft shelter.`,
-        },
+        { title },
+        { name: "description", content: description },
+        ...ogMeta({ title, description, path }),
       ],
+      scripts: [jsonLdScript(webPageJsonLd({ name: title, description, path }))],
+      links: [canonicalLink(path)],
     };
   },
   notFoundComponent: () => (

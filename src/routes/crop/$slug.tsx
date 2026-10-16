@@ -33,6 +33,7 @@ import {
   isCutFlower,
   salesUnitLabel,
 } from "@/types/crop";
+import { canonicalLink, jsonLdScript, ogMeta, webPageJsonLd } from "@/lib/seo";
 import type { ReactNode } from "react";
 
 export const Route = createFileRoute("/crop/$slug")({
@@ -41,19 +42,22 @@ export const Route = createFileRoute("/crop/$slug")({
     if (!crop) throw notFound();
     return { crop };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     const crop = loaderData?.crop;
     if (!crop) return { meta: [{ title: "Cultivar — MicroRadicle" }] };
     const g = crop.fieldGeometry;
     const y = crop.yieldAndRevenue;
+    const title = `${crop.cultivar} — ${crop.commonName} | MicroRadicle`;
+    const description = `${crop.cultivar} ${crop.commonName}: ${crop.timeline.dtmFromField} d DTM, ${g.rowsPerBed} rows on a 30-inch bed, ${y.unitsPerBedFoot} ${salesUnitLabel(y.salesUnit)} / bed-ft.`;
+    const path = `/crop/${params.slug}`;
     return {
       meta: [
-        { title: `${crop.cultivar} — ${crop.commonName} | MicroRadicle` },
-        {
-          name: "description",
-          content: `${crop.cultivar} ${crop.commonName}: ${crop.timeline.dtmFromField} d DTM, ${g.rowsPerBed} rows on a 30-inch bed, ${y.unitsPerBedFoot} ${salesUnitLabel(y.salesUnit)} / bed-ft.`,
-        },
+        { title },
+        { name: "description", content: description },
+        ...ogMeta({ title, description, path }),
       ],
+      scripts: [jsonLdScript(webPageJsonLd({ name: title, description, path }))],
+      links: [canonicalLink(path)],
     };
   },
   notFoundComponent: () => (

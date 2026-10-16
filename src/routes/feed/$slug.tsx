@@ -17,6 +17,12 @@ export const Route = createFileRoute("/feed/$slug")({
         content:
           "Balance this ration: Pearson-square protein, a nutrient panel against the target bands, batch weigh-out, and cost per bird per day.",
       },
+      { property: "og:title", content: "Feed Studio — MicroRadicle" },
+      {
+        property: "og:description",
+        content:
+          "Balance this ration: Pearson-square protein, a nutrient panel against the target bands, batch weigh-out, and cost per bird per day.",
+      },
     ],
   }),
 });

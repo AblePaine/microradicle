@@ -3,6 +3,7 @@ import { MicrogreenCard } from "@/components/MicrogreenCard";
 import { NurseryRackPlanner } from "@/components/NurseryRackPlanner";
 import { MICROGREEN_COUNT, MICROGREENS } from "@/lib/nursery";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 import { RACK_TRAY_CAPACITY } from "@/types/nursery";
 
 export type NurserySearch = { crop?: string };
@@ -20,7 +21,20 @@ export const Route = createFileRoute("/nursery/")({
         content:
           "1020-tray microgreen rack. Seed weight, soak (or don't), days in the dark, and a harvest calendar. Separate from the outdoor 30-inch beds.",
       },
+      ...ogMeta({
+        title: "Nursery — MicroRadicle",
+        description:
+          "1020-tray microgreen rack. Seed weight, soak (or don't), days in the dark, and a harvest calendar. Separate from the outdoor 30-inch beds.",
+        path: "/nursery",
+      }),
     ],
+    scripts: [jsonLdScript(webApplicationJsonLd({
+          name: "MicroRadicle Nursery Planner",
+          description:
+            "1020-tray microgreen rack. Seed weight, soak (or don't), days in the dark, and a harvest calendar. Separate from the outdoor 30-inch beds.",
+          path: "/nursery",
+        }),)],
+    links: [canonicalLink("/nursery")],
   }),
 });
 

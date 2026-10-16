@@ -5,6 +5,7 @@ import { nAppliedById, SoilNutrientBalancer } from "@/components/SoilNutrientBal
 import { cropBySlug } from "@/lib/crops";
 import { useFarmStore } from "@/lib/farm-store";
 import { balancePlan, creditById, farmDeficit, resolveSoil, selectedAmendments } from "@/lib/soilMath";
+import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/soil/")({
   component: SoilIndex,
@@ -16,7 +17,20 @@ export const Route = createFileRoute("/soil/")({
         content:
           "What the beds took out, which bags put N, P, and K back, and how crediting a paddock move cuts the fertilizer bill.",
       },
+      ...ogMeta({
+        title: "Soil — MicroRadicle",
+        description:
+          "What the beds took out, which bags put N, P, and K back, and how crediting a paddock move cuts the fertilizer bill.",
+        path: "/soil",
+      }),
     ],
+    scripts: [jsonLdScript(webApplicationJsonLd({
+          name: "MicroRadicle Soil Nutrient Balancer",
+          description:
+            "What the beds took out, which bags put N, P, and K back, and how crediting a paddock move cuts the fertilizer bill.",
+          path: "/soil",
+        }),)],
+    links: [canonicalLink("/soil")],
   }),
 });
 

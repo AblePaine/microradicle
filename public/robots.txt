@@ -1,0 +1,11 @@
+# MicroRadicle — every crawler is welcome, search and AI/agent alike.
+# The cultivar library and tool pages are public reference material.
+User-agent: *
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://microradicle.com/sitemap.xml

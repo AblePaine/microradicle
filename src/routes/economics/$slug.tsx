@@ -12,6 +12,7 @@ import {
 } from "@/lib/economicsMath";
 import { useFarmStore } from "@/lib/farm-store";
 import { formatTemp } from "@/lib/math";
+import { canonicalLink, jsonLdScript, ogMeta, webPageJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { CoolingMethod, RespirationRating } from "@/types/economics";
 
@@ -39,8 +40,24 @@ export const Route = createFileRoute("/economics/$slug")({
   head: ({ params }) => {
     const crop = getCrop(params.slug);
     const zone = isZone(params.slug) ? ZONE_META[params.slug] : null;
-    const title = crop?.cultivar ?? zone?.label ?? params.slug;
-    return { meta: [{ title: `${title} — Pack-shed | MicroRadicle` }] };
+    const spec = crop ? specFor(crop.id) : null;
+    const name = crop?.cultivar ?? zone?.label ?? params.slug;
+    const title = `${name} — Pack-shed | MicroRadicle`;
+    const description = crop
+      ? `${crop.cultivar} ${crop.commonName} post-harvest spec: ${spec ? `${spec.optimal_temp_f}°F storage, ${spec.shelf_life_days} d shelf life, ${spec.cooling_method.replace(/-/g, " ")}` : "storage zone, field heat, and shelf life"} — pack-shed numbers for the cooler.`
+      : zone
+        ? `${zone.label}: ${zone.temp_f}°F at ${zone.rh}. ${zone.note}`
+        : "Pack-shed storage specs — MicroRadicle.";
+    const path = `/economics/${params.slug}`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        ...ogMeta({ title, description, path }),
+      ],
+      scripts: [jsonLdScript(webPageJsonLd({ name: title, description, path }))],
+      links: [canonicalLink(path)],
+    };
   },
 });
 

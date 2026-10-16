@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useFarmStore } from "@/lib/farm-store";
 import { analyzeRation, effectiveTarget, resolveFeed, TARGETS, TARGET_BY_ID } from "@/lib/feedMath";
+import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 import { uid } from "@/lib/storage";
 import { round2 } from "@/lib/soil-chemistry";
 import type { SavedRation } from "@/types/feed";
@@ -16,7 +17,20 @@ export const Route = createFileRoute("/feed/")({
         content:
           "Formulate, check, and price a poultry ration from ingredients you can buy locally — Pearson-square balancing, a full nutrient panel, and cost per bird per day.",
       },
+      ...ogMeta({
+        title: "Feed Studio — MicroRadicle",
+        description:
+          "Formulate, check, and price a poultry ration from ingredients you can buy locally — Pearson-square balancing, a full nutrient panel, and cost per bird per day.",
+        path: "/feed",
+      }),
     ],
+    scripts: [jsonLdScript(webApplicationJsonLd({
+          name: "MicroRadicle Feed Studio",
+          description:
+            "Formulate, check, and price a poultry ration from ingredients you can buy locally — Pearson-square balancing, a full nutrient panel, and cost per bird per day.",
+          path: "/feed",
+        }),)],
+    links: [canonicalLink("/feed")],
   }),
 });
 

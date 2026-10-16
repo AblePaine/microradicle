@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { HydraulicZoneSizer } from "@/components/HydraulicZoneSizer";
 import { MainlinePressureLossChart } from "@/components/MainlinePressureLossChart";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/irrigation/")({
   component: IrrigationIndex,
@@ -14,7 +15,20 @@ export const Route = createFileRoute("/irrigation/")({
         content:
           "Drip planning for 30-inch beds. How much water each crop wants, and whether the header and mainline can keep up.",
       },
+      ...ogMeta({
+        title: "Drip — MicroRadicle",
+        description:
+          "Drip planning for 30-inch beds. How much water each crop wants, and whether the header and mainline can keep up.",
+        path: "/irrigation",
+      }),
     ],
+    scripts: [jsonLdScript(webApplicationJsonLd({
+          name: "MicroRadicle Drip Planner",
+          description:
+            "Drip planning for 30-inch beds. How much water each crop wants, and whether the header and mainline can keep up.",
+          path: "/irrigation",
+        }),)],
+    links: [canonicalLink("/irrigation")],
   }),
 });
 

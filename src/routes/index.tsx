@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { FLOWER_COUNT, VEGETABLE_COUNT, CULTIVAR_COUNT } from "@/lib/crops";
 import { MICROGREEN_COUNT } from "@/lib/nursery";
 import { SPECIES_COUNT } from "@/lib/pasture";
+import { canonicalLink, jsonLdScript, ogMeta, websiteJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   component: Gateway,
@@ -13,7 +14,15 @@ export const Route = createFileRoute("/")({
         content:
           "Plan 30-inch beds, size drip, balance fertilizer, run a tray nursery, rotate a small flock, and manage the cooler — free, in the browser, no account.",
       },
+      ...ogMeta({
+        title: "MicroRadicle // Tools for ¼–3 acre farms",
+        description:
+          "Plan 30-inch beds, size drip, balance fertilizer, run a tray nursery, rotate a small flock, and manage the cooler — free, in the browser, no account.",
+        path: "/",
+      }),
     ],
+    scripts: [jsonLdScript(websiteJsonLd())],
+    links: [canonicalLink("/")],
   }),
 });
 

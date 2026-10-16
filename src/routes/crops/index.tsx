@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { CropCard } from "@/components/CropCard";
 import { CROP_CATEGORIES, CULTIVAR_COUNT, FAMILIES, FROST_BANDS, cropsByCategory, filterCrops } from "@/lib/crops";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, collectionPageJsonLd, jsonLdScript, ogMeta } from "@/lib/seo";
 import { CATEGORY_LABEL, FROST_LABEL, type CropCategory, type FrostHardiness } from "@/types/crop";
 
 export const Route = createFileRoute("/crops/")({
@@ -16,7 +17,20 @@ export const Route = createFileRoute("/crops/")({
         content:
           "Cultivar sheets for a 30-inch bed: spacing, days to harvest, what it pays, drip, and what it takes from the soil.",
       },
+      ...ogMeta({
+        title: "Cultivars — MicroRadicle",
+        description:
+          "Cultivar sheets for a 30-inch bed: spacing, days to harvest, what it pays, drip, and what it takes from the soil.",
+        path: "/crops",
+      }),
     ],
+    scripts: [jsonLdScript(collectionPageJsonLd({
+          name: "Cultivars — MicroRadicle",
+          description:
+            "Cultivar sheets for a 30-inch bed: spacing, days to harvest, what it pays, drip, and what it takes from the soil.",
+          path: "/crops",
+        }),)],
+    links: [canonicalLink("/crops")],
   }),
 });
 

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { articleJsonLd, jsonLdScript } from "@/lib/seo";
 import { ArrowLeft } from "lucide-react";
 
 const TITLE = "Vegetable Spacing Chart for 30-Inch Beds";
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/guides/vegetable-spacing-chart")({
       { name: "twitter:description", content: DESCRIPTION },
       { name: "twitter:image", content: "https://microradicle.com/og.jpg" },
     ],
+    scripts: [jsonLdScript(articleJsonLd({ title: TITLE, description: DESCRIPTION, path: `/guides/${SLUG}` }))],
     links: [{ rel: "canonical", href: `https://microradicle.com/guides/${SLUG}` }],
   }),
 });

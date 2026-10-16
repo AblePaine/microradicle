@@ -8,6 +8,7 @@ import { OpsBoard } from "@/components/OpsBoard";
 import { SuccessionTimeline } from "@/components/SuccessionTimeline";
 import { cropBySlug, crops, getCrop, groupedCropsForTrade, defaultCropIdForTrade, tradeViewLabel } from "@/lib/crops";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 import {
   computeSuccession,
   directRevenue,
@@ -42,7 +43,27 @@ export const Route = createFileRoute("/engine")({
   validateSearch: (s: Record<string, unknown>): EngineSearch => engineSearchFromUnknown(s),
   component: EnginePage,
   head: () => ({
-    meta: [{ title: "Planner — MicroRadicle" }],
+    meta: [
+      { title: "Planner — MicroRadicle" },
+      {
+        name: "description",
+        content:
+          "Lay out blocks and 30-inch beds, place cultivar successions, and get plant and harvest dates worked out against real daylight and frost — the MicroRadicle bed planner.",
+      },
+      ...ogMeta({
+        title: "Planner — MicroRadicle",
+        description:
+          "Lay out blocks and 30-inch beds, place cultivar successions, and get plant and harvest dates worked out against real daylight and frost — the MicroRadicle bed planner.",
+        path: "/engine",
+      }),
+    ],
+    scripts: [jsonLdScript(webApplicationJsonLd({
+          name: "MicroRadicle Bed Planner",
+          description:
+            "Lay out blocks and 30-inch beds, place cultivar successions, and get plant and harvest dates worked out against real daylight and frost — the MicroRadicle bed planner.",
+          path: "/engine",
+        }),)],
+    links: [canonicalLink("/engine")],
   }),
 });
 

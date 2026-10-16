@@ -10,7 +10,10 @@ import { balancePlan, blockDeficit, creditById, resolveSoil, selectedAmendments 
 export const Route = createFileRoute("/soil/$slug")({
   component: SoilBlock,
   head: ({ params }) => ({
-    meta: [{ title: `Soil ${params.slug} — MicroRadicle` }],
+    meta: [
+      { title: `Soil ${params.slug} — MicroRadicle` },
+      { property: "og:title", content: `Soil ${params.slug} — MicroRadicle` },
+    ],
   }),
 });
 

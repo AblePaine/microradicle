@@ -19,7 +19,10 @@ import type { PipeDiameterInches } from "@/types/irrigation";
 export const Route = createFileRoute("/irrigation/$slug")({
   component: ZoneDetail,
   head: ({ params }) => ({
-    meta: [{ title: `Zone ${params.slug} — MicroRadicle` }],
+    meta: [
+      { title: `Zone ${params.slug} — MicroRadicle` },
+      { property: "og:title", content: `Zone ${params.slug} — MicroRadicle` },
+    ],
   }),
 });
 

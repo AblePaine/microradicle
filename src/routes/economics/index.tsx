@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { ColdChainAudit } from "@/components/ColdChainAudit";
 import { PackShedPlanner } from "@/components/PackShedPlanner";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/economics/")({
   component: EconomicsIndex,
@@ -14,7 +15,20 @@ export const Route = createFileRoute("/economics/")({
         content:
           "Harvest walks into the pack-shed hot. Field heat, CoolBot sizing, and what not to put in the 34°F box.",
       },
+      ...ogMeta({
+        title: "Pack-shed — MicroRadicle",
+        description:
+          "Harvest walks into the pack-shed hot. Field heat, CoolBot sizing, and what not to put in the 34°F box.",
+        path: "/economics",
+      }),
     ],
+    scripts: [jsonLdScript(webApplicationJsonLd({
+          name: "MicroRadicle Pack-Shed Planner",
+          description:
+            "Harvest walks into the pack-shed hot. Field heat, CoolBot sizing, and what not to put in the 34°F box.",
+          path: "/economics",
+        }),)],
+    links: [canonicalLink("/economics")],
   }),
 });
 

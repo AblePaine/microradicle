@@ -3,6 +3,7 @@ import { PasturePlanner } from "@/components/PasturePlanner";
 import { SpeciesCard } from "@/components/SpeciesCard";
 import { SPECIES, SPECIES_COUNT } from "@/lib/pasture";
 import { useFarmStore } from "@/lib/farm-store";
+import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 import { NET_ROLL_FT } from "@/types/pasture";
 
 export type PastureSearch = { species?: string };
@@ -20,7 +21,20 @@ export const Route = createFileRoute("/pasture/")({
         content:
           "Rotational grazing for a small flock or herd. Daily dry matter, 164-ft net rolls, rest days, and manure credit. Separate from the 30-inch beds.",
       },
+      ...ogMeta({
+        title: "Pasture — MicroRadicle",
+        description:
+          "Rotational grazing for a small flock or herd. Daily dry matter, 164-ft net rolls, rest days, and manure credit. Separate from the 30-inch beds.",
+        path: "/pasture",
+      }),
     ],
+    scripts: [jsonLdScript(webApplicationJsonLd({
+          name: "MicroRadicle Pasture Planner",
+          description:
+            "Rotational grazing for a small flock or herd. Daily dry matter, 164-ft net rolls, rest days, and manure credit. Separate from the 30-inch beds.",
+          path: "/pasture",
+        }),)],
+    links: [canonicalLink("/pasture")],
   }),
 });
 

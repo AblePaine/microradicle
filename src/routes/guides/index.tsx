@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { collectionPageJsonLd, jsonLdScript } from "@/lib/seo";
 
 const GUIDES = [
   {
@@ -158,6 +159,12 @@ export const Route = createFileRoute("/guides/")({
       },
       { name: "twitter:image", content: "https://microradicle.com/og.jpg" },
     ],
+    scripts: [jsonLdScript(collectionPageJsonLd({
+          name: "Guides — MicroRadicle",
+          description:
+            "Field guides with real numbers for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops — written to be used at the bed.",
+          path: "/guides",
+        }),)],
     links: [{ rel: "canonical", href: "https://microradicle.com/guides" }],
   }),
 });
