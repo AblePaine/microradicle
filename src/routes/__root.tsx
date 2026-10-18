@@ -70,6 +70,11 @@ function RootDocument() {
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script
+          defer
+          src="https://umami.epoxybench.com/script.js"
+          data-website-id="b2c899fa-6d7f-4348-afe0-f7a268bbb6d7"
+        />
       </head>
       <body className="min-h-dvh bg-bg font-sans text-fg">
         <PreviewHostBridge />
