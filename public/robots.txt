@@ -8,4 +8,7 @@ User-agent: PerplexityBot
 User-agent: CCBot
 Allow: /
 
+User-agent: Meta-ExternalAgent
+Disallow: /
+
 Sitemap: https://microradicle.com/sitemap.xml
