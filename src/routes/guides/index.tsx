@@ -148,8 +148,8 @@ export const Route = createFileRoute("/guides/")({
         content:
           "Field guides with real numbers for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops — written to be used at the bed.",
       },
-      { property: "og:url", content: "https://microradicle.com/guides" },
-      { property: "og:image", content: "https://microradicle.com/og.jpg" },
+      { property: "og:url", content: "https://www.microradicle.com/guides" },
+      { property: "og:image", content: "https://www.microradicle.com/og.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Guides — MicroRadicle" },
       {
@@ -157,7 +157,7 @@ export const Route = createFileRoute("/guides/")({
         content:
           "Field guides with real numbers for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops — written to be used at the bed.",
       },
-      { name: "twitter:image", content: "https://microradicle.com/og.jpg" },
+      { name: "twitter:image", content: "https://www.microradicle.com/og.jpg" },
     ],
     scripts: [jsonLdScript(collectionPageJsonLd({
           name: "Guides — MicroRadicle",
@@ -165,7 +165,7 @@ export const Route = createFileRoute("/guides/")({
             "Field guides with real numbers for ¼–3 acre market farms: bed prep, succession planting, drip irrigation, soil blocks, cooler management, and cover crops — written to be used at the bed.",
           path: "/guides",
         }),)],
-    links: [{ rel: "canonical", href: "https://microradicle.com/guides" }],
+    links: [{ rel: "canonical", href: "https://www.microradicle.com/guides" }],
   }),
 });
 

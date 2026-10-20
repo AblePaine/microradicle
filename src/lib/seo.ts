@@ -12,7 +12,7 @@ import type { JSX } from "react";
  * Keep descriptions factual: they are copied from each page's own copy.
  */
 
-export const SITE_URL = "https://microradicle.com";
+export const SITE_URL = "https://www.microradicle.com";
 export const SITE_NAME = "MicroRadicle";
 export const OG_IMAGE = `${SITE_URL}/og.jpg`;
 

@@ -28,8 +28,8 @@ export const Route = createRootRoute({
         content:
           "Stop guessing your beds, water, fertilizer, and cooler. Real numbers for ¼–3 acre market farms — for growers who would rather farm than calculate. Saved on this machine, no account.",
       },
-      { property: "og:url", content: "https://microradicle.com/" },
-      { property: "og:image", content: "https://microradicle.com/og.jpg" },
+      { property: "og:url", content: "https://www.microradicle.com/" },
+      { property: "og:image", content: "https://www.microradicle.com/og.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
@@ -40,7 +40,7 @@ export const Route = createRootRoute({
         content:
           "Stop guessing your beds, water, fertilizer, and cooler. Real numbers for ¼–3 acre market farms — for growers who would rather farm than calculate. Saved on this machine, no account.",
       },
-      { name: "twitter:image", content: "https://microradicle.com/og.jpg" },
+      { name: "twitter:image", content: "https://www.microradicle.com/og.jpg" },
       { name: "theme-color", content: "#09090b" },
     ],
     links: [

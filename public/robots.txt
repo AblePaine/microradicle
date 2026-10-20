@@ -8,4 +8,4 @@ User-agent: PerplexityBot
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://microradicle.com/sitemap.xml
+Sitemap: https://www.microradicle.com/sitemap.xml
