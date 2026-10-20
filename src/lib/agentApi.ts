@@ -234,6 +234,130 @@ export function feedInputFromQuery(searchParams: URLSearchParams): Record<string
   return input;
 }
 
+// ---------------------------------------------------------------------------
+// Herd packet — due-date calculation (the log itself is web-only)
+// ---------------------------------------------------------------------------
+
+import {
+  computeDueDate,
+  computeReminderDate,
+  defaultGestationDays,
+  GESTATION_DEFAULTS,
+  isIsoDate,
+} from "./herdMath.ts";
+import type { HerdRecord, HerdReminder, HerdSpecies } from "../types/herd.ts";
+
+export interface HerdDueDateResult {
+  input: {
+    species?: string;
+    breeding_date: string;
+    gestation_days: number;
+    reminders: HerdReminder[];
+  };
+  due_date: string;
+  reminders: Array<HerdReminder & { date: string | null }>;
+}
+
+const REMINDER_ANCHORS = ["breeding", "due", "custom"] as const;
+
+/**
+ * Stateless herd due-date math for agents — the same arithmetic the web
+ * herd log uses. The log itself (the keeper's records) is web-only: it
+ * lives in the browser's local storage and is never sent to this API.
+ * Reminder intervals are the caller's own numbers; nothing here suggests
+ * an interval, a schedule, or any animal-care action.
+ */
+export function calculateHerdDueDate(rawInput: unknown): HerdDueDateResult {
+  const input = (rawInput ?? {}) as Record<string, unknown>;
+  if (typeof input !== "object" || Array.isArray(input)) {
+    throw new ApiError(400, "Herd due-date calculate expects a JSON object body.");
+  }
+
+  let species: HerdSpecies | undefined;
+  if (input.species !== undefined) {
+    if (typeof input.species !== "string" || !GESTATION_DEFAULTS.some((g) => g.species === input.species)) {
+      throw new ApiError(
+        400,
+        `Unknown species '${String(input.species)}'. Known species: ${GESTATION_DEFAULTS.map((g) => g.species).join(", ")}.`,
+      );
+    }
+    species = input.species as HerdSpecies;
+  }
+
+  const breedingRaw = input.breeding_date;
+  if (typeof breedingRaw !== "string" || !isIsoDate(breedingRaw)) {
+    throw new ApiError(400, "breeding_date is required, as an ISO date (YYYY-MM-DD).");
+  }
+
+  let gestation = species ? defaultGestationDays(species) : 283;
+  if (input.gestation_days !== undefined) {
+    const g = num(input.gestation_days);
+    if (g === undefined || g <= 0) throw new ApiError(400, "gestation_days must be a positive number.");
+    gestation = Math.round(g);
+  }
+
+  const reminders: HerdReminder[] = [];
+  if (input.reminders !== undefined) {
+    if (!Array.isArray(input.reminders)) throw new ApiError(400, "reminders must be an array.");
+    input.reminders.forEach((raw, i) => {
+      if (!raw || typeof raw !== "object") throw new ApiError(400, `reminders[${i}] must be an object.`);
+      const o = raw as Record<string, unknown>;
+      const label = typeof o.label === "string" && o.label.trim() ? o.label.trim() : `Reminder ${i + 1}`;
+      const anchorRaw = typeof o.anchor === "string" ? o.anchor : "breeding";
+      if (!(REMINDER_ANCHORS as readonly string[]).includes(anchorRaw)) {
+        throw new ApiError(400, `reminders[${i}].anchor must be one of: ${REMINDER_ANCHORS.join(", ")}.`);
+      }
+      const offset = o.offset_days === undefined ? 0 : num(o.offset_days);
+      if (offset === undefined) throw new ApiError(400, `reminders[${i}].offset_days must be a number.`);
+      const custom = typeof o.custom_date === "string" ? o.custom_date : undefined;
+      if (anchorRaw === "custom" && (!custom || !isIsoDate(custom))) {
+        throw new ApiError(400, `reminders[${i}].custom_date must be an ISO date (YYYY-MM-DD) when anchor is 'custom'.`);
+      }
+      reminders.push({
+        id: `api-reminder-${i + 1}`,
+        label,
+        anchor: anchorRaw as HerdReminder["anchor"],
+        offset_days: Math.round(offset),
+        ...(custom && isIsoDate(custom) ? { custom_date: custom } : {}),
+      });
+    });
+  }
+
+  const due = computeDueDate(breedingRaw, gestation);
+  if (!due) throw new ApiError(400, "Could not compute a due date from the given inputs.");
+  const stub: HerdRecord = {
+    id: "api-record",
+    animal_id: "api",
+    species: species ?? "other",
+    breeding_date: breedingRaw,
+    gestation_days: gestation,
+    reminders,
+    updated_at: "",
+  };
+  return {
+    input: {
+      ...(species ? { species } : {}),
+      breeding_date: breedingRaw,
+      gestation_days: gestation,
+      reminders,
+    },
+    due_date: due,
+    reminders: reminders.map((r) => ({ ...r, date: computeReminderDate(r, stub) })),
+  };
+}
+
+/** Parse the GET form: `?species=cattle&breeding_date=2026-01-01&gestation_days=283`. */
+export function herdInputFromQuery(searchParams: URLSearchParams): Record<string, unknown> {
+  const input: Record<string, unknown> = {};
+  const species = searchParams.get("species");
+  if (species) input.species = species;
+  const breeding = searchParams.get("breeding_date");
+  if (breeding) input.breeding_date = breeding;
+  const gestation = searchParams.get("gestation_days");
+  if (gestation !== null) input.gestation_days = gestation;
+  return input;
+}
+
 export function listFeedIngredients() {
   return { count: INGREDIENTS.length, ingredients: INGREDIENTS };
 }

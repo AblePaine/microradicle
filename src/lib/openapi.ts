@@ -9,7 +9,7 @@ export const OPENAPI_SPEC = {
     title: "MicroRadicle Agent API",
     version: "1.0.0",
     description:
-      "Free, no-key access to MicroRadicle's farm engines: the Feed Studio poultry ration analyzer and the 266-record cultivar library. The same math as the web UI. An MCP server exposing the same tools lives at /mcp; a tool manifest is at /mcp-tools.json.",
+      "Free, no-key access to MicroRadicle's farm engines: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, and the 266-record cultivar library. The same math as the web UI. An MCP server exposing the same tools lives at /mcp; a tool manifest is at /mcp-tools.json.",
   },
   servers: [{ url: "https://microradicle.com" }],
   paths: {
@@ -67,6 +67,50 @@ export const OPENAPI_SPEC = {
           "200": {
             description: "Same response as POST.",
             content: { "application/json": { schema: { $ref: "#/components/schemas/FeedCalculateResponse" } } },
+          },
+          "400": { $ref: "#/components/responses/Error" },
+        },
+      },
+    },
+    "/api/herd/calculate": {
+      post: {
+        operationId: "herdDueDate",
+        summary: "Compute a herd due date (herd packet date math)",
+        description:
+          "Adds a day count to a breeding date the caller supplies: species presets pre-fill the common published average (cattle 283, sheep 147, goat 150, pig 114, poultry incubation 21) and gestation_days overrides with the caller's own number. Optional reminders carry the caller's own labels and offsets and return with computed dates. Date arithmetic only — no intervals or schedules are suggested, and the response contains dates, not animal-care advice. The herd log itself is web-only (records live in the keeper's browser) and is not exposed by this API.",
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/HerdDueDateRequest" },
+              example: {
+                species: "cattle",
+                breeding_date: "2026-01-01",
+                reminders: [{ label: "My own note — two weeks out", anchor: "due", offset_days: -14 }],
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "Normalized input, the computed due date, and reminder dates.",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/HerdDueDateResponse" } } },
+          },
+          "400": { $ref: "#/components/responses/Error" },
+        },
+      },
+      get: {
+        operationId: "herdDueDateGet",
+        summary: "Compute a herd due date via query params",
+        parameters: [
+          { name: "species", in: "query", schema: { type: "string", enum: ["cattle", "sheep", "goat", "pig", "poultry", "other"] } },
+          { name: "breeding_date", in: "query", required: true, schema: { type: "string" }, description: "ISO date, YYYY-MM-DD." },
+          { name: "gestation_days", in: "query", schema: { type: "number" }, description: "Overrides the species preset day count." },
+        ],
+        responses: {
+          "200": {
+            description: "Same response as POST (without reminders).",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/HerdDueDateResponse" } } },
           },
           "400": { $ref: "#/components/responses/Error" },
         },
@@ -326,6 +370,54 @@ export const OPENAPI_SPEC = {
                     message: { type: "string" },
                   },
                 },
+              },
+            },
+          },
+        },
+      },
+      HerdReminder: {
+        type: "object",
+        properties: {
+          label: { type: "string", description: "The caller's own label for the reminder." },
+          anchor: { type: "string", enum: ["breeding", "due", "custom"], default: "breeding" },
+          offset_days: { type: "number", default: 0, description: "Days from the anchor date; negative counts back." },
+          custom_date: { type: "string", description: "ISO date — required when anchor is 'custom'." },
+        },
+      },
+      HerdDueDateRequest: {
+        type: "object",
+        properties: {
+          species: { type: "string", enum: ["cattle", "sheep", "goat", "pig", "poultry", "other"] },
+          breeding_date: { type: "string", description: "ISO date, YYYY-MM-DD." },
+          gestation_days: { type: "number", description: "Day count override; defaults to the species preset (283 with no species)." },
+          reminders: { type: "array", items: { $ref: "#/components/schemas/HerdReminder" } },
+        },
+        required: ["breeding_date"],
+      },
+      HerdDueDateResponse: {
+        type: "object",
+        properties: {
+          input: {
+            type: "object",
+            properties: {
+              species: { type: "string" },
+              breeding_date: { type: "string" },
+              gestation_days: { type: "number" },
+              reminders: { type: "array", items: { $ref: "#/components/schemas/HerdReminder" } },
+            },
+          },
+          due_date: { type: "string", description: "breeding_date + gestation_days, YYYY-MM-DD." },
+          reminders: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                label: { type: "string" },
+                anchor: { type: "string" },
+                offset_days: { type: "number" },
+                custom_date: { type: "string" },
+                date: { type: ["string", "null"], description: "The computed calendar date, or null when it cannot be placed." },
               },
             },
           },

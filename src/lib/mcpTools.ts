@@ -3,7 +3,7 @@
  * endpoint (src/routes/mcp.ts), the REST API, and the static manifest at
  * public/mcp-tools.json (generated from this module; keep them in step).
  */
-import { ApiError, calculateFeed, getVarietyById, searchVarieties } from "./agentApi.ts";
+import { ApiError, calculateFeed, calculateHerdDueDate, getVarietyById, searchVarieties } from "./agentApi.ts";
 
 export interface AgentToolDefinition {
   name: string;
@@ -90,6 +90,49 @@ export const AGENT_TOOLS: AgentToolDefinition[] = [
     },
   },
   {
+    name: "herd_due_date",
+    description:
+      "Compute an expected due date from a breeding date plus a day count — the same arithmetic as the MicroRadicle herd log. Species presets pre-fill the common published average day count (cattle 283, sheep 147, goat 150, pig 114, poultry incubation 21); gestation_days overrides it with the keeper's own number. Optional reminders are the caller's own labels and offsets (anchored to the breeding date, the due date, or a custom date) and come back with their calendar dates. This is date arithmetic on caller-supplied entries only — it returns dates, not animal-care advice, and it suggests no intervals or schedules. The herd log itself is web-only: records live in the keeper's browser and are not accessible through this API.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        species: {
+          type: "string",
+          enum: ["cattle", "sheep", "goat", "pig", "poultry", "other"],
+          description: "Species preset for the day count. Omit to default to 283 days, or pair with gestation_days.",
+        },
+        breeding_date: { type: "string", description: "Breeding (or incubation-start) date, ISO YYYY-MM-DD. Required." },
+        gestation_days: { type: "number", description: "Day count from breeding_date to the expected due date. Overrides the species preset." },
+        reminders: {
+          type: "array",
+          description: "The caller's own reminder entries: { label, anchor ('breeding' | 'due' | 'custom'), offset_days, custom_date (required when anchor is 'custom') }.",
+          items: {
+            type: "object",
+            properties: {
+              label: { type: "string" },
+              anchor: { type: "string", enum: ["breeding", "due", "custom"] },
+              offset_days: { type: "number" },
+              custom_date: { type: "string" },
+            },
+          },
+        },
+      },
+      required: ["breeding_date"],
+    },
+    outputDescription:
+      "Returns { input (normalized: species, breeding_date, gestation_days, reminders), due_date (YYYY-MM-DD), reminders: [{ id, label, anchor, offset_days, custom_date?, date (computed YYYY-MM-DD or null) }] }.",
+    http: {
+      method: "POST",
+      path: "/herd/calculate",
+      example_body: {
+        species: "cattle",
+        breeding_date: "2026-01-01",
+        reminders: [{ label: "My own note — two weeks out", anchor: "due", offset_days: -14 }],
+      },
+      example_query: "species=cattle&breeding_date=2026-01-01",
+    },
+  },
+  {
     name: "variety_search",
     description:
       "Search the MicroRadicle cultivar library (266 field-tested variety records for 30-inch biointensive beds). Free-text query matches common name, cultivar, botanical name, family, category, and id; category, frost-hardiness band, and botanical family filter exactly. Results are paginated full records — the same operating specs the site's succession engine plans from (propagation, bed geometry, timeline/DTM, yield & revenue, irrigation, soil extraction).",
@@ -148,6 +191,8 @@ export function callAgentTool(name: string, args: Record<string, unknown> | unde
   switch (name) {
     case "feed_calculate":
       return calculateFeed(input);
+    case "herd_due_date":
+      return calculateHerdDueDate(input);
     case "variety_search":
       return searchVarieties(input);
     case "variety_get": {

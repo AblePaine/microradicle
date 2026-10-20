@@ -116,7 +116,7 @@ function Gateway() {
           <div>
             <p className="text-[10px] tracking-[0.22em] text-accent uppercase">The rest of the farm</p>
             <h2 className="font-display text-2xl font-semibold tracking-wide text-fg">
-              WATER, SOIL, FEED, COOLER, CLIPBOARD
+              WATER, SOIL, FEED, HERD, COOLER, CLIPBOARD
             </h2>
           </div>
           <p className="hidden text-[11px] tracking-[0.16em] text-subtle uppercase sm:block">
@@ -144,6 +144,13 @@ function Gateway() {
             d="Balance a poultry ration from local bags — protein squared, minerals checked, batch priced per bird per day."
             href="/feed"
             cta="Open feed →"
+          />
+          <ModuleCard
+            k="Livestock"
+            t="Herd packet"
+            d="The barn log without the subscription: breeding dates in, due dates and your own reminder dates out, printed on one sheet. Records stay in your browser, offline."
+            href="/herd"
+            cta="Open herd log →"
           />
           <ModuleCard
             k="Postharvest"
@@ -325,7 +332,7 @@ function ModuleCard({
   k: string;
   t: string;
   d: string;
-  href: "/irrigation" | "/soil" | "/feed" | "/economics" | "/clipboard";
+  href: "/irrigation" | "/soil" | "/feed" | "/economics" | "/clipboard" | "/herd";
   cta: string;
 }) {
   return (

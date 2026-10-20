@@ -8,6 +8,7 @@ MicroRadicle (https://microradicle.com) is a free planning toolkit for small-sca
 
 - **Succession engine** (`/engine`): pick a cultivar and a harvest date; it works backwards through nursery lead time and germination to planting dates, bed feet, and a full-season succession schedule. Shareable result links encode the calculation in the URL (`/engine?crop=lettuce-salanova-butterhead&units=368&date=2026-10-20`).
 - **Feed Studio** (`/feed`): poultry ration formulator. Pearson-square balancing, a full nutrient panel (CP, ME, lysine, methionine, Ca, P, fiber) judged against six life-stage target presets, batch weigh-out, and cost per bird per day — from an 11-ingredient catalog of locally buyable feeds. Rations carry share links too (`/feed/<id>?target=...&lines=...`).
+- **Herd packet** (`/herd`): a herd & flock log for the barn, not another subscription app. Record an animal or group (tag, species, breed), the breeding date you wrote down, and the day count you use — the log works out the expected due date and your own reminder dates (your labels, your intervals), and prints as a paper log sheet. Records live in your browser's local storage and work offline; nothing is sent to a server. It is a notebook: dates and notes only, no animal-care advice or recommendations.
 - **Soil balancer** (`/soil`): turns crop nutrient extraction across your blocks into an organic amendment recipe (feather meal / bone meal / potash) with mineralization timing and manure credits.
 - **Irrigation & hydraulics** (`/irrigation`): drip zone sizing and mainline pressure-loss (Hazen-Williams) from the same bed plan.
 - **Nursery planner** (`/nursery`), **pasture planner** (`/pasture`), **pack-shed economics** (`/economics`): rack scheduling for microgreens and transplants, grazing rotations with manure nutrient credits, and per-crop enterprise economics from the cultivar records.
@@ -19,12 +20,13 @@ Plain-language deep dives at `/guides`: bed prep, cover crops, soil-test reading
 
 ## For AI agents
 
-MicroRadicle exposes its Feed Studio engine and cultivar library as a free JSON API plus an MCP server — no key required. This is the same math and data as the web engines.
+MicroRadicle exposes its Feed Studio engine, herd due-date calculator, and cultivar library as a free JSON API plus an MCP server — no key required. This is the same math and data as the web engines. The herd log itself is web-only: the keeper's records live in their browser's local storage and are never sent to the API — only the stateless due-date calculation below is exposed.
 
 ### REST API
 
 - `POST https://microradicle.com/api/feed/calculate` — ration analysis. Body is a partial JSON object; every field optional (omit `lines` entirely to analyze the built-in layer example ration). Key fields: `target_id` (broiler-starter | broiler-grower | broiler-finisher | pullet-starter | pullet-grower | layer-production), `lines` (`[{ingredient_id, pct}]` — catalog ids from the ingredients endpoint, or a custom line with a `name` plus nutrient values), `batch_lbs`, `flock_size`, `intake_lb_per_day`, `target_overrides` (per-nutrient `{min, max}` band edits). Returns the normalized input, the effective target bands, and the analysis: nutrient panel with in/low/high states, Ca:P ratio, batch weigh-out with per-ingredient cost, cost per lb / bird-day / flock-day / flock-week, and plain-language warnings.
 - `GET https://microradicle.com/api/feed/calculate?target_id=layer-production&lines=corn:63.2,soybean-meal-44:25.3,limestone:9` — same engine via query params; `lines` is comma-separated `ingredient_id:pct` pairs.
+- `POST https://microradicle.com/api/herd/calculate` — herd due-date math. Body: `breeding_date` (required, YYYY-MM-DD), optional `species` (cattle | sheep | goat | pig | poultry | other — pre-fills the common published average day count: 283 / 147 / 150 / 114 / 21), optional `gestation_days` (overrides the preset with your own number), optional `reminders` (`[{label, anchor: breeding|due|custom, offset_days, custom_date}]` — your own labels and intervals). Returns the normalized input, the computed `due_date`, and each reminder with its calendar date. `GET` takes `species`, `breeding_date`, `gestation_days` as query params. Date arithmetic only: no intervals or schedules are suggested, and the response contains dates, not animal-care advice.
 - `GET https://microradicle.com/api/feed/ingredients` — the 11-ingredient catalog (id, nutrient values as-fed, default price).
 - `GET https://microradicle.com/api/feed/targets` — the six life-stage target presets with nutrient bands.
 - `GET https://microradicle.com/api/crops?q=tomato&category=solanaceous&frost=tender&family=Solanaceae&limit=50&offset=0` — search the cultivar library. Free-text `q` matches name/cultivar/botanical name/family/id; `category`, `frost`, and `family` filter exactly. Returns paginated full records plus the total match count.
@@ -33,8 +35,8 @@ MicroRadicle exposes its Feed Studio engine and cultivar library as a free JSON 
 
 ### MCP server
 
-- `POST https://microradicle.com/mcp` — stateless streamable-HTTP MCP endpoint (JSON-RPC: initialize, ping, tools/list, tools/call). Tools: `feed_calculate`, `variety_search`, `variety_get` — the same handlers as the REST API.
-- `GET https://microradicle.com/mcp-tools.json` — machine-readable tool manifest (input schemas + HTTP bindings) for the three tools.
+- `POST https://microradicle.com/mcp` — stateless streamable-HTTP MCP endpoint (JSON-RPC: initialize, ping, tools/list, tools/call). Tools: `feed_calculate`, `herd_due_date`, `variety_search`, `variety_get` — the same handlers as the REST API.
+- `GET https://microradicle.com/mcp-tools.json` — machine-readable tool manifest (input schemas + HTTP bindings) for the four tools.
 
 Example:
 ```

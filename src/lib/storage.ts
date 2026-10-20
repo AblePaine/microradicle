@@ -16,9 +16,12 @@ import { defaultNetwork, PIPE_DIAMETERS } from "@/lib/hydraulics";
 import { DEFAULT_AMENDMENT_IDS, DEFAULT_SOIL } from "@/lib/soilMath";
 import { DEFAULT_ECONOMICS } from "@/lib/economicsMath";
 import { cloneDefaultFeed, resolveFeed } from "@/lib/feedMath";
+import { parseHerdRecord } from "@/lib/herdMath";
+import type { HerdRecord } from "@/types/herd";
 import { computeSuccession, iso, recomputeFarm } from "@/lib/math";
 
 export const FARM_STORAGE_KEY = "microradicle:farm:v3";
+export const HERD_LEDGER_KEY = "microradicle_herd_packet_v1";
 export const PASTURE_LEDGER_KEY = "microradicle_pasture_batches_v1";
 export const NURSERY_LEDGER_KEY = "microradicle_nursery_batches_v1";
 export const LEGACY_FARM_KEYS = [
@@ -480,6 +483,24 @@ export function parseFarm(raw: unknown): FarmState {
     },
     cropBySlug,
   );
+}
+
+export function loadHerdLedger(): HerdRecord[] {
+  if (typeof localStorage === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(HERD_LEDGER_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map(parseHerdRecord).filter((r): r is HerdRecord => r !== null);
+  } catch {
+    return [];
+  }
+}
+
+export function saveHerdLedger(records: HerdRecord[]): void {
+  if (typeof localStorage === "undefined") return;
+  localStorage.setItem(HERD_LEDGER_KEY, JSON.stringify(records));
 }
 
 export function loadPastureLedger(): PastureRotationQueueItem[] {

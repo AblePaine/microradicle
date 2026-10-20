@@ -40,6 +40,7 @@ import { Route as GuidesSuccessionPlantingSaladGreensRouteImport } from './route
 import { Route as GuidesSuccessionPlantingScheduleRouteImport } from './routes/guides/succession-planting-schedule'
 import { Route as GuidesVegetableSpacingChartRouteImport } from './routes/guides/vegetable-spacing-chart'
 import { Route as GuidesWalkInCoolerManagementRouteImport } from './routes/guides/walk-in-cooler-management'
+import { Route as HerdIndexRouteImport } from './routes/herd/index'
 import { Route as IrrigationIndexRouteImport } from './routes/irrigation/index'
 import { Route as IrrigationSlugRouteImport } from './routes/irrigation/$slug'
 import { Route as NurseryIndexRouteImport } from './routes/nursery/index'
@@ -54,6 +55,7 @@ import { Route as ApiCropsIdRouteImport } from './routes/api/crops/$id'
 import { Route as ApiFeedCalculateRouteImport } from './routes/api/feed/calculate'
 import { Route as ApiFeedIngredientsRouteImport } from './routes/api/feed/ingredients'
 import { Route as ApiFeedTargetsRouteImport } from './routes/api/feed/targets'
+import { Route as ApiHerdCalculateRouteImport } from './routes/api/herd/calculate'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -226,6 +228,11 @@ const GuidesWalkInCoolerManagementRoute =
     path: '/guides/walk-in-cooler-management',
     getParentRoute: () => rootRouteImport,
   } as any)
+const HerdIndexRoute = HerdIndexRouteImport.update({
+  id: '/herd/',
+  path: '/herd/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IrrigationIndexRoute = IrrigationIndexRouteImport.update({
   id: '/irrigation/',
   path: '/irrigation/',
@@ -296,6 +303,11 @@ const ApiFeedTargetsRoute = ApiFeedTargetsRouteImport.update({
   path: '/api/feed/targets',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiHerdCalculateRoute = ApiHerdCalculateRouteImport.update({
+  id: '/api/herd/calculate',
+  path: '/api/herd/calculate',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -334,6 +346,7 @@ export interface FileRoutesByFullPath {
   '/economics/': typeof EconomicsIndexRoute
   '/feed/': typeof FeedIndexRoute
   '/guides/': typeof GuidesIndexRoute
+  '/herd/': typeof HerdIndexRoute
   '/irrigation/': typeof IrrigationIndexRoute
   '/nursery/': typeof NurseryIndexRoute
   '/pasture/': typeof PastureIndexRoute
@@ -342,6 +355,7 @@ export interface FileRoutesByFullPath {
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/herd/calculate': typeof ApiHerdCalculateRoute
   '/api/crops/': typeof ApiCropsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -381,6 +395,7 @@ export interface FileRoutesByTo {
   '/economics': typeof EconomicsIndexRoute
   '/feed': typeof FeedIndexRoute
   '/guides': typeof GuidesIndexRoute
+  '/herd': typeof HerdIndexRoute
   '/irrigation': typeof IrrigationIndexRoute
   '/nursery': typeof NurseryIndexRoute
   '/pasture': typeof PastureIndexRoute
@@ -389,6 +404,7 @@ export interface FileRoutesByTo {
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/herd/calculate': typeof ApiHerdCalculateRoute
   '/api/crops': typeof ApiCropsIndexRoute
 }
 export interface FileRoutesById {
@@ -429,6 +445,7 @@ export interface FileRoutesById {
   '/economics/': typeof EconomicsIndexRoute
   '/feed/': typeof FeedIndexRoute
   '/guides/': typeof GuidesIndexRoute
+  '/herd/': typeof HerdIndexRoute
   '/irrigation/': typeof IrrigationIndexRoute
   '/nursery/': typeof NurseryIndexRoute
   '/pasture/': typeof PastureIndexRoute
@@ -437,6 +454,7 @@ export interface FileRoutesById {
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/herd/calculate': typeof ApiHerdCalculateRoute
   '/api/crops/': typeof ApiCropsIndexRoute
 }
 export interface FileRouteTypes {
@@ -478,6 +496,7 @@ export interface FileRouteTypes {
     | '/economics/'
     | '/feed/'
     | '/guides/'
+    | '/herd/'
     | '/irrigation/'
     | '/nursery/'
     | '/pasture/'
@@ -486,6 +505,7 @@ export interface FileRouteTypes {
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
+    | '/api/herd/calculate'
     | '/api/crops/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -525,6 +545,7 @@ export interface FileRouteTypes {
     | '/economics'
     | '/feed'
     | '/guides'
+    | '/herd'
     | '/irrigation'
     | '/nursery'
     | '/pasture'
@@ -533,6 +554,7 @@ export interface FileRouteTypes {
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
+    | '/api/herd/calculate'
     | '/api/crops'
   id:
     | '__root__'
@@ -572,6 +594,7 @@ export interface FileRouteTypes {
     | '/economics/'
     | '/feed/'
     | '/guides/'
+    | '/herd/'
     | '/irrigation/'
     | '/nursery/'
     | '/pasture/'
@@ -580,6 +603,7 @@ export interface FileRouteTypes {
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
+    | '/api/herd/calculate'
     | '/api/crops/'
   fileRoutesById: FileRoutesById
 }
@@ -620,6 +644,7 @@ export interface RootRouteChildren {
   EconomicsIndexRoute: typeof EconomicsIndexRoute
   FeedIndexRoute: typeof FeedIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
+  HerdIndexRoute: typeof HerdIndexRoute
   IrrigationIndexRoute: typeof IrrigationIndexRoute
   NurseryIndexRoute: typeof NurseryIndexRoute
   PastureIndexRoute: typeof PastureIndexRoute
@@ -628,6 +653,7 @@ export interface RootRouteChildren {
   ApiFeedCalculateRoute: typeof ApiFeedCalculateRoute
   ApiFeedIngredientsRoute: typeof ApiFeedIngredientsRoute
   ApiFeedTargetsRoute: typeof ApiFeedTargetsRoute
+  ApiHerdCalculateRoute: typeof ApiHerdCalculateRoute
   ApiCropsIndexRoute: typeof ApiCropsIndexRoute
 }
 
@@ -850,6 +876,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesWalkInCoolerManagementRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/herd/': {
+      id: '/herd/'
+      path: '/herd'
+      fullPath: '/herd/'
+      preLoaderRoute: typeof HerdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/irrigation/': {
       id: '/irrigation/'
       path: '/irrigation'
@@ -948,6 +981,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiFeedTargetsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/herd/calculate': {
+      id: '/api/herd/calculate'
+      path: '/api/herd/calculate'
+      fullPath: '/api/herd/calculate'
+      preLoaderRoute: typeof ApiHerdCalculateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -991,6 +1031,7 @@ const rootRouteChildren: RootRouteChildren = {
   EconomicsIndexRoute: EconomicsIndexRoute,
   FeedIndexRoute: FeedIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
+  HerdIndexRoute: HerdIndexRoute,
   IrrigationIndexRoute: IrrigationIndexRoute,
   NurseryIndexRoute: NurseryIndexRoute,
   PastureIndexRoute: PastureIndexRoute,
@@ -999,6 +1040,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiFeedCalculateRoute: ApiFeedCalculateRoute,
   ApiFeedIngredientsRoute: ApiFeedIngredientsRoute,
   ApiFeedTargetsRoute: ApiFeedTargetsRoute,
+  ApiHerdCalculateRoute: ApiHerdCalculateRoute,
   ApiCropsIndexRoute: ApiCropsIndexRoute,
 }
 export const routeTree = rootRouteImport
