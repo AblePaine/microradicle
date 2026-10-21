@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const ROUTES_DIR = join(ROOT, "src", "routes");
 const OUT_FILE = join(ROOT, "public", "sitemap.xml");
-const SITE_URL = "https://microradicle.com";
+const SITE_URL = "https://www.microradicle.com";
 
 /** Files that are redirect aliases (client-side <Navigate>) or the root shell — never listed. */
 const SKIP_FILES = new Set(["__root.tsx", "clip.tsx", "print.clipboard.tsx"]);
