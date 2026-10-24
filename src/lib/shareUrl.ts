@@ -250,3 +250,137 @@ export function feedShareHref(rationId: string, params: SharedRationParams, orig
   const qs = encodeRationToParams(params).toString();
   return `${origin}/feed/${encodeURIComponent(rationId)}${qs ? `?${qs}` : ""}`;
 }
+
+/* ------------------------------------------------------------------ */
+/* Greenhouse top-off share state (/greenhouse?v=…&ec=…&tgt=…&p=…)     */
+/*                                                                     */
+/* Unnamed parts encode readably as rates (`p=5,5,5`). Parts carrying  */
+/* grower labels fall back to a base64url JSON payload (`p64`) so a    */
+/* shared link never silently drops a label — the recipient sees the   */
+/* same recipe.                                                        */
+/* ------------------------------------------------------------------ */
+
+import type { TopOffPart } from "./topoffMath.ts";
+
+export interface SharedTopOffParams {
+  volumeL?: number;
+  ecNow?: number;
+  ecTarget?: number;
+  recipeEc?: number;
+  parts?: TopOffPart[];
+  fillVolumeL?: number;
+  capacityL?: number;
+  phNow?: number;
+  driftSuspected?: boolean;
+}
+
+function encodeParts64(parts: TopOffPart[]): string {
+  const bytes = new TextEncoder().encode(JSON.stringify(parts));
+  let binary = "";
+  for (const b of bytes) binary += String.fromCharCode(b);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+function decodeParts64(raw: string): TopOffPart[] | undefined {
+  try {
+    const b64 = raw.replace(/-/g, "+").replace(/_/g, "/");
+    const binary = atob(b64 + "=".repeat((4 - (b64.length % 4)) % 4));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    const parsed: unknown = JSON.parse(new TextDecoder().decode(bytes));
+    if (!Array.isArray(parsed)) return undefined;
+    const parts: TopOffPart[] = [];
+    for (const item of parsed) {
+      if (!item || typeof item !== "object") return undefined;
+      const o = item as Record<string, unknown>;
+      if (typeof o.ml_per_gal !== "number" || !Number.isFinite(o.ml_per_gal)) return undefined;
+      parts.push({
+        ...(typeof o.name === "string" && o.name ? { name: o.name } : {}),
+        ml_per_gal: o.ml_per_gal,
+      });
+    }
+    return parts.length ? parts.slice(0, 3) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function fmtNum(n: number): string {
+  return String(Math.round(n * 10000) / 10000);
+}
+
+export function encodeTopOffToParams(p: SharedTopOffParams): URLSearchParams {
+  const sp = new URLSearchParams();
+  if (p.volumeL !== undefined && Number.isFinite(p.volumeL)) sp.set("v", fmtNum(p.volumeL));
+  if (p.ecNow !== undefined && Number.isFinite(p.ecNow)) sp.set("ec", fmtNum(p.ecNow));
+  if (p.ecTarget !== undefined && Number.isFinite(p.ecTarget)) sp.set("tgt", fmtNum(p.ecTarget));
+  if (p.recipeEc !== undefined && Number.isFinite(p.recipeEc)) sp.set("rec", fmtNum(p.recipeEc));
+  if (p.parts && p.parts.length) {
+    if (p.parts.every((part) => !part.name)) {
+      sp.set("p", p.parts.map((part) => fmtNum(part.ml_per_gal)).join(","));
+    } else {
+      sp.set("p64", encodeParts64(p.parts));
+    }
+  }
+  if (p.fillVolumeL !== undefined && Number.isFinite(p.fillVolumeL)) sp.set("fill", fmtNum(p.fillVolumeL));
+  if (p.capacityL !== undefined && Number.isFinite(p.capacityL)) sp.set("cap", fmtNum(p.capacityL));
+  if (p.phNow !== undefined && Number.isFinite(p.phNow)) sp.set("ph", fmtNum(p.phNow));
+  if (p.driftSuspected) sp.set("drift", "1");
+  return sp;
+}
+
+function numParam(sp: URLSearchParams, key: string): number | undefined {
+  const raw = sp.get(key);
+  if (raw === null || raw === "") return undefined;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : undefined;
+}
+
+export function decodeTopOffFromParams(sp: URLSearchParams): SharedTopOffParams {
+  const out: SharedTopOffParams = {};
+  const v = numParam(sp, "v");
+  if (v !== undefined) out.volumeL = v;
+  const ec = numParam(sp, "ec");
+  if (ec !== undefined) out.ecNow = ec;
+  const tgt = numParam(sp, "tgt");
+  if (tgt !== undefined) out.ecTarget = tgt;
+  const rec = numParam(sp, "rec");
+  if (rec !== undefined) out.recipeEc = rec;
+  const p64 = sp.get("p64");
+  const plain = sp.get("p");
+  const parts = p64
+    ? decodeParts64(p64)
+    : plain
+      ? plain
+          .split(",")
+          .map((s) => Number(s.trim()))
+          .filter((n) => Number.isFinite(n))
+          .slice(0, 3)
+          .map((ml_per_gal) => ({ ml_per_gal }))
+      : undefined;
+  if (parts && parts.length) out.parts = parts;
+  const fill = numParam(sp, "fill");
+  if (fill !== undefined) out.fillVolumeL = fill;
+  const cap = numParam(sp, "cap");
+  if (cap !== undefined) out.capacityL = cap;
+  const ph = numParam(sp, "ph");
+  if (ph !== undefined) out.phNow = ph;
+  if (sp.get("drift") === "1") out.driftSuspected = true;
+  return out;
+}
+
+/** TanStack Router validateSearch input -> top-off params (validateSearch for /greenhouse). */
+export function decodeTopOffFromUnknown(search: Record<string, unknown>): SharedTopOffParams {
+  const sp = new URLSearchParams();
+  for (const key of ["v", "ec", "tgt", "rec", "p", "p64", "fill", "cap", "ph", "drift"] as const) {
+    const value = search[key];
+    if (value === undefined || value === null) continue;
+    sp.set(key, String(value));
+  }
+  return decodeTopOffFromParams(sp);
+}
+
+export function greenhouseShareHref(params: SharedTopOffParams, origin = ""): string {
+  const qs = encodeTopOffToParams(params).toString();
+  return `${origin}/greenhouse${qs ? `?${qs}` : ""}`;
+}

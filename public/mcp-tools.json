@@ -1,7 +1,7 @@
 {
   "name": "microradicle",
   "version": "1.0.0",
-  "description": "MicroRadicle farm engines for agents: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, and the 266-record cultivar library. Free, no API key.",
+  "description": "MicroRadicle farm engines for agents: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, the greenhouse reservoir top-off calculator, and the 266-record cultivar library. Free, no API key.",
   "homepage": "https://microradicle.com",
   "api_base": "https://microradicle.com/api",
   "mcp_endpoint": "https://microradicle.com/mcp",
@@ -11,7 +11,8 @@
     "The same tools are served over MCP (stateless streamable HTTP, JSON-RPC) at mcp_endpoint — send initialize, then tools/list / tools/call.",
     "feed_calculate: every input is optional — omit lines entirely to analyze the built-in layer example ration. Lines are expected to total 100%; the engine computes on the actual total and warns when it drifts.",
     "variety_search over the full library is paginated (default limit 50, max 200) — check `total` before assuming you have everything.",
-    "herd_due_date: date arithmetic only — breeding_date + a day count (species preset or your own gestation_days), plus your own reminder labels/offsets returned as calendar dates. The herd log itself is web-only; records are never sent to the API."
+    "herd_due_date: date arithmetic only — breeding_date + a day count (species preset or your own gestation_days), plus your own reminder labels/offsets returned as calendar dates. The herd log itself is web-only; records are never sent to the API.",
+    "greenhouse_topoff: linear-blend EC math — current volume + EC and a target EC in, concentrate-part doses or plain-water dilution out (or both, split to a fill line); dump-and-remix advisory on stated triggers. pH is context only, never dosed."
   ],
   "tools": [
     {
@@ -194,6 +195,96 @@
           "reminders": [{ "label": "My own note — two weeks out", "anchor": "due", "offset_days": -14 }]
         },
         "example_query": "species=cattle&breeding_date=2026-01-01"
+      }
+    },
+    {
+      "name": "greenhouse_topoff",
+      "description": "Answer the hydroponic grower's daily question — what do I add to the reservoir right now? Give the current volume (liters), current EC, and a target EC, plus the last mix recipe (up to 3 concentrate parts at their full-strength mL/gal rates, and the recipe's full-strength EC — the EC a fresh full-strength batch reads, default 2.0). EC blends linearly by volume: if EC is low it solves for the concentrate dose per part (as a full-strength-equivalent volume); if EC is high it solves for plain-water dilution; with fill_volume_l it solves the water + concentrate split that lands on target exactly at the fill line. A dump-and-remix advisory fires on stated, conservative triggers: the target is at/above the recipe's own EC, the correction exceeds the reservoir volume or a stated capacity, dilution cannot fit the headroom, or the caller flags suspected drift (drift_suspected). Brand-agnostic — no product database. Results carry PPM on both the 500 and 700 scales, derived from EC. pH (ph_now) is accepted as context only and is never dosed.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "volume_l": {
+            "type": "number",
+            "description": "Current reservoir volume in liters. Required."
+          },
+          "ec_now": {
+            "type": "number",
+            "description": "Current EC reading (mS/cm). Required."
+          },
+          "ec_target": {
+            "type": "number",
+            "description": "Target EC (mS/cm). Required."
+          },
+          "recipe_ec": {
+            "type": "number",
+            "description": "EC of the recipe mixed at full strength (grower-stated; brands differ). Default: 2.0."
+          },
+          "parts": {
+            "type": "array",
+            "description": "The last mix recipe: up to 3 parts, each { name (optional label), ml_per_gal (rate at full strength) }.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "ml_per_gal": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "ml_per_gal"
+              ]
+            }
+          },
+          "fill_volume_l": {
+            "type": "number",
+            "description": "Optional: top off to this final volume (liters) while landing on target."
+          },
+          "capacity_l": {
+            "type": "number",
+            "description": "Optional: physical reservoir capacity (liters) — drives the overflow flag."
+          },
+          "ph_now": {
+            "type": "number",
+            "description": "Optional pH reading — context only; this tool does no pH dosing math."
+          },
+          "drift_suspected": {
+            "type": "boolean",
+            "description": "Set true when the mix may be compromised (slime, smell, unknown additions) — forces the dump-and-remix advisory."
+          }
+        },
+        "required": [
+          "volume_l",
+          "ec_now",
+          "ec_target"
+        ]
+      },
+      "outputDescription": "Returns { input (normalized), mode ('concentrate' | 'dilute' | 'fill' | 'none' | 'blocked'), add_water_l, full_strength_equivalent_l (liters of full-strength mix whose concentrate content equals the dose; null when blocked), parts_ml [{ name?, ml_per_gal, add_ml }], total_concentrate_ml, final_volume_l, final_ec (recomputed blend check), ppm_now / ppm_target { ppm500, ppm700 }, advisory { dump_and_remix, codes, messages }, notes }.",
+      "http": {
+        "method": "POST",
+        "path": "/greenhouse/calculate",
+        "example_body": {
+          "volume_l": 40,
+          "ec_now": 1.2,
+          "ec_target": 1.8,
+          "recipe_ec": 2.0,
+          "parts": [
+            {
+              "name": "Micro",
+              "ml_per_gal": 5
+            },
+            {
+              "name": "Gro",
+              "ml_per_gal": 5
+            },
+            {
+              "name": "Bloom",
+              "ml_per_gal": 5
+            }
+          ]
+        },
+        "example_query": "volume_l=40&ec_now=1.2&ec_target=1.8&recipe_ec=2.0&parts=5,5,5"
       }
     },
     {

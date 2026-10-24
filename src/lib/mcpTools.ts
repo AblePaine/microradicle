@@ -3,7 +3,7 @@
  * endpoint (src/routes/mcp.ts), the REST API, and the static manifest at
  * public/mcp-tools.json (generated from this module; keep them in step).
  */
-import { ApiError, calculateFeed, calculateHerdDueDate, getVarietyById, searchVarieties } from "./agentApi.ts";
+import { ApiError, calculateFeed, calculateHerdDueDate, calculateTopOff, getVarietyById, searchVarieties } from "./agentApi.ts";
 
 export interface AgentToolDefinition {
   name: string;
@@ -133,6 +133,55 @@ export const AGENT_TOOLS: AgentToolDefinition[] = [
     },
   },
   {
+    name: "greenhouse_topoff",
+    description:
+      "Answer the hydroponic grower's daily question — what do I add to the reservoir right now? Give the current volume (liters), current EC, and a target EC, plus the last mix recipe (up to 3 concentrate parts at their full-strength mL/gal rates, and the recipe's full-strength EC — the EC a fresh full-strength batch reads, default 2.0). EC blends linearly by volume: if EC is low it solves for the concentrate dose per part (as a full-strength-equivalent volume); if EC is high it solves for plain-water dilution; with fill_volume_l it solves the water + concentrate split that lands on target exactly at the fill line. A dump-and-remix advisory fires on stated, conservative triggers: the target is at/above the recipe's own EC, the correction exceeds the reservoir volume or a stated capacity, dilution cannot fit the headroom, or the caller flags suspected drift (drift_suspected). Brand-agnostic — no product database. Results carry PPM on both the 500 and 700 scales, derived from EC. pH (ph_now) is accepted as context only and is never dosed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        volume_l: { type: "number", description: "Current reservoir volume in liters. Required." },
+        ec_now: { type: "number", description: "Current EC reading (mS/cm). Required." },
+        ec_target: { type: "number", description: "Target EC (mS/cm). Required." },
+        recipe_ec: { type: "number", description: "EC of the recipe mixed at full strength (grower-stated; brands differ). Default: 2.0." },
+        parts: {
+          type: "array",
+          description: "The last mix recipe: up to 3 parts, each { name (optional label), ml_per_gal (rate at full strength) }.",
+          items: {
+            type: "object",
+            properties: {
+              name: { type: "string" },
+              ml_per_gal: { type: "number" },
+            },
+            required: ["ml_per_gal"],
+          },
+        },
+        fill_volume_l: { type: "number", description: "Optional: top off to this final volume (liters) while landing on target." },
+        capacity_l: { type: "number", description: "Optional: physical reservoir capacity (liters) — drives the overflow flag." },
+        ph_now: { type: "number", description: "Optional pH reading — context only; this tool does no pH dosing math." },
+        drift_suspected: { type: "boolean", description: "Set true when the mix may be compromised (slime, smell, unknown additions) — forces the dump-and-remix advisory." },
+      },
+      required: ["volume_l", "ec_now", "ec_target"],
+    },
+    outputDescription:
+      "Returns { input (normalized), mode ('concentrate' | 'dilute' | 'fill' | 'none' | 'blocked'), add_water_l, full_strength_equivalent_l (liters of full-strength mix whose concentrate content equals the dose; null when blocked), parts_ml [{ name?, ml_per_gal, add_ml }], total_concentrate_ml, final_volume_l, final_ec (recomputed blend check), ppm_now / ppm_target { ppm500, ppm700 }, advisory { dump_and_remix, codes, messages }, notes }.",
+    http: {
+      method: "POST",
+      path: "/greenhouse/calculate",
+      example_body: {
+        volume_l: 40,
+        ec_now: 1.2,
+        ec_target: 1.8,
+        recipe_ec: 2.0,
+        parts: [
+          { name: "Micro", ml_per_gal: 5 },
+          { name: "Gro", ml_per_gal: 5 },
+          { name: "Bloom", ml_per_gal: 5 },
+        ],
+      },
+      example_query: "volume_l=40&ec_now=1.2&ec_target=1.8&recipe_ec=2.0&parts=5,5,5",
+    },
+  },
+  {
     name: "variety_search",
     description:
       "Search the MicroRadicle cultivar library (266 field-tested variety records for 30-inch biointensive beds). Free-text query matches common name, cultivar, botanical name, family, category, and id; category, frost-hardiness band, and botanical family filter exactly. Results are paginated full records — the same operating specs the site's succession engine plans from (propagation, bed geometry, timeline/DTM, yield & revenue, irrigation, soil extraction).",
@@ -193,6 +242,8 @@ export function callAgentTool(name: string, args: Record<string, unknown> | unde
       return calculateFeed(input);
     case "herd_due_date":
       return calculateHerdDueDate(input);
+    case "greenhouse_topoff":
+      return calculateTopOff(input);
     case "variety_search":
       return searchVarieties(input);
     case "variety_get": {

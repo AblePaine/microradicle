@@ -9,7 +9,7 @@ export const OPENAPI_SPEC = {
     title: "MicroRadicle Agent API",
     version: "1.0.0",
     description:
-      "Free, no-key access to MicroRadicle's farm engines: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, and the 266-record cultivar library. The same math as the web UI. An MCP server exposing the same tools lives at /mcp; a tool manifest is at /mcp-tools.json.",
+      "Free, no-key access to MicroRadicle's farm engines: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, the greenhouse reservoir top-off calculator, and the 266-record cultivar library. The same math as the web UI. An MCP server exposing the same tools lives at /mcp; a tool manifest is at /mcp-tools.json.",
   },
   servers: [{ url: "https://microradicle.com" }],
   paths: {
@@ -111,6 +111,62 @@ export const OPENAPI_SPEC = {
           "200": {
             description: "Same response as POST (without reminders).",
             content: { "application/json": { schema: { $ref: "#/components/schemas/HerdDueDateResponse" } } },
+          },
+          "400": { $ref: "#/components/responses/Error" },
+        },
+      },
+    },
+    "/api/greenhouse/calculate": {
+      post: {
+        operationId: "greenhouseTopOff",
+        summary: "Solve a reservoir top-off (greenhouse hydroponics)",
+        description:
+          "The daily-action calculator: given the reservoir's current volume and EC, a target EC, and the last mix recipe (up to 3 parts at full-strength mL/gal rates plus the recipe's full-strength EC), it returns the concentrate dose per part or the plain-water dilution that lands on target — or both, split to hit a fill volume exactly. EC blends linearly by volume. A dump-and-remix advisory fires on stated triggers (target at/above the recipe's own EC, correction exceeding the reservoir volume or a stated capacity, dilution that cannot fit the headroom, caller-flagged suspected drift). Brand-agnostic; PPM is reported on both the 500 and 700 scales, derived from EC. ph_now is context only — no pH dosing is computed.",
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/TopOffRequest" },
+              example: {
+                volume_l: 40,
+                ec_now: 1.2,
+                ec_target: 1.8,
+                recipe_ec: 2.0,
+                parts: [
+                  { name: "Micro", ml_per_gal: 5 },
+                  { name: "Gro", ml_per_gal: 5 },
+                  { name: "Bloom", ml_per_gal: 5 },
+                ],
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "Normalized input, the solved additions, the resulting volume/EC, and any advisory.",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/TopOffResponse" } } },
+          },
+          "400": { $ref: "#/components/responses/Error" },
+        },
+      },
+      get: {
+        operationId: "greenhouseTopOffGet",
+        summary: "Solve a reservoir top-off via query params",
+        parameters: [
+          { name: "volume_l", in: "query", required: true, schema: { type: "number" }, description: "Current reservoir volume, liters." },
+          { name: "ec_now", in: "query", required: true, schema: { type: "number" }, description: "Current EC (mS/cm)." },
+          { name: "ec_target", in: "query", required: true, schema: { type: "number" }, description: "Target EC (mS/cm)." },
+          { name: "recipe_ec", in: "query", schema: { type: "number" }, description: "EC of the recipe at full strength. Default 2.0." },
+          { name: "parts", in: "query", schema: { type: "string" }, description: "Comma-separated full-strength rates in mL/gal, e.g. parts=5,5,5 (max 3; names are POST-only)." },
+          { name: "fill_volume_l", in: "query", schema: { type: "number" }, description: "Top off to this final volume while landing on target." },
+          { name: "capacity_l", in: "query", schema: { type: "number" }, description: "Physical reservoir capacity — drives the overflow flag." },
+          { name: "ph_now", in: "query", schema: { type: "number" }, description: "pH reading — context only." },
+          { name: "drift_suspected", in: "query", schema: { type: "string" }, description: "'1' or 'true' when the mix may be compromised." },
+        ],
+        responses: {
+          "200": {
+            description: "Same response as POST.",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/TopOffResponse" } } },
           },
           "400": { $ref: "#/components/responses/Error" },
         },
@@ -421,6 +477,70 @@ export const OPENAPI_SPEC = {
               },
             },
           },
+        },
+      },
+      TopOffPart: {
+        type: "object",
+        properties: {
+          name: { type: "string", description: "Optional grower label for the part (display only)." },
+          ml_per_gal: { type: "number", description: "This part's rate in the full-strength recipe, mL per gallon." },
+        },
+        required: ["ml_per_gal"],
+      },
+      TopOffRequest: {
+        type: "object",
+        properties: {
+          volume_l: { type: "number", description: "Current reservoir volume, liters." },
+          ec_now: { type: "number", description: "Current EC (mS/cm)." },
+          ec_target: { type: "number", description: "Target EC (mS/cm)." },
+          recipe_ec: { type: "number", description: "EC of the recipe mixed at full strength (grower-stated). Default 2.0.", default: 2.0 },
+          parts: { type: "array", maxItems: 3, items: { $ref: "#/components/schemas/TopOffPart" } },
+          fill_volume_l: { type: "number", description: "Optional final volume to top off to while landing on target." },
+          capacity_l: { type: "number", description: "Optional physical reservoir capacity — drives the overflow flag." },
+          ph_now: { type: "number", description: "Optional pH reading — context only; never dosed." },
+          drift_suspected: { type: "boolean", description: "Caller-flagged suspected drift — forces the dump-and-remix advisory." },
+        },
+        required: ["volume_l", "ec_now", "ec_target"],
+      },
+      TopOffResponse: {
+        type: "object",
+        properties: {
+          input: {
+            type: "object",
+            description: "The normalized input the engine solved (recipe_ec defaulted; fill/capacity/ph null when absent).",
+            additionalProperties: true,
+          },
+          mode: { type: "string", enum: ["concentrate", "dilute", "fill", "none", "blocked"] },
+          add_water_l: { type: "number", description: "Plain water to add, liters." },
+          full_strength_equivalent_l: {
+            type: ["number", "null"],
+            description: "Liters of full-strength mix whose concentrate content equals the dose; null when no such volume exists.",
+          },
+          parts_ml: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                name: { type: "string" },
+                ml_per_gal: { type: "number" },
+                add_ml: { type: "number", description: "mL of this part to add." },
+              },
+            },
+          },
+          total_concentrate_ml: { type: "number" },
+          final_volume_l: { type: ["number", "null"] },
+          final_ec: { type: ["number", "null"], description: "EC after the additions, recomputed from the blend." },
+          ppm_now: { type: "object", properties: { ppm500: { type: "number" }, ppm700: { type: "number" } } },
+          ppm_target: { type: "object", properties: { ppm500: { type: "number" }, ppm700: { type: "number" } } },
+          advisory: {
+            type: "object",
+            properties: {
+              dump_and_remix: { type: "boolean" },
+              codes: { type: "array", items: { type: "string" } },
+              messages: { type: "array", items: { type: "string" } },
+            },
+          },
+          notes: { type: "array", items: { type: "string" } },
         },
       },
       Crop: {

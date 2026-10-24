@@ -21,6 +21,7 @@ import { Route as EconomicsIndexRouteImport } from './routes/economics/index'
 import { Route as EconomicsSlugRouteImport } from './routes/economics/$slug'
 import { Route as FeedIndexRouteImport } from './routes/feed/index'
 import { Route as FeedSlugRouteImport } from './routes/feed/$slug'
+import { Route as GreenhouseIndexRouteImport } from './routes/greenhouse/index'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as Guides30InchBedPrepRouteImport } from './routes/guides/30-inch-bed-prep'
 import { Route as GuidesChickenTractorMoveFrequencyRouteImport } from './routes/guides/chicken-tractor-move-frequency'
@@ -55,6 +56,7 @@ import { Route as ApiCropsIdRouteImport } from './routes/api/crops/$id'
 import { Route as ApiFeedCalculateRouteImport } from './routes/api/feed/calculate'
 import { Route as ApiFeedIngredientsRouteImport } from './routes/api/feed/ingredients'
 import { Route as ApiFeedTargetsRouteImport } from './routes/api/feed/targets'
+import { Route as ApiGreenhouseCalculateRouteImport } from './routes/api/greenhouse/calculate'
 import { Route as ApiHerdCalculateRouteImport } from './routes/api/herd/calculate'
 
 const IndexRoute = IndexRouteImport.update({
@@ -115,6 +117,11 @@ const FeedIndexRoute = FeedIndexRouteImport.update({
 const FeedSlugRoute = FeedSlugRouteImport.update({
   id: '/feed/$slug',
   path: '/feed/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GreenhouseIndexRoute = GreenhouseIndexRouteImport.update({
+  id: '/greenhouse/',
+  path: '/greenhouse/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesIndexRoute = GuidesIndexRouteImport.update({
@@ -303,6 +310,11 @@ const ApiFeedTargetsRoute = ApiFeedTargetsRouteImport.update({
   path: '/api/feed/targets',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiGreenhouseCalculateRoute = ApiGreenhouseCalculateRouteImport.update({
+  id: '/api/greenhouse/calculate',
+  path: '/api/greenhouse/calculate',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiHerdCalculateRoute = ApiHerdCalculateRouteImport.update({
   id: '/api/herd/calculate',
   path: '/api/herd/calculate',
@@ -345,6 +357,7 @@ export interface FileRoutesByFullPath {
   '/crops/': typeof CropsIndexRoute
   '/economics/': typeof EconomicsIndexRoute
   '/feed/': typeof FeedIndexRoute
+  '/greenhouse/': typeof GreenhouseIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/herd/': typeof HerdIndexRoute
   '/irrigation/': typeof IrrigationIndexRoute
@@ -355,6 +368,7 @@ export interface FileRoutesByFullPath {
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/greenhouse/calculate': typeof ApiGreenhouseCalculateRoute
   '/api/herd/calculate': typeof ApiHerdCalculateRoute
   '/api/crops/': typeof ApiCropsIndexRoute
 }
@@ -394,6 +408,7 @@ export interface FileRoutesByTo {
   '/crops': typeof CropsIndexRoute
   '/economics': typeof EconomicsIndexRoute
   '/feed': typeof FeedIndexRoute
+  '/greenhouse': typeof GreenhouseIndexRoute
   '/guides': typeof GuidesIndexRoute
   '/herd': typeof HerdIndexRoute
   '/irrigation': typeof IrrigationIndexRoute
@@ -404,6 +419,7 @@ export interface FileRoutesByTo {
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/greenhouse/calculate': typeof ApiGreenhouseCalculateRoute
   '/api/herd/calculate': typeof ApiHerdCalculateRoute
   '/api/crops': typeof ApiCropsIndexRoute
 }
@@ -444,6 +460,7 @@ export interface FileRoutesById {
   '/crops/': typeof CropsIndexRoute
   '/economics/': typeof EconomicsIndexRoute
   '/feed/': typeof FeedIndexRoute
+  '/greenhouse/': typeof GreenhouseIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/herd/': typeof HerdIndexRoute
   '/irrigation/': typeof IrrigationIndexRoute
@@ -454,6 +471,7 @@ export interface FileRoutesById {
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
+  '/api/greenhouse/calculate': typeof ApiGreenhouseCalculateRoute
   '/api/herd/calculate': typeof ApiHerdCalculateRoute
   '/api/crops/': typeof ApiCropsIndexRoute
 }
@@ -495,6 +513,7 @@ export interface FileRouteTypes {
     | '/crops/'
     | '/economics/'
     | '/feed/'
+    | '/greenhouse/'
     | '/guides/'
     | '/herd/'
     | '/irrigation/'
@@ -505,6 +524,7 @@ export interface FileRouteTypes {
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
+    | '/api/greenhouse/calculate'
     | '/api/herd/calculate'
     | '/api/crops/'
   fileRoutesByTo: FileRoutesByTo
@@ -544,6 +564,7 @@ export interface FileRouteTypes {
     | '/crops'
     | '/economics'
     | '/feed'
+    | '/greenhouse'
     | '/guides'
     | '/herd'
     | '/irrigation'
@@ -554,6 +575,7 @@ export interface FileRouteTypes {
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
+    | '/api/greenhouse/calculate'
     | '/api/herd/calculate'
     | '/api/crops'
   id:
@@ -593,6 +615,7 @@ export interface FileRouteTypes {
     | '/crops/'
     | '/economics/'
     | '/feed/'
+    | '/greenhouse/'
     | '/guides/'
     | '/herd/'
     | '/irrigation/'
@@ -603,6 +626,7 @@ export interface FileRouteTypes {
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
+    | '/api/greenhouse/calculate'
     | '/api/herd/calculate'
     | '/api/crops/'
   fileRoutesById: FileRoutesById
@@ -643,6 +667,7 @@ export interface RootRouteChildren {
   CropsIndexRoute: typeof CropsIndexRoute
   EconomicsIndexRoute: typeof EconomicsIndexRoute
   FeedIndexRoute: typeof FeedIndexRoute
+  GreenhouseIndexRoute: typeof GreenhouseIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
   HerdIndexRoute: typeof HerdIndexRoute
   IrrigationIndexRoute: typeof IrrigationIndexRoute
@@ -653,6 +678,7 @@ export interface RootRouteChildren {
   ApiFeedCalculateRoute: typeof ApiFeedCalculateRoute
   ApiFeedIngredientsRoute: typeof ApiFeedIngredientsRoute
   ApiFeedTargetsRoute: typeof ApiFeedTargetsRoute
+  ApiGreenhouseCalculateRoute: typeof ApiGreenhouseCalculateRoute
   ApiHerdCalculateRoute: typeof ApiHerdCalculateRoute
   ApiCropsIndexRoute: typeof ApiCropsIndexRoute
 }
@@ -741,6 +767,13 @@ declare module '@tanstack/react-router' {
       path: '/feed/$slug'
       fullPath: '/feed/$slug'
       preLoaderRoute: typeof FeedSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/greenhouse/': {
+      id: '/greenhouse/'
+      path: '/greenhouse'
+      fullPath: '/greenhouse/'
+      preLoaderRoute: typeof GreenhouseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/': {
@@ -981,6 +1014,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiFeedTargetsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/greenhouse/calculate': {
+      id: '/api/greenhouse/calculate'
+      path: '/api/greenhouse/calculate'
+      fullPath: '/api/greenhouse/calculate'
+      preLoaderRoute: typeof ApiGreenhouseCalculateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/herd/calculate': {
       id: '/api/herd/calculate'
       path: '/api/herd/calculate'
@@ -1030,6 +1070,7 @@ const rootRouteChildren: RootRouteChildren = {
   CropsIndexRoute: CropsIndexRoute,
   EconomicsIndexRoute: EconomicsIndexRoute,
   FeedIndexRoute: FeedIndexRoute,
+  GreenhouseIndexRoute: GreenhouseIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
   HerdIndexRoute: HerdIndexRoute,
   IrrigationIndexRoute: IrrigationIndexRoute,
@@ -1040,6 +1081,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiFeedCalculateRoute: ApiFeedCalculateRoute,
   ApiFeedIngredientsRoute: ApiFeedIngredientsRoute,
   ApiFeedTargetsRoute: ApiFeedTargetsRoute,
+  ApiGreenhouseCalculateRoute: ApiGreenhouseCalculateRoute,
   ApiHerdCalculateRoute: ApiHerdCalculateRoute,
   ApiCropsIndexRoute: ApiCropsIndexRoute,
 }

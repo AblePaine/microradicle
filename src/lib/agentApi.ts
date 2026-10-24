@@ -358,6 +358,103 @@ export function herdInputFromQuery(searchParams: URLSearchParams): Record<string
   return input;
 }
 
+// ---------------------------------------------------------------------------
+// Greenhouse — reservoir top-off calculation
+// ---------------------------------------------------------------------------
+
+import { computeTopOff, DEFAULT_RECIPE_EC, type TopOffInput, type TopOffPart } from "./topoffMath.ts";
+
+export type TopOffCalculateResult = ReturnType<typeof computeTopOff>;
+
+/**
+ * Reservoir top-off math for agents — the same linear-blend engine as the
+ * web greenhouse page. Stateless: it answers "what do I add right now"
+ * (concentrate parts, plain water, or both) for a reservoir state the
+ * caller supplies, and flags a dump-and-remix when the correction is
+ * extreme. pH is context only — no pH dosing is computed.
+ */
+export function calculateTopOff(rawInput: unknown): TopOffCalculateResult {
+  const input = (rawInput ?? {}) as Record<string, unknown>;
+  if (typeof input !== "object" || Array.isArray(input)) {
+    throw new ApiError(400, "Greenhouse top-off calculate expects a JSON object body.");
+  }
+
+  const volume = num(input.volume_l);
+  if (volume === undefined || volume <= 0) throw new ApiError(400, "volume_l is required and must be a positive number (liters).");
+  const ecNow = num(input.ec_now);
+  if (ecNow === undefined || ecNow < 0) throw new ApiError(400, "ec_now is required and must be a number >= 0.");
+  const ecTarget = num(input.ec_target);
+  if (ecTarget === undefined || ecTarget <= 0) throw new ApiError(400, "ec_target is required and must be a positive number.");
+
+  const topoff: TopOffInput = {
+    volume_l: clamp(volume, 0.01, 1_000_000),
+    ec_now: clamp(ecNow, 0, 20),
+    ec_target: clamp(ecTarget, 0.01, 20),
+  };
+
+  if (input.recipe_ec !== undefined) {
+    const v = num(input.recipe_ec);
+    if (v === undefined || v <= 0) throw new ApiError(400, "recipe_ec must be a positive number.");
+    topoff.recipe_ec = clamp(v, 0.01, 20);
+  } else {
+    topoff.recipe_ec = DEFAULT_RECIPE_EC;
+  }
+
+  if (input.parts !== undefined) {
+    if (!Array.isArray(input.parts)) throw new ApiError(400, "parts must be an array of { name?, ml_per_gal } (max 3).");
+    if (input.parts.length > 3) throw new ApiError(400, "parts is capped at 3 — a recipe has at most 3 concentrate parts.");
+    topoff.parts = input.parts.map((raw, i): TopOffPart => {
+      if (!raw || typeof raw !== "object") throw new ApiError(400, `parts[${i}] must be an object with ml_per_gal.`);
+      const o = raw as Record<string, unknown>;
+      const rate = num(o.ml_per_gal);
+      if (rate === undefined || rate < 0) throw new ApiError(400, `parts[${i}].ml_per_gal must be a number >= 0.`);
+      const name = typeof o.name === "string" && o.name.trim() ? o.name.trim() : undefined;
+      return { ...(name ? { name } : {}), ml_per_gal: clamp(rate, 0, 1000) };
+    });
+  }
+
+  for (const key of ["fill_volume_l", "capacity_l"] as const) {
+    if (input[key] !== undefined) {
+      const v = num(input[key]);
+      if (v === undefined || v <= 0) throw new ApiError(400, `${key} must be a positive number (liters).`);
+      topoff[key] = clamp(v, 0.01, 1_000_000);
+    }
+  }
+
+  if (input.ph_now !== undefined) {
+    const v = num(input.ph_now);
+    if (v === undefined || v < 0 || v > 14) throw new ApiError(400, "ph_now must be a number between 0 and 14.");
+    topoff.ph_now = v;
+  }
+
+  if (input.drift_suspected !== undefined) {
+    if (typeof input.drift_suspected !== "boolean") throw new ApiError(400, "drift_suspected must be a boolean.");
+    topoff.drift_suspected = input.drift_suspected;
+  }
+
+  return computeTopOff(topoff);
+}
+
+/** Parse the GET form: `?volume_l=40&ec_now=1.2&ec_target=1.8&parts=5,5,5&recipe_ec=2.0`. */
+export function topoffInputFromQuery(searchParams: URLSearchParams): Record<string, unknown> {
+  const input: Record<string, unknown> = {};
+  for (const key of ["volume_l", "ec_now", "ec_target", "recipe_ec", "fill_volume_l", "capacity_l", "ph_now"] as const) {
+    const v = searchParams.get(key);
+    if (v !== null) input[key] = v;
+  }
+  const partsRaw = searchParams.get("parts");
+  if (partsRaw) {
+    input.parts = partsRaw
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .map((rate) => ({ ml_per_gal: rate }));
+  }
+  const drift = searchParams.get("drift_suspected");
+  if (drift !== null) input.drift_suspected = drift === "1" || drift.toLowerCase() === "true";
+  return input;
+}
+
 export function listFeedIngredients() {
   return { count: INGREDIENTS.length, ingredients: INGREDIENTS };
 }

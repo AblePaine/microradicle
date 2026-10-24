@@ -153,6 +153,13 @@ function Gateway() {
             cta="Open herd log →"
           />
           <ModuleCard
+            k="Greenhouse"
+            t="Reservoir top-off"
+            d="What do I add right now: current volume and EC in, mL of each part or plain water out — with a plain dump-and-remix flag when the correction is too big. Brand-agnostic hydroponics."
+            href="/greenhouse"
+            cta="Open top-off →"
+          />
+          <ModuleCard
             k="Postharvest"
             t="Pack-shed & cooler"
             d="How much heat walked in with harvest, and whether the CoolBot can knock it down before the greens wilt."
@@ -332,7 +339,7 @@ function ModuleCard({
   k: string;
   t: string;
   d: string;
-  href: "/irrigation" | "/soil" | "/feed" | "/economics" | "/clipboard" | "/herd";
+  href: "/irrigation" | "/soil" | "/feed" | "/economics" | "/clipboard" | "/herd" | "/greenhouse";
   cta: string;
 }) {
   return (
