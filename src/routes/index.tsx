@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 import { FLOWER_COUNT, VEGETABLE_COUNT, CULTIVAR_COUNT } from "@/lib/crops";
 import { MICROGREEN_COUNT } from "@/lib/nursery";
 import { SPECIES_COUNT } from "@/lib/pasture";
@@ -198,6 +199,8 @@ function Gateway() {
           </div>
         </div>
       </section>
+
+      <NewsletterSignup source="homepage" />
     </main>
   );
 }
