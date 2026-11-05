@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { NextStep } from "@/components/next-step";
 import { useMemo, useState } from "react";
 import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
 import {
@@ -336,6 +337,10 @@ function GreenhouseIndex() {
         Stir and re-read after dosing; meters settle slower than math. This engine doses nutrients
         only — it does not dose pH.
       </p>
+
+      <div className="mt-6">
+        <NextStep to="/nursery" label="Run the nursery bench" blurb="The other indoor bench: 1020 flats with seed weight per tray, days in the dark, and what a 7–14 day microgreen cycle actually pays." />
+      </div>
     </main>
   );
 }

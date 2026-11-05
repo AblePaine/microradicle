@@ -3,7 +3,9 @@ import { format, parseISO } from "date-fns";
 import { Link2, Plus, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { BedCrossSection } from "@/components/BedCrossSection";
+import { EmailResults } from "@/components/email-results";
 import { EngineCanvas } from "@/components/EngineCanvas";
+import { NextStep } from "@/components/next-step";
 import { OpsBoard } from "@/components/OpsBoard";
 import { SuccessionTimeline } from "@/components/SuccessionTimeline";
 import { cropBySlug, crops, getCrop, groupedCropsForTrade, defaultCropIdForTrade, tradeViewLabel } from "@/lib/crops";
@@ -455,6 +457,41 @@ function EnginePage() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="space-y-3 px-3 pb-4 sm:px-4">
+        <EmailResults
+          surface="engine"
+          snapshot={{
+            farm: farm.name,
+            blocks: farm.blocks.length,
+            beds: farm.blocks.reduce((s, b) => s + b.bed_count, 0),
+            successions: farm.successions.length,
+            yieldRollup: yields.map((r) => ({
+              crop: r.cropId,
+              bedFt: r.bedFt,
+              yieldAmount: r.yieldAmount,
+              unit: r.unitLabel,
+              wholesaleUsd: r.wholesaleUsd,
+              directUsd: r.directUsd,
+            })),
+            draft: draft
+              ? {
+                  crop: crop.id,
+                  targetHarvest: harvestDate,
+                  nurserySow: draft.nursery_sow_date,
+                  transplant: draft.field_transplant_date,
+                  harvestEnd: draft.harvest_end_date,
+                  bedFeet: draft.bed_feet_needed,
+                }
+              : null,
+          }}
+        />
+        <NextStep
+          to="/irrigation"
+          label="Size the water for these beds"
+          blurb="The beds are planned — the drip tool sizes headers and poly lines so the last emitter on every bed still has pressure."
+        />
       </div>
     </main>
   );

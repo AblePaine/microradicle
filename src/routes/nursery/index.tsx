@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MicrogreenCard } from "@/components/MicrogreenCard";
+import { NextStep } from "@/components/next-step";
 import { NurseryRackPlanner } from "@/components/NurseryRackPlanner";
 import { MICROGREEN_COUNT, MICROGREENS } from "@/lib/nursery";
 import { useFarmStore } from "@/lib/farm-store";
@@ -84,6 +85,10 @@ function NurseryIndex() {
           ))}
         </div>
       </section>
+
+      <div className="mt-6">
+        <NextStep to="/engine" label="Schedule the transplants" blurb="Trays become transplants — the crop engine schedules them into beds, counted back from the harvest date you pick." />
+      </div>
     </main>
   );
 }

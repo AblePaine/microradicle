@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PasturePlanner } from "@/components/PasturePlanner";
+import { NextStep } from "@/components/next-step";
 import { SpeciesCard } from "@/components/SpeciesCard";
 import { SPECIES, SPECIES_COUNT } from "@/lib/pasture";
 import { useFarmStore } from "@/lib/farm-store";
@@ -84,6 +85,10 @@ function PastureIndex() {
           ))}
         </div>
       </section>
+
+      <div className="mt-6">
+        <NextStep to="/herd" label="Keep the herd packet" blurb="The rotation is planned — keep the records for those animals in the herd packet: breeding dates in, due dates and your reminder dates out, on one printed sheet." />
+      </div>
     </main>
   );
 }

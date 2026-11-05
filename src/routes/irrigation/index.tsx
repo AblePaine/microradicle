@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { HydraulicZoneSizer } from "@/components/HydraulicZoneSizer";
+import { NextStep } from "@/components/next-step";
 import { MainlinePressureLossChart } from "@/components/MainlinePressureLossChart";
 import { useFarmStore } from "@/lib/farm-store";
 import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
@@ -68,6 +69,10 @@ function IrrigationIndex() {
         onRemoveZone={removeZone}
         onPatchZone={patchZone}
       />
+
+      <div className="mt-6">
+        <NextStep to="/soil" label="Balance what the crops took out" blurb="Water is sized — next is fertility: the soil tool totals what the crops removed and which amendment puts it back." />
+      </div>
     </main>
   );
 }

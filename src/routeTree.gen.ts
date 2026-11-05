@@ -15,6 +15,7 @@ import { Route as ClipboardRouteImport } from './routes/clipboard'
 import { Route as EngineRouteImport } from './routes/engine'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
+import { Route as ApiResultsEmailRouteImport } from './routes/api/results-email'
 import { Route as CropSlugRouteImport } from './routes/crop/$slug'
 import { Route as CropsIndexRouteImport } from './routes/crops/index'
 import { Route as EconomicsIndexRouteImport } from './routes/economics/index'
@@ -87,6 +88,11 @@ const McpRoute = McpRouteImport.update({
 const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
   id: '/openapi.json',
   path: '/openapi.json',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiResultsEmailRoute = ApiResultsEmailRouteImport.update({
+  id: '/api/results-email',
+  path: '/api/results-email',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CropSlugRoute = CropSlugRouteImport.update({
@@ -328,6 +334,7 @@ export interface FileRoutesByFullPath {
   '/engine': typeof EngineRoute
   '/mcp': typeof McpRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/api/results-email': typeof ApiResultsEmailRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -379,6 +386,7 @@ export interface FileRoutesByTo {
   '/engine': typeof EngineRoute
   '/mcp': typeof McpRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/api/results-email': typeof ApiResultsEmailRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -431,6 +439,7 @@ export interface FileRoutesById {
   '/engine': typeof EngineRoute
   '/mcp': typeof McpRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
+  '/api/results-email': typeof ApiResultsEmailRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -484,6 +493,7 @@ export interface FileRouteTypes {
     | '/engine'
     | '/mcp'
     | '/openapi.json'
+    | '/api/results-email'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -535,6 +545,7 @@ export interface FileRouteTypes {
     | '/engine'
     | '/mcp'
     | '/openapi.json'
+    | '/api/results-email'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -586,6 +597,7 @@ export interface FileRouteTypes {
     | '/engine'
     | '/mcp'
     | '/openapi.json'
+    | '/api/results-email'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -638,6 +650,7 @@ export interface RootRouteChildren {
   EngineRoute: typeof EngineRoute
   McpRoute: typeof McpRoute
   OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
+  ApiResultsEmailRoute: typeof ApiResultsEmailRoute
   CropSlugRoute: typeof CropSlugRoute
   EconomicsSlugRoute: typeof EconomicsSlugRoute
   FeedSlugRoute: typeof FeedSlugRoute
@@ -725,6 +738,13 @@ declare module '@tanstack/react-router' {
       path: '/openapi.json'
       fullPath: '/openapi.json'
       preLoaderRoute: typeof OpenapiDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/results-email': {
+      id: '/api/results-email'
+      path: '/api/results-email'
+      fullPath: '/api/results-email'
+      preLoaderRoute: typeof ApiResultsEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/crop/$slug': {
@@ -1038,6 +1058,7 @@ const rootRouteChildren: RootRouteChildren = {
   EngineRoute: EngineRoute,
   McpRoute: McpRoute,
   OpenapiDotjsonRoute: OpenapiDotjsonRoute,
+  ApiResultsEmailRoute: ApiResultsEmailRoute,
   CropSlugRoute: CropSlugRoute,
   EconomicsSlugRoute: EconomicsSlugRoute,
   FeedSlugRoute: FeedSlugRoute,

@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { NextStep } from "@/components/next-step";
 import { useEffect, useMemo, useState } from "react";
 import { useFarmStore } from "@/lib/farm-store";
 import { analyzeRation, effectiveTarget, resolveFeed, TARGETS, TARGET_BY_ID } from "@/lib/feedMath";
@@ -149,6 +150,10 @@ function FeedIndex() {
         Targets: LSU AgCenter / NRC 1994. Catalog values are editable per ration — your corn is not
         book corn. Prices are placeholder defaults, not quotes.
       </p>
+
+      <div className="mt-6">
+        <NextStep to="/pasture" label="Put the birds on grass" blurb="The ration is balanced — the other half of the poultry system is the rotation: broiler tractors, daily moves, and rest days in the pasture tool." />
+      </div>
     </main>
   );
 }

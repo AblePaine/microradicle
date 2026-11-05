@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { ColdChainAudit } from "@/components/ColdChainAudit";
+import { NextStep } from "@/components/next-step";
 import { PackShedPlanner } from "@/components/PackShedPlanner";
 import { useFarmStore } from "@/lib/farm-store";
 import { canonicalLink, jsonLdScript, ogMeta, webApplicationJsonLd } from "@/lib/seo";
@@ -57,6 +58,10 @@ function EconomicsIndex() {
       </div>
 
       <PackShedPlanner farm={farm} onPatch={patchEconomics} />
+
+      <div className="mt-6">
+        <NextStep to="/clipboard" label="Print today's sheet" blurb="The cooler plan is set — print the field clipboards: paddock pulls, 1020 soaks and cuts, and bed work on one sheet for the day." />
+      </div>
     </main>
   );
 }

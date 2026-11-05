@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo } from "react";
 import { MineralizationCurveChart } from "@/components/MineralizationCurveChart";
+import { NextStep } from "@/components/next-step";
 import { nAppliedById, SoilNutrientBalancer } from "@/components/SoilNutrientBalancer";
 import { cropBySlug } from "@/lib/crops";
 import { useFarmStore } from "@/lib/farm-store";
@@ -72,6 +73,10 @@ function SoilIndex() {
       </div>
 
       <SoilNutrientBalancer farm={farm} onPatchSoil={patchSoil} />
+
+      <div className="mt-6">
+        <NextStep to="/engine" label="Plan the next beds" blurb="Fertility plan in hand — put it to work in the crop engine: successions counted back from market day, with these numbers under them." />
+      </div>
     </main>
   );
 }
