@@ -14,6 +14,7 @@ MicroRadicle (https://microradicle.com) is a free planning toolkit for small-sca
 - **Irrigation & hydraulics** (`/irrigation`): drip zone sizing and mainline pressure-loss (Hazen-Williams) from the same bed plan.
 - **Nursery planner** (`/nursery`), **pasture planner** (`/pasture`), **pack-shed economics** (`/economics`): rack scheduling for microgreens and transplants, grazing rotations with manure nutrient credits, and per-crop enterprise economics from the cultivar records.
 - **Crop library** (`/crops`): all 266 cultivar records, browsable and searchable.
+- **Variety Explorer** (`/varieties`): research 3,000+ vegetable varieties from OpenPlantDB (CC0) before ordering seed — days to maturity, documented disease resistance, spacing, and growing notes, searchable by crop group and maturity band, one page per variety (`/variety/<slug>`).
 
 ## Guides
 
@@ -33,6 +34,8 @@ MicroRadicle exposes its Feed Studio engine, herd due-date calculator, greenhous
 - `GET https://microradicle.com/api/feed/targets` — the six life-stage target presets with nutrient bands.
 - `GET https://microradicle.com/api/crops?q=tomato&category=solanaceous&frost=tender&family=Solanaceae&limit=50&offset=0` — search the cultivar library. Free-text `q` matches name/cultivar/botanical name/family/id; `category`, `frost`, and `family` filter exactly. Returns paginated full records plus the total match count.
 - `GET https://microradicle.com/api/crops/tomato-cherokee-purple` — one full cultivar record by id.
+- `GET https://microradicle.com/api/varieties?q=cherokee&group=Tomatoes&band=d61-80&resistant=true&limit=50&offset=0` — search the Variety Explorer (OpenPlantDB, CC0). Free-text `q` matches variety name and crop group; `group`, `band` (le60 | d61-80 | d81-100 | gt100), and `resistant` filter exactly. Returns paginated slim records plus the total match count and the crop-group list.
+- `GET https://microradicle.com/api/varieties/amelia-tomato` — one full variety record by slug (growing stats, notes, documented resistance, source citations).
 - `GET https://microradicle.com/openapi.json` — OpenAPI 3.1 description of the REST API with full schemas.
 
 ### MCP server

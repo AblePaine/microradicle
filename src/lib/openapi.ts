@@ -9,7 +9,7 @@ export const OPENAPI_SPEC = {
     title: "MicroRadicle Agent API",
     version: "1.0.0",
     description:
-      "Free, no-key access to MicroRadicle's farm engines: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, the greenhouse reservoir top-off calculator, and the 266-record cultivar library. The same math as the web UI. An MCP server exposing the same tools lives at /mcp; a tool manifest is at /mcp-tools.json.",
+      "Free, no-key access to MicroRadicle's farm engines: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, the greenhouse reservoir top-off calculator, the 266-record cultivar library, and the 3,000+ variety Seed & Variety Explorer (OpenPlantDB, CC0). The same math as the web UI. An MCP server exposing the same tools lives at /mcp; a tool manifest is at /mcp-tools.json.",
   },
   servers: [{ url: "https://microradicle.com" }],
   paths: {
@@ -262,6 +262,41 @@ export const OPENAPI_SPEC = {
         },
       },
     },
+    "/api/varieties": {
+      get: {
+        operationId: "seedVarietySearch",
+        summary: "Search the Seed & Variety Explorer (OpenPlantDB, CC0)",
+        parameters: [
+          { name: "q", in: "query", schema: { type: "string" }, description: "Free-text search over variety name and crop group." },
+          { name: "group", in: "query", schema: { type: "string" }, description: "Crop group, exact match (e.g. 'Tomatoes'). Known groups are returned in every response." },
+          { name: "band", in: "query", schema: { type: "string", enum: ["le60", "d61-80", "d81-100", "gt100"] }, description: "Days-to-maturity band, keyed on the top of the DTM range." },
+          { name: "resistant", in: "query", schema: { type: "string", enum: ["true", "false"] }, description: "Only varieties with documented resistance." },
+          { name: "limit", in: "query", schema: { type: "integer", minimum: 1, maximum: 200, default: 50 } },
+          { name: "offset", in: "query", schema: { type: "integer", minimum: 0, default: 0 } },
+        ],
+        responses: {
+          "200": {
+            description: "{ total, limit, offset, count, groups, varieties: [SeedVarietyIndexEntry] }",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/SeedVarietySearchResponse" } } },
+          },
+          "400": { $ref: "#/components/responses/Error" },
+        },
+      },
+    },
+    "/api/varieties/{slug}": {
+      get: {
+        operationId: "seedVarietyGet",
+        summary: "Fetch one full Variety Explorer record by slug",
+        parameters: [{ name: "slug", in: "path", required: true, schema: { type: "string" }, example: "amelia-tomato" }],
+        responses: {
+          "200": {
+            description: "The full variety record.",
+            content: { "application/json": { schema: { $ref: "#/components/schemas/SeedVariety" } } },
+          },
+          "404": { $ref: "#/components/responses/Error" },
+        },
+      },
+    },
   },
   components: {
     responses: {
@@ -279,6 +314,48 @@ export const OPENAPI_SPEC = {
       },
     },
     schemas: {
+      SeedVarietyIndexEntry: {
+        type: "object",
+        properties: {
+          slug: { type: "string" },
+          name: { type: "string" },
+          cropGroup: { type: "string" },
+          dtmMin: { type: "number" },
+          dtmMax: { type: "number" },
+          maturityFrom: { type: "string", enum: ["seed", "transplant"] },
+          resistanceCodes: { type: "array", items: { type: "string" }, description: "Catalog resistance code strings (e.g. V, FF, N) when the source states them." },
+          resistances: { type: "array", items: { type: "string" }, description: "Named diseases the source describes the variety as resistant/tolerant to." },
+        },
+        required: ["slug", "name", "cropGroup", "dtmMin", "dtmMax", "maturityFrom", "resistanceCodes", "resistances"],
+      },
+      SeedVariety: {
+        allOf: [
+          { $ref: "#/components/schemas/SeedVarietyIndexEntry" },
+          {
+            type: "object",
+            properties: {
+              cultivar: { type: "string" },
+              scientificName: { type: "string" },
+              subcategory: { type: "string" },
+              plantingNote: { type: ["string", "null"] },
+              directions: { type: ["string", "null"] },
+              sources: { type: "array", items: { type: "string" }, description: "Provenance citations from OpenPlantDB — not vendor buy links." },
+            },
+          },
+        ],
+      },
+      SeedVarietySearchResponse: {
+        type: "object",
+        properties: {
+          total: { type: "integer" },
+          limit: { type: "integer" },
+          offset: { type: "integer" },
+          count: { type: "integer" },
+          groups: { type: "array", items: { type: "string" } },
+          varieties: { type: "array", items: { $ref: "#/components/schemas/SeedVarietyIndexEntry" } },
+        },
+        required: ["total", "limit", "offset", "count", "groups", "varieties"],
+      },
       FeedBand: {
         type: "object",
         properties: {

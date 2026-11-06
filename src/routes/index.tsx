@@ -161,6 +161,13 @@ function Gateway() {
             cta="Open top-off →"
           />
           <ModuleCard
+            k="Seed library"
+            t="Variety Explorer"
+            d="Research 3,000+ vegetable varieties before the seed order goes in — days to maturity, documented disease resistance, spacing and growing notes from open data."
+            href="/varieties"
+            cta="Explore varieties →"
+          />
+          <ModuleCard
             k="Postharvest"
             t="Pack-shed & cooler"
             d="How much heat walked in with harvest, and whether the CoolBot can knock it down before the greens wilt."
@@ -342,7 +349,7 @@ function ModuleCard({
   k: string;
   t: string;
   d: string;
-  href: "/irrigation" | "/soil" | "/feed" | "/economics" | "/clipboard" | "/herd" | "/greenhouse";
+  href: "/irrigation" | "/soil" | "/feed" | "/economics" | "/clipboard" | "/herd" | "/greenhouse" | "/varieties";
   cta: string;
 }) {
   return (

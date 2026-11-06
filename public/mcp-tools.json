@@ -1,7 +1,7 @@
 {
   "name": "microradicle",
   "version": "1.0.0",
-  "description": "MicroRadicle farm engines for agents: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, the greenhouse reservoir top-off calculator, and the 266-record cultivar library. Free, no API key.",
+  "description": "MicroRadicle farm engines for agents: the Feed Studio poultry ration analyzer, the herd packet due-date calculator, the greenhouse reservoir top-off calculator, the 266-record cultivar library, and the 3,000+ variety Seed & Variety Explorer (OpenPlantDB, CC0). Free, no API key.",
   "homepage": "https://microradicle.com",
   "api_base": "https://microradicle.com/api",
   "mcp_endpoint": "https://microradicle.com/mcp",
@@ -362,6 +362,72 @@
       "http": {
         "method": "GET",
         "path": "/crops/{id}"
+      }
+    },
+    {
+      "name": "seed_variety_search",
+      "description": "Search the Seed & Variety Explorer: 3,000+ vegetable varieties from OpenPlantDB (CC0) for gardener variety research — days to maturity, documented disease resistance (catalog codes and named resistances), crop group. Distinct from variety_search (the 266-record bed-production cultivar library). Free-text query matches variety name and crop group; group, maturity band, and documented-resistance filters narrow exactly. Paginated slim records; fetch seed_variety_get for the full record (growing notes, spacing, sources).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "Free-text search (variety name, crop group). Also accepted as 'query'."
+          },
+          "group": {
+            "type": "string",
+            "description": "Crop group filter, exact match (e.g. 'Tomatoes', 'Beans & Peas'). The response includes the full group list."
+          },
+          "band": {
+            "type": "string",
+            "enum": [
+              "le60",
+              "d61-80",
+              "d81-100",
+              "gt100"
+            ],
+            "description": "Days-to-maturity band, keyed on the top of the variety's DTM range."
+          },
+          "resistant": {
+            "type": "boolean",
+            "description": "When true, only varieties with documented resistance (codes or named diseases)."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Page size, 1–200. Default: 50."
+          },
+          "offset": {
+            "type": "number",
+            "description": "Pagination offset. Default: 0."
+          }
+        }
+      },
+      "outputDescription": "Returns { total, limit, offset, count, groups (all crop groups), varieties: [slim variety records with slug, name, cropGroup, dtmMin, dtmMax, maturityFrom, resistanceCodes, resistances] }.",
+      "http": {
+        "method": "GET",
+        "path": "/varieties",
+        "example_query": "q=cherokee&limit=5"
+      }
+    },
+    {
+      "name": "seed_variety_get",
+      "description": "Fetch one full Variety Explorer record by slug (e.g. 'amelia-tomato') — growing stats (germination, zones, spacing, height, sun, water), planting and growing notes, documented resistance detail, and the source citations behind the record.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Variety slug from seed_variety_search results."
+          }
+        },
+        "required": [
+          "slug"
+        ]
+      },
+      "outputDescription": "Returns the full variety record, or a 404 error for an unknown slug.",
+      "http": {
+        "method": "GET",
+        "path": "/varieties/{slug}"
       }
     }
   ]

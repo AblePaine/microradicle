@@ -53,6 +53,8 @@ import { Route as PastureSlugRouteImport } from './routes/pasture/$slug'
 import { Route as PrintClipboardRouteImport } from './routes/print.clipboard'
 import { Route as SoilIndexRouteImport } from './routes/soil/index'
 import { Route as SoilSlugRouteImport } from './routes/soil/$slug'
+import { Route as VarietiesIndexRouteImport } from './routes/varieties/index'
+import { Route as VarietySlugRouteImport } from './routes/variety/$slug'
 import { Route as ApiCropsIndexRouteImport } from './routes/api/crops/index'
 import { Route as ApiCropsIdRouteImport } from './routes/api/crops/$id'
 import { Route as ApiFeedCalculateRouteImport } from './routes/api/feed/calculate'
@@ -60,6 +62,8 @@ import { Route as ApiFeedIngredientsRouteImport } from './routes/api/feed/ingred
 import { Route as ApiFeedTargetsRouteImport } from './routes/api/feed/targets'
 import { Route as ApiGreenhouseCalculateRouteImport } from './routes/api/greenhouse/calculate'
 import { Route as ApiHerdCalculateRouteImport } from './routes/api/herd/calculate'
+import { Route as ApiVarietiesIndexRouteImport } from './routes/api/varieties/index'
+import { Route as ApiVarietiesSlugRouteImport } from './routes/api/varieties/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -297,6 +301,16 @@ const SoilSlugRoute = SoilSlugRouteImport.update({
   path: '/soil/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VarietiesIndexRoute = VarietiesIndexRouteImport.update({
+  id: '/varieties/',
+  path: '/varieties/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VarietySlugRoute = VarietySlugRouteImport.update({
+  id: '/variety/$slug',
+  path: '/variety/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiCropsIndexRoute = ApiCropsIndexRouteImport.update({
   id: '/api/crops/',
   path: '/api/crops/',
@@ -330,6 +344,16 @@ const ApiGreenhouseCalculateRoute = ApiGreenhouseCalculateRouteImport.update({
 const ApiHerdCalculateRoute = ApiHerdCalculateRouteImport.update({
   id: '/api/herd/calculate',
   path: '/api/herd/calculate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVarietiesIndexRoute = ApiVarietiesIndexRouteImport.update({
+  id: '/api/varieties/',
+  path: '/api/varieties/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVarietiesSlugRoute = ApiVarietiesSlugRouteImport.update({
+  id: '/api/varieties/$slug',
+  path: '/api/varieties/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -368,6 +392,7 @@ export interface FileRoutesByFullPath {
   '/pasture/$slug': typeof PastureSlugRoute
   '/print/clipboard': typeof PrintClipboardRoute
   '/soil/$slug': typeof SoilSlugRoute
+  '/variety/$slug': typeof VarietySlugRoute
   '/crops/': typeof CropsIndexRoute
   '/economics/': typeof EconomicsIndexRoute
   '/feed/': typeof FeedIndexRoute
@@ -378,13 +403,16 @@ export interface FileRoutesByFullPath {
   '/nursery/': typeof NurseryIndexRoute
   '/pasture/': typeof PastureIndexRoute
   '/soil/': typeof SoilIndexRoute
+  '/varieties/': typeof VarietiesIndexRoute
   '/api/crops/$id': typeof ApiCropsIdRoute
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
   '/api/greenhouse/calculate': typeof ApiGreenhouseCalculateRoute
   '/api/herd/calculate': typeof ApiHerdCalculateRoute
+  '/api/varieties/$slug': typeof ApiVarietiesSlugRoute
   '/api/crops/': typeof ApiCropsIndexRoute
+  '/api/varieties/': typeof ApiVarietiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -421,6 +449,7 @@ export interface FileRoutesByTo {
   '/pasture/$slug': typeof PastureSlugRoute
   '/print/clipboard': typeof PrintClipboardRoute
   '/soil/$slug': typeof SoilSlugRoute
+  '/variety/$slug': typeof VarietySlugRoute
   '/crops': typeof CropsIndexRoute
   '/economics': typeof EconomicsIndexRoute
   '/feed': typeof FeedIndexRoute
@@ -431,13 +460,16 @@ export interface FileRoutesByTo {
   '/nursery': typeof NurseryIndexRoute
   '/pasture': typeof PastureIndexRoute
   '/soil': typeof SoilIndexRoute
+  '/varieties': typeof VarietiesIndexRoute
   '/api/crops/$id': typeof ApiCropsIdRoute
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
   '/api/greenhouse/calculate': typeof ApiGreenhouseCalculateRoute
   '/api/herd/calculate': typeof ApiHerdCalculateRoute
+  '/api/varieties/$slug': typeof ApiVarietiesSlugRoute
   '/api/crops': typeof ApiCropsIndexRoute
+  '/api/varieties': typeof ApiVarietiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -475,6 +507,7 @@ export interface FileRoutesById {
   '/pasture/$slug': typeof PastureSlugRoute
   '/print/clipboard': typeof PrintClipboardRoute
   '/soil/$slug': typeof SoilSlugRoute
+  '/variety/$slug': typeof VarietySlugRoute
   '/crops/': typeof CropsIndexRoute
   '/economics/': typeof EconomicsIndexRoute
   '/feed/': typeof FeedIndexRoute
@@ -485,13 +518,16 @@ export interface FileRoutesById {
   '/nursery/': typeof NurseryIndexRoute
   '/pasture/': typeof PastureIndexRoute
   '/soil/': typeof SoilIndexRoute
+  '/varieties/': typeof VarietiesIndexRoute
   '/api/crops/$id': typeof ApiCropsIdRoute
   '/api/feed/calculate': typeof ApiFeedCalculateRoute
   '/api/feed/ingredients': typeof ApiFeedIngredientsRoute
   '/api/feed/targets': typeof ApiFeedTargetsRoute
   '/api/greenhouse/calculate': typeof ApiGreenhouseCalculateRoute
   '/api/herd/calculate': typeof ApiHerdCalculateRoute
+  '/api/varieties/$slug': typeof ApiVarietiesSlugRoute
   '/api/crops/': typeof ApiCropsIndexRoute
+  '/api/varieties/': typeof ApiVarietiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -530,6 +566,7 @@ export interface FileRouteTypes {
     | '/pasture/$slug'
     | '/print/clipboard'
     | '/soil/$slug'
+    | '/variety/$slug'
     | '/crops/'
     | '/economics/'
     | '/feed/'
@@ -540,13 +577,16 @@ export interface FileRouteTypes {
     | '/nursery/'
     | '/pasture/'
     | '/soil/'
+    | '/varieties/'
     | '/api/crops/$id'
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
     | '/api/greenhouse/calculate'
     | '/api/herd/calculate'
+    | '/api/varieties/$slug'
     | '/api/crops/'
+    | '/api/varieties/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -583,6 +623,7 @@ export interface FileRouteTypes {
     | '/pasture/$slug'
     | '/print/clipboard'
     | '/soil/$slug'
+    | '/variety/$slug'
     | '/crops'
     | '/economics'
     | '/feed'
@@ -593,13 +634,16 @@ export interface FileRouteTypes {
     | '/nursery'
     | '/pasture'
     | '/soil'
+    | '/varieties'
     | '/api/crops/$id'
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
     | '/api/greenhouse/calculate'
     | '/api/herd/calculate'
+    | '/api/varieties/$slug'
     | '/api/crops'
+    | '/api/varieties'
   id:
     | '__root__'
     | '/'
@@ -636,6 +680,7 @@ export interface FileRouteTypes {
     | '/pasture/$slug'
     | '/print/clipboard'
     | '/soil/$slug'
+    | '/variety/$slug'
     | '/crops/'
     | '/economics/'
     | '/feed/'
@@ -646,13 +691,16 @@ export interface FileRouteTypes {
     | '/nursery/'
     | '/pasture/'
     | '/soil/'
+    | '/varieties/'
     | '/api/crops/$id'
     | '/api/feed/calculate'
     | '/api/feed/ingredients'
     | '/api/feed/targets'
     | '/api/greenhouse/calculate'
     | '/api/herd/calculate'
+    | '/api/varieties/$slug'
     | '/api/crops/'
+    | '/api/varieties/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -690,6 +738,7 @@ export interface RootRouteChildren {
   PastureSlugRoute: typeof PastureSlugRoute
   PrintClipboardRoute: typeof PrintClipboardRoute
   SoilSlugRoute: typeof SoilSlugRoute
+  VarietySlugRoute: typeof VarietySlugRoute
   CropsIndexRoute: typeof CropsIndexRoute
   EconomicsIndexRoute: typeof EconomicsIndexRoute
   FeedIndexRoute: typeof FeedIndexRoute
@@ -700,13 +749,16 @@ export interface RootRouteChildren {
   NurseryIndexRoute: typeof NurseryIndexRoute
   PastureIndexRoute: typeof PastureIndexRoute
   SoilIndexRoute: typeof SoilIndexRoute
+  VarietiesIndexRoute: typeof VarietiesIndexRoute
   ApiCropsIdRoute: typeof ApiCropsIdRoute
   ApiFeedCalculateRoute: typeof ApiFeedCalculateRoute
   ApiFeedIngredientsRoute: typeof ApiFeedIngredientsRoute
   ApiFeedTargetsRoute: typeof ApiFeedTargetsRoute
   ApiGreenhouseCalculateRoute: typeof ApiGreenhouseCalculateRoute
   ApiHerdCalculateRoute: typeof ApiHerdCalculateRoute
+  ApiVarietiesSlugRoute: typeof ApiVarietiesSlugRoute
   ApiCropsIndexRoute: typeof ApiCropsIndexRoute
+  ApiVarietiesIndexRoute: typeof ApiVarietiesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1019,6 +1071,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SoilSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/varieties/': {
+      id: '/varieties/'
+      path: '/varieties'
+      fullPath: '/varieties/'
+      preLoaderRoute: typeof VarietiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/variety/$slug': {
+      id: '/variety/$slug'
+      path: '/variety/$slug'
+      fullPath: '/variety/$slug'
+      preLoaderRoute: typeof VarietySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/crops/': {
       id: '/api/crops/'
       path: '/api/crops'
@@ -1068,6 +1134,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiHerdCalculateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/varieties/': {
+      id: '/api/varieties/'
+      path: '/api/varieties'
+      fullPath: '/api/varieties/'
+      preLoaderRoute: typeof ApiVarietiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/varieties/$slug': {
+      id: '/api/varieties/$slug'
+      path: '/api/varieties/$slug'
+      fullPath: '/api/varieties/$slug'
+      preLoaderRoute: typeof ApiVarietiesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1109,6 +1189,7 @@ const rootRouteChildren: RootRouteChildren = {
   PastureSlugRoute: PastureSlugRoute,
   PrintClipboardRoute: PrintClipboardRoute,
   SoilSlugRoute: SoilSlugRoute,
+  VarietySlugRoute: VarietySlugRoute,
   CropsIndexRoute: CropsIndexRoute,
   EconomicsIndexRoute: EconomicsIndexRoute,
   FeedIndexRoute: FeedIndexRoute,
@@ -1119,13 +1200,16 @@ const rootRouteChildren: RootRouteChildren = {
   NurseryIndexRoute: NurseryIndexRoute,
   PastureIndexRoute: PastureIndexRoute,
   SoilIndexRoute: SoilIndexRoute,
+  VarietiesIndexRoute: VarietiesIndexRoute,
   ApiCropsIdRoute: ApiCropsIdRoute,
   ApiFeedCalculateRoute: ApiFeedCalculateRoute,
   ApiFeedIngredientsRoute: ApiFeedIngredientsRoute,
   ApiFeedTargetsRoute: ApiFeedTargetsRoute,
   ApiGreenhouseCalculateRoute: ApiGreenhouseCalculateRoute,
   ApiHerdCalculateRoute: ApiHerdCalculateRoute,
+  ApiVarietiesSlugRoute: ApiVarietiesSlugRoute,
   ApiCropsIndexRoute: ApiCropsIndexRoute,
+  ApiVarietiesIndexRoute: ApiVarietiesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

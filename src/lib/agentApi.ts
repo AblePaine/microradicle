@@ -21,6 +21,8 @@ import {
 } from "./feedMath.ts";
 import { CROP_CATEGORIES, FROST_BANDS, type CropCategory, type FrostHardiness } from "../types/crop.ts";
 import type { FeedBand, NutrientKey, RationLine, SavedRation } from "../types/feed.ts";
+import { CROP_GROUPS, DTM_BANDS, filterVarieties } from "./varieties.ts";
+import { getVarietyFull } from "./varietiesFull.ts";
 
 export class ApiError extends Error {
   status: number;
@@ -527,4 +529,73 @@ export function getVarietyById(id: string) {
 
 export function varietyCount(): number {
   return crops.length;
+}
+
+// ---------------------------------------------------------------------------
+// Seed & Variety Explorer (OpenPlantDB, CC0) — distinct from the cultivar
+// library above: gardener-facing variety research data (DTM, documented
+// resistance, growing notes), not bed-production specs.
+// ---------------------------------------------------------------------------
+
+export interface SeedVarietySearchParams {
+  q?: unknown;
+  query?: unknown;
+  group?: unknown;
+  band?: unknown;
+  resistant?: unknown;
+  limit?: unknown;
+  offset?: unknown;
+}
+
+export function searchSeedVarieties(params: SeedVarietySearchParams) {
+  const queryRaw = typeof params.q === "string" ? params.q : typeof params.query === "string" ? params.query : undefined;
+
+  let group: string | "all" | undefined;
+  if (params.group !== undefined && params.group !== null && params.group !== "") {
+    if (typeof params.group !== "string" || !CROP_GROUPS.includes(params.group)) {
+      throw new ApiError(400, `Unknown crop group '${String(params.group)}'. Known groups: ${CROP_GROUPS.join(", ")}.`);
+    }
+    group = params.group;
+  }
+
+  let band: string | "all" | undefined;
+  if (params.band !== undefined && params.band !== null && params.band !== "") {
+    if (typeof params.band !== "string" || !DTM_BANDS.some((b) => b.id === params.band)) {
+      throw new ApiError(400, `Unknown maturity band '${String(params.band)}'. Known bands: ${DTM_BANDS.map((b) => b.id).join(", ")}.`);
+    }
+    band = params.band;
+  }
+
+  let resistantOnly: boolean | undefined;
+  if (params.resistant !== undefined && params.resistant !== null && params.resistant !== "") {
+    if (params.resistant === true || params.resistant === "true") resistantOnly = true;
+    else if (params.resistant === false || params.resistant === "false") resistantOnly = false;
+    else throw new ApiError(400, "resistant must be true or false.");
+  }
+
+  const limitRaw = num(params.limit);
+  const offsetRaw = num(params.offset);
+  if (params.limit !== undefined && limitRaw === undefined) throw new ApiError(400, "limit must be a number.");
+  if (params.offset !== undefined && offsetRaw === undefined) throw new ApiError(400, "offset must be a number.");
+  const limit = Math.min(200, Math.max(1, Math.floor(limitRaw ?? 50)));
+  const offset = Math.max(0, Math.floor(offsetRaw ?? 0));
+
+  const matches = filterVarieties({ query: queryRaw, group, band, resistantOnly });
+  const page = matches.slice(offset, offset + limit);
+  return {
+    total: matches.length,
+    limit,
+    offset,
+    count: page.length,
+    groups: CROP_GROUPS,
+    varieties: page,
+  };
+}
+
+export function getSeedVarietyBySlug(slug: string) {
+  const variety = getVarietyFull(slug);
+  if (!variety) {
+    throw new ApiError(404, `No variety with slug '${slug}'. Search GET /api/varieties?q=... to find slugs.`);
+  }
+  return variety;
 }

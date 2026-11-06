@@ -3,7 +3,7 @@
  * endpoint (src/routes/mcp.ts), the REST API, and the static manifest at
  * public/mcp-tools.json (generated from this module; keep them in step).
  */
-import { ApiError, calculateFeed, calculateHerdDueDate, calculateTopOff, getVarietyById, searchVarieties } from "./agentApi.ts";
+import { ApiError, calculateFeed, calculateHerdDueDate, calculateTopOff, getSeedVarietyBySlug, getVarietyById, searchSeedVarieties, searchVarieties } from "./agentApi.ts";
 
 export interface AgentToolDefinition {
   name: string;
@@ -229,6 +229,46 @@ export const AGENT_TOOLS: AgentToolDefinition[] = [
       path: "/crops/{id}",
     },
   },
+  {
+    name: "seed_variety_search",
+    description:
+      "Search the Seed & Variety Explorer: 3,000+ vegetable varieties from OpenPlantDB (CC0) for gardener variety research — days to maturity, documented disease resistance (catalog codes and named resistances), crop group. Distinct from variety_search (the 266-record bed-production cultivar library). Free-text query matches variety name and crop group; group, maturity band, and documented-resistance filters narrow exactly. Paginated slim records; fetch seed_variety_get for the full record (growing notes, spacing, sources).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        q: { type: "string", description: "Free-text search (variety name, crop group). Also accepted as 'query'." },
+        group: { type: "string", description: "Crop group filter, exact match (e.g. 'Tomatoes', 'Beans & Peas'). The response includes the full group list." },
+        band: { type: "string", enum: ["le60", "d61-80", "d81-100", "gt100"], description: "Days-to-maturity band, keyed on the top of the variety's DTM range." },
+        resistant: { type: "boolean", description: "When true, only varieties with documented resistance (codes or named diseases)." },
+        limit: { type: "number", description: "Page size, 1–200. Default: 50." },
+        offset: { type: "number", description: "Pagination offset. Default: 0." },
+      },
+    },
+    outputDescription:
+      "Returns { total, limit, offset, count, groups (all crop groups), varieties: [slim variety records with slug, name, cropGroup, dtmMin, dtmMax, maturityFrom, resistanceCodes, resistances] }.",
+    http: {
+      method: "GET",
+      path: "/varieties",
+      example_query: "q=cherokee&limit=5",
+    },
+  },
+  {
+    name: "seed_variety_get",
+    description:
+      "Fetch one full Variety Explorer record by slug (e.g. 'amelia-tomato') — growing stats (germination, zones, spacing, height, sun, water), planting and growing notes, documented resistance detail, and the source citations behind the record.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        slug: { type: "string", description: "Variety slug from seed_variety_search results." },
+      },
+      required: ["slug"],
+    },
+    outputDescription: "Returns the full variety record, or a 404 error for an unknown slug.",
+    http: {
+      method: "GET",
+      path: "/varieties/{slug}",
+    },
+  },
 ];
 
 export function listMcpTools(): Array<{ name: string; description: string; inputSchema: Record<string, unknown> }> {
@@ -252,6 +292,15 @@ export function callAgentTool(name: string, args: Record<string, unknown> | unde
         throw new ApiError(400, "variety_get requires an 'id' argument (a cultivar id from variety_search).");
       }
       return getVarietyById(id);
+    }
+    case "seed_variety_search":
+      return searchSeedVarieties(input);
+    case "seed_variety_get": {
+      const slug = input.slug;
+      if (typeof slug !== "string" || !slug) {
+        throw new ApiError(400, "seed_variety_get requires a 'slug' argument (a variety slug from seed_variety_search).");
+      }
+      return getSeedVarietyBySlug(slug);
     }
     default:
       throw new ApiError(404, `Unknown tool '${name}'. Available tools: ${AGENT_TOOLS.map((t) => t.name).join(", ")}.`);

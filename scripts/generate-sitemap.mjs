@@ -38,6 +38,12 @@ function dataIds(relPath) {
   return readJson(join(ROOT, relPath)).map((row) => row.id);
 }
 
+function varietySlugs() {
+  return readJson(join(ROOT, "src", "data", "varieties", "varieties-index.json")).map(
+    (row) => row.slug,
+  );
+}
+
 function storageZoneSlugs() {
   // All zones the route can render (STORAGE_ZONES in economics-calc.ts),
   // unioned with the zones actually used by the specs data — a zone with no
@@ -58,6 +64,7 @@ function storageZoneSlugs() {
  */
 const DYNAMIC_SOURCES = {
   "/crop": () => cropSlugs(),
+  "/variety": () => varietySlugs(),
   "/economics": () => [...cropSlugs(), ...storageZoneSlugs()],
   "/nursery": () => dataIds("src/data/nursery/microgreens.json"),
   "/pasture": () => dataIds("src/data/pasture/species.json"),
