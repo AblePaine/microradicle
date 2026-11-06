@@ -16,6 +16,7 @@ import { Route as EngineRouteImport } from './routes/engine'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as OpenapiDotjsonRouteImport } from './routes/openapi[.]json'
 import { Route as ApiResultsEmailRouteImport } from './routes/api/results-email'
+import { Route as ApiResultsEmailDrainRouteImport } from './routes/api/results-email-drain'
 import { Route as CropSlugRouteImport } from './routes/crop/$slug'
 import { Route as CropsIndexRouteImport } from './routes/crops/index'
 import { Route as EconomicsIndexRouteImport } from './routes/economics/index'
@@ -93,6 +94,11 @@ const OpenapiDotjsonRoute = OpenapiDotjsonRouteImport.update({
 const ApiResultsEmailRoute = ApiResultsEmailRouteImport.update({
   id: '/api/results-email',
   path: '/api/results-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiResultsEmailDrainRoute = ApiResultsEmailDrainRouteImport.update({
+  id: '/api/results-email-drain',
+  path: '/api/results-email-drain',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CropSlugRoute = CropSlugRouteImport.update({
@@ -335,6 +341,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/api/results-email': typeof ApiResultsEmailRoute
+  '/api/results-email-drain': typeof ApiResultsEmailDrainRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -387,6 +394,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/api/results-email': typeof ApiResultsEmailRoute
+  '/api/results-email-drain': typeof ApiResultsEmailDrainRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -440,6 +448,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/openapi.json': typeof OpenapiDotjsonRoute
   '/api/results-email': typeof ApiResultsEmailRoute
+  '/api/results-email-drain': typeof ApiResultsEmailDrainRoute
   '/crop/$slug': typeof CropSlugRoute
   '/economics/$slug': typeof EconomicsSlugRoute
   '/feed/$slug': typeof FeedSlugRoute
@@ -494,6 +503,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/openapi.json'
     | '/api/results-email'
+    | '/api/results-email-drain'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -546,6 +556,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/openapi.json'
     | '/api/results-email'
+    | '/api/results-email-drain'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -598,6 +609,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/openapi.json'
     | '/api/results-email'
+    | '/api/results-email-drain'
     | '/crop/$slug'
     | '/economics/$slug'
     | '/feed/$slug'
@@ -651,6 +663,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   OpenapiDotjsonRoute: typeof OpenapiDotjsonRoute
   ApiResultsEmailRoute: typeof ApiResultsEmailRoute
+  ApiResultsEmailDrainRoute: typeof ApiResultsEmailDrainRoute
   CropSlugRoute: typeof CropSlugRoute
   EconomicsSlugRoute: typeof EconomicsSlugRoute
   FeedSlugRoute: typeof FeedSlugRoute
@@ -745,6 +758,13 @@ declare module '@tanstack/react-router' {
       path: '/api/results-email'
       fullPath: '/api/results-email'
       preLoaderRoute: typeof ApiResultsEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/results-email-drain': {
+      id: '/api/results-email-drain'
+      path: '/api/results-email-drain'
+      fullPath: '/api/results-email-drain'
+      preLoaderRoute: typeof ApiResultsEmailDrainRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/crop/$slug': {
@@ -1059,6 +1079,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   OpenapiDotjsonRoute: OpenapiDotjsonRoute,
   ApiResultsEmailRoute: ApiResultsEmailRoute,
+  ApiResultsEmailDrainRoute: ApiResultsEmailDrainRoute,
   CropSlugRoute: CropSlugRoute,
   EconomicsSlugRoute: EconomicsSlugRoute,
   FeedSlugRoute: FeedSlugRoute,
