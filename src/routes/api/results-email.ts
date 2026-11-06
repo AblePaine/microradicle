@@ -7,9 +7,10 @@ import { getSql } from "@/lib/db";
  *
  * Body: { email, surface, snapshot } where snapshot is the caller's
  * results object. The request is written to `results_email_requests`
- * (migration 0001). Delivery is NOT wired: no mail send leg exists
- * yet, so the response says so plainly (`delivery: "pending"`) and
- * the UI copy matches — the request is stored, never faked as sent.
+ * (migration 0001). The response says `delivery: "pending"` because
+ * that is true at store time: the drain job (send leg, live
+ * 2026-11-06 — POST /api/results-email/drain) sends within a few
+ * minutes and marks the row sent (migration 0002).
  */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
